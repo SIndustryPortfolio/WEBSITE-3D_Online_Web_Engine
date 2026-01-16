@@ -5,7 +5,7 @@ A **Flask-based web application** hosting an **optimised online multiplayer 3D r
 
 The project combines a **high-performance client-side engine**, real-time multiplayer networking, and a **secure, API-driven backend**, designed for responsiveness, scalability, and low memory overhead.
 
-<img width="489" height="275" alt="image" src="https://github.com/user-attachments/assets/74c1a6b9-99cf-40f7-9d9d-615717555c30" /> <img width="489" height="275" alt="image" src="https://github.com/user-attachments/assets/0527e1cf-b3e0-4a22-bef7-8d56c82db4fb" />
+<img width="350" height="275" alt="image" src="https://github.com/user-attachments/assets/74c1a6b9-99cf-40f7-9d9d-615717555c30" /> <img width="350" height="275" alt="image" src="https://github.com/user-attachments/assets/0527e1cf-b3e0-4a22-bef7-8d56c82db4fb" />
 
 
 ---
@@ -166,7 +166,7 @@ Some effects are intentionally capped at **30 FPS** to reduce processing cost.
 - Chat logging
 - Webhook to Discord Channels
 
-<img width="489" height="275" alt="image" src="https://github.com/user-attachments/assets/8e205b54-60b2-4b21-a7b6-a69a427519e3" />
+<img width="350" height="275" alt="image" src="https://github.com/user-attachments/assets/8e205b54-60b2-4b21-a7b6-a69a427519e3" />
 
 ---
 
@@ -177,7 +177,7 @@ Some effects are intentionally capped at **30 FPS** to reduce processing cost.
 - Scalable multi-instance hosting
 - Low shared memory overhead
 
-<img width="489" height="275" alt="image" src="https://github.com/user-attachments/assets/03fd8d3a-515a-4689-80b0-4588341628b6" />
+<img width="350" height="275" alt="image" src="https://github.com/user-attachments/assets/03fd8d3a-515a-4689-80b0-4588341628b6" />
 
 ---
 
@@ -229,7 +229,7 @@ Security is implemented at every layer:
 - Environment variable loading for sensitive data
 - NoSQL storage via MongoDB DQL to eliminate SQL injection vectors
 
-<img width="489" height="275" alt="image" src="https://github.com/user-attachments/assets/026f30fa-34ca-4235-9bbc-46dea58603b3" />
+<img width="350" height="275" alt="image" src="https://github.com/user-attachments/assets/026f30fa-34ca-4235-9bbc-46dea58603b3" />
 
 ---
 
@@ -241,7 +241,7 @@ Security is implemented at every layer:
 - Delete accounts
 - Role-based access enforcement
 
-<img width="489" height="275" alt="image" src="https://github.com/user-attachments/assets/fa8b37c7-e0d9-48fa-8b84-57b14aaa9c13" />
+<img width="350" height="275" alt="image" src="https://github.com/user-attachments/assets/fa8b37c7-e0d9-48fa-8b84-57b14aaa9c13" />
 
 ---
 
