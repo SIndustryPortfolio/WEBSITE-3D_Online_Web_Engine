@@ -59,9 +59,6 @@ function initialise()
  window.onLoginClicked = onLoginClicked;
 
  csrfToken = "{{ csrf_token() }}";
-
- console.log("{{ siteKey }}");
-
  utilitiesHandlerModule.runModules(alertHandlerModule);
 
  handleForm();
