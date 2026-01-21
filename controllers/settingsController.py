@@ -95,7 +95,7 @@ def settingsChangeRequest():
         return jsonify(response) 
 
     # IF REGISTER SUCCESSFUL
-    session["user"] = requests.get(request.host_url + "/api/v1/users/" + str(user.userId)).json() # API CALL FOR USER DATA
+    session["user"] = UserHandler.getUserFromUserId(user.userId) #requests.get(request.host_url + "/api/v1/users/" + str(user.userId)).json() # API CALL FOR USER DATA
 
     response["status"] = "success"
 

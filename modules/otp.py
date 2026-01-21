@@ -9,6 +9,7 @@ from flask import request, url_for, render_template, session
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # INT
+from modules.userHandler import UserHandler
 from modules.utilities import Utilities
 from modules.database import Database
 from modules.google.email import Email
@@ -102,7 +103,7 @@ class OTP:
 
         subject = "Email 2FA for: " + coreInfo["name"]
 
-        userInfo = requests.get(request.host_url + "/api/v1/users/" + str(userId)).json()
+        userInfo = UserHandler.getUserFromUserId(userId) #requests.get(request.host_url + "/api/v1/users/" + str(userId)).json()
 
         if userInfo == None:
             response["success"] = False
