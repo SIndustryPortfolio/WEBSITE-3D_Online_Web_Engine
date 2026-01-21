@@ -127,7 +127,8 @@ def end():
 #app.register_blueprint(gameBlueprint)
 
 if __name__ == "__main__":
-    success, response = Debug.pcall(initialise)
+    #success, response = Debug.pcall(initialise)
+    initialise()
     end()
 
     #try:
