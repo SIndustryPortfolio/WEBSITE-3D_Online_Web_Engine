@@ -21,8 +21,10 @@ def Initialise(app):
     # Functions
     # INIT
     CurrentApp = app
-    client = MongoClient("mongodb+srv://" + app.config["DBUsername"] + ":" + app.config["DBKey"] + "@dissertationcluster.so7tm.mongodb.net/?retryWrites=true&w=majority&appName=dissertationCluster")
 
+    print("Connecting to MONGO")
+    client = MongoClient("mongodb+srv://" + app.config["DBUsername"] + ":" + app.config["DBKey"] + "@dissertationcluster.so7tm.mongodb.net/?retryWrites=true&w=majority&appName=dissertationCluster")
+    print("Connected to MONGO")
 
 class Database:
     def getDatabase():
