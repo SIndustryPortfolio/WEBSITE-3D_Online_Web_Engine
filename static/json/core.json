@@ -1,0 +1,43 @@
+{
+    "name": "Pixel World",
+    "displayName": "Pixel World",
+
+    "servers": 
+    {
+        "meta": 
+        {
+            "playerTimeOut": 10,
+            "maxChats": 200
+        },
+        "worlds": 
+        {
+            "1": {"name": "Server 1", "map": "map1"},
+            "2": {"name": "Server 2", "map": "map2"},
+            "3": {"name": "Server 3", "map": "map3"}
+        }
+    },
+
+    "userTypes": 
+    {
+        "1": 
+        {
+            "name": "Member",
+            "colour": "light"
+        },
+        "2": 
+        {
+            "name": "Moderator",
+            "colour": "danger"
+        },
+        "3": 
+        {
+            "name": "Admin",
+            "colour": "info"
+        },
+        "4": 
+        {
+            "name": "Server",
+            "colour": "success"
+        }
+    }
+}

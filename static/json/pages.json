@@ -1,0 +1,28 @@
+{
+    "home": {
+        "name": "Home",
+        "topBar": {
+            "userAuthorisedOnly": false,
+            "displayName": "Home",
+            "side": "left"
+        },
+        "redirectLink": "/home"
+    },
+    "mfa": {
+        "name": "MFA",
+        "redirectLink": "/mfa"
+    },
+    "game": {
+       "name": "Game",
+       "redirectLink": "/game"
+    },
+    "settings": {
+        "name": "Settings",
+        "topBar": {
+            "userAuthorisedOnly": true,
+            "displayName": "⚙️",
+            "side": "right"
+        },
+        "redirectLink": "/settings"
+    }
+}

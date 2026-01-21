@@ -1,0 +1,77 @@
+{
+    "01": {
+        "args": 
+        {
+            "colour": [160, 105, 55],
+            "textureName": "dirt"
+        }
+    },
+    "02": 
+    {
+        "type": "spawnLocation"
+    },
+    "03": 
+    {
+        "args": 
+        {
+            "colour": [128, 255, 0],
+            "textureName": "grassTop"
+        }
+    },
+    "04": 
+    {
+        "args": 
+        {
+            "colour": [179, 139, 99],
+            "textureName": "oakWoodPlanks"
+        }
+    },
+    "05": 
+    {
+        "args": 
+        {
+            "colour": [132, 132, 132],
+            "textureName": "stoneBricks"
+        }
+    },
+    "06": 
+    {
+        "args": 
+        {
+            "colour": [169, 169, 169],
+            "textureName": "iron"
+        }
+    },
+    "07": 
+    {
+        "args": 
+        {
+            "colour": [255, 223, 51],
+            "textureName": "gold"
+        }
+    },
+    "08": 
+    {
+        "args":  
+        {
+            "colour": [55, 255, 255],
+            "textureName": "diamond"
+        }
+    },
+    "09": 
+    {
+        "args": 
+        {
+            "colour": [255, 255, 153],
+            "textureName": "glowstone"
+        }
+    },
+    "10": 
+    {
+        "args": 
+        {
+            "colour": [32, 32, 32],
+            "textureName": "obsidian"
+        }
+    }
+}
