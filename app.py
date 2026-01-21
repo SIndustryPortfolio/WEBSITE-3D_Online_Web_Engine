@@ -1,5 +1,6 @@
 # MODULES
 import os
+import importlib
 
 # EXT
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -51,16 +52,30 @@ csrf = CSRFProtect(app)
 socketIO = SocketIO(app)
 
 # CONTROLLERS
-with app.app_context():
-    from controllers.api.apiV1 import apiV1Blueprint
-    from controllers.worldController import socketIO, worldControllerInitialise, servers
-    from controllers.indexController import indexBlueprint
-    from controllers.homeController import homeBlueprint
-    from controllers.loginController import loginBlueprint
-    from controllers.registerController import registerBlueprint
-    from controllers.settingsController import settingsBlueprint
-    from controllers.gameController import gameBlueprint
-    from controllers.multiFactorAuthenticationController import multiFactorAuthenticationBlueprint
+ControllerRegistry = {
+    "controllers.api.apiV1",
+    "controllers.worldController",
+    "controllers.indexController"
+    "controllers.homeController",
+    "controllers.loginController",
+    "controllers.registerController",
+    "controllers.settingsController",
+    "controllers.gameController",
+    "controllers.multiFactorAuthenticationController"
+}
+
+RequiredModules = [] #CONTROLLERS
+
+#from controllers.api.apiV1 import apiV1Blueprint
+#from controllers.worldController import socketIO, servers
+#from controllers.indexController import indexBlueprint
+#from controllers.homeController import homeBlueprint
+#from controllers.loginController import loginBlueprint
+#from controllers.registerController import registerBlueprint
+#from controllers.settingsController import settingsBlueprint
+#from controllers.gameController import gameBlueprint
+#from controllers.multiFactorAuthenticationController import multiFactorAuthenticationBlueprint
+
 
 # Functions
 # MECHANICS
@@ -68,19 +83,32 @@ def initialise():
     # Functions
     # INIT
     with app.app_context():
-        # Functions
-        # INIT
-        worldControllerInitialise()
+        for ModuleName in ControllerRegistry:
+            RequiredModule = importlib.import_module(ModuleName)
+            URLPrefix = None
+
+            if hasattr(RequiredModule, "url_prefix"):
+                URLPrefix = RequiredModule.url_prefix
+
+            if hasattr(RequiredModule, "initialise"):
+                RequiredModule.initialise(app)
+
+            if hasattr(RequiredModule, "BluePrint"):
+                app.register_blueprint(RequiredModule.BluePrint, url_prefix = URLPrefix)
+            
+            RequiredModules[ModuleName] = RequiredModule
+
+        servers = RequiredModules["controllers.worldController"].servers
 
         DiscordURLKeys = ["errors", "joins", "server".join(*list(range(len(servers))))]
 
         for ChannelKey in DiscordURLKeys.items():
             EnvironmentKey = "Discord" + ChannelKey + "URL"
             app.config[EnvironmentKey] = os.environ.get(EnvironmentKey)
-#
+        #
 
-    scheduler.start()
-    socketIO.run(app, host='0.0.0.0', port=5000, debug=False)
+        scheduler.start()
+        socketIO.run(app, host='0.0.0.0', port=5000, debug=False)
 
 def end():
     # Functions
@@ -88,15 +116,15 @@ def end():
     scheduler.shutdown()
 
 # INIT
-app.register_blueprint(apiV1Blueprint, url_prefix="/api/v1")
+#app.register_blueprint(apiV1Blueprint, url_prefix="/api/v1")
 
-app.register_blueprint(indexBlueprint)
-app.register_blueprint(homeBlueprint)
-app.register_blueprint(loginBlueprint)
-app.register_blueprint(multiFactorAuthenticationBlueprint)
-app.register_blueprint(registerBlueprint)
-app.register_blueprint(settingsBlueprint)
-app.register_blueprint(gameBlueprint)
+#app.register_blueprint(indexBlueprint)
+#app.register_blueprint(homeBlueprint)
+#app.register_blueprint(loginBlueprint)
+#app.register_blueprint(multiFactorAuthenticationBlueprint)
+#app.register_blueprint(registerBlueprint)
+#app.register_blueprint(settingsBlueprint)
+#app.register_blueprint(gameBlueprint)
 
 if __name__ == "__main__":
     success, response = Debug.pcall(initialise)

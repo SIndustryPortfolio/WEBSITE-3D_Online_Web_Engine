@@ -10,11 +10,16 @@ import json
 from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify
 
 # CORE
-homeBlueprint = Blueprint("home", __name__)
+BluePrint = Blueprint("home", __name__)
+CurrentApp = None
 
+# FUNCTIONS
+# MECHANICS
+def Initialise(app):
+    CurrentApp = app
 
 #  Routes
-@homeBlueprint.route("/home")
+@BluePrint.route("/home")
 def pageHandler():
     # Functions
     # INIT

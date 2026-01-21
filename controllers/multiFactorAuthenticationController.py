@@ -16,11 +16,16 @@ import json
 from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify
 
 # CORE
-multiFactorAuthenticationBlueprint = Blueprint("mfa", __name__)
-
+BluePrint = Blueprint("mfa", __name__)
+CurrentApp = None
 
 # FUNCTIONS
 # MECHANICS
+def Initialise(app):
+    # Functions
+    # INIT
+    CurrentApp = app
+
 def userLoginAuthorised(userId):
     # Functions
     # INIT
@@ -31,7 +36,7 @@ def userLoginAuthorised(userId):
     return token
 
 #  Routes
-@multiFactorAuthenticationBlueprint.route("/mfa/cancelRequest", methods=["POST"]) # AJAX
+@BluePrint.route("/mfa/cancelRequest", methods=["POST"]) # AJAX
 def cancelMFA():
     # CORE
     mfaUserId = session.get("mfaUserId", None)
@@ -61,7 +66,7 @@ def cancelMFA():
     return jsonify(response)
 
 
-@multiFactorAuthenticationBlueprint.route("/mfa/authoriseRequest", methods = ["POST"]) # AJAX
+@BluePrint.route("/mfa/authoriseRequest", methods = ["POST"]) # AJAX
 def authoriseMFA():
     # CORE
     mfaUserId = session.get("mfaUserId", None)
@@ -110,7 +115,7 @@ def authoriseMFA():
     return jsonify(response)
 
 
-@multiFactorAuthenticationBlueprint.route("/mfa/resendRequest", methods=["POST"]) # AJAX
+@BluePrint.route("/mfa/resendRequest", methods=["POST"]) # AJAX
 def resendMFA():
     # CORE
     mfaUserId = session.get("mfaUserId", None)
@@ -134,7 +139,7 @@ def resendMFA():
     return jsonify(response)
 
 
-@multiFactorAuthenticationBlueprint.route("/mfa")
+@BluePrint.route("/mfa")
 def pageHandler():
     # CORE
     mfaUserId = session.get("mfaUserId", None)

@@ -11,13 +11,16 @@ import json
 from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify
 
 # CORE
-gameBlueprint = Blueprint("game", __name__)
+BluePrint = Blueprint("game", __name__)
+CurrentApp = None
 
 
 # MECHANICS
+def Initialise(app):
+    CurrentApp = app
 
 #  Routes
-@gameBlueprint.route("/game/<int:_serverId>")
+@BluePrint.route("/game/<int:_serverId>")
 def pageHandler(_serverId):
     # Functions
     # INIT

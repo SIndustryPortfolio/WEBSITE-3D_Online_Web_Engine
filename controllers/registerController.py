@@ -13,32 +13,36 @@ from modules.google.recaptcha import Recaptcha
 import time
 import requests
 import json
-from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify, current_app
+from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify
 
 # CORE
-registerBlueprint = Blueprint("register", __name__)
-#secureInfo = Utilities.loadJson("secure/json/secure.json")
-
+BluePrint = Blueprint("register", __name__)
+CurrentApp = None
+GoogleSiteKey = None
 
 # Functions
 # MECHANICS
-
+def Initialise(app):
+    # Functions
+    # INIT
+    CurrentApp = app
+    GoogleSiteKey = app.config["GoogleSiteKey"]
 
 #  Routes
-@registerBlueprint.route("/register")
+@BluePrint.route("/register")
 def pageHandler():
     # IF USER ALREADY LOGGED IN
     if session.get("user", None):
         return redirect(url_for("index.pageHandler"))
     
-    siteKey = current_app.config["GoogleSiteKey"] #secureInfo["google"]["recaptcha"]["siteKey"]
+    siteKey = GoogleSiteKey
 
     form = RegisterForm()
     return Shortcuts.renderPage("register.html", "Register", form=form, siteKey=siteKey)
 
     
 
-@registerBlueprint.route("/registerRequest", methods = ["POST"]) # AJAX
+@BluePrint.route("/registerRequest", methods = ["POST"]) # AJAX
 def registerRequestPageHandler():
     # IF ALREADY LOGGED IN
     if session.get("user", None):

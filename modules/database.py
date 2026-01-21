@@ -3,16 +3,10 @@
 from modules.utilities import Utilities
 
 # EXT
-import json
 from pymongo import MongoClient
-
 from flask import current_app
 
 # CORE
-#coreInfo = Utilities.loadJson("static/json/core.json")
-
-#secureInfo = Utilities.loadJson("secure/json/secure.json")
-
 
 # 
 class Database:

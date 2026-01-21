@@ -15,14 +15,17 @@ import json
 from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify
 
 # CORE
-settingsBlueprint = Blueprint("settings", __name__)
+BluePrint = Blueprint("settings", __name__)
+CurrentApp = None
 
 
 # Functions
 # MECHANICS
+def Initialise(app):
+    CurrentApp = app
 
 #  Routes
-@settingsBlueprint.route("/settings")
+@BluePrint.route("/settings")
 def pageHandler():
     user = session.get("user", None)
 
@@ -41,7 +44,7 @@ def pageHandler():
     return Shortcuts.renderPage("settings.html", "Settings", form=form, fieldNames=fieldNames)
 
 
-@settingsBlueprint.route("/settingChangeRequest", methods = ["POST"]) # AJAX
+@BluePrint.route("/settingChangeRequest", methods = ["POST"]) # AJAX
 def settingsChangeRequest():
     # IF NOT ALREADY LOGGED IN
     if not session.get("user", None):

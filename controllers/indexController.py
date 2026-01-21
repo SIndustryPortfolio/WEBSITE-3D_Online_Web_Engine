@@ -7,10 +7,16 @@ import json
 from flask import Blueprint, session, render_template, request, redirect, url_for
 
 # CORE
-indexBlueprint = Blueprint("index", __name__)
+BluePrint = Blueprint("index", __name__)
+CurrentApp = None
+
+# FUNCTIONS
+# MECHANICS
+def Initialise(app):
+    CurrentApp = app
 
 #  Routes
-@indexBlueprint.route("/")
+@BluePrint.route("/")
 def pageHandler():
     # CORE
     user = session.get("user", None) # GET USER IF LOGGED IN

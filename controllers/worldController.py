@@ -11,7 +11,6 @@ from modules.game.server import Server
 # EXTERNAL
 import requests
 import json
-from flask import current_app
 from flask_socketio import SocketIO, send, emit
 
 # CORE
@@ -20,14 +19,19 @@ userCache = {}
 
 servers = {}
 
+CurrentApp = None
+
+
 # MECHANICS
 def setupServer(serverId):
     # Functions
     # INIT
     servers[str(serverId)] = Server(str(serverId), socketIO, servers)
 
-def worldControllerInitialise():
+def Initialise(app):
     # INIT
+    CurrentApp = app
+
     for serverId, serverInfo in coreInfo["servers"]["worlds"].items():
         setupServer(serverId)
 

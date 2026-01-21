@@ -14,16 +14,23 @@ from forms.loginForm import LoginForm
 import time
 import requests
 import json
-from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify, current_app
-
+from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify
 # CORE
-loginBlueprint = Blueprint("login", __name__)
-#secureInfo = Utilities.loadJson("secure/json/secure.json")
+BluePrint = Blueprint("login", __name__)
+
+CurrentApp = None
+GoogleSiteKey = None
+
 
 # MECHANICS
+def Initialise(app):
+    # Functions
+    # INIT
+    CurrentApp = app
+    GoogleSiteKey = app.config["GoogleSiteKey"]
 
 #  Routes
-@loginBlueprint.route("/login")
+@BluePrint.route("/login")
 def pageHandler():
     # Functions
     # INIT
@@ -35,8 +42,6 @@ def pageHandler():
     # IF STILL ON MULTI-FACTOR-AUTHENTICATION
     if session.get("mfaUserId", None) != None:
         return redirect(url_for("mfa.pageHandler"))
-
-    googleSiteKey = current_app.config["GoogleSiteKey"] #secureInfo["google"]["recaptcha"]["siteKey"]
 
     userIdCookie = request.cookies.get("userId", None)
     userAuthTokenCookie = request.cookies.get("userAuthToken", None) # AUTHENTICATION TOKEN STRING
@@ -60,9 +65,9 @@ def pageHandler():
     # IF NOT TOKEN AUTH
     form = LoginForm()
 
-    return Shortcuts.renderPage("login.html", "Login", form=form, siteKey = googleSiteKey)
+    return Shortcuts.renderPage("login.html", "Login", form=form, siteKey = GoogleSiteKey)
     
-@loginBlueprint.route("/logout", methods = ["POST", "GET"])
+@BluePrint.route("/logout", methods = ["POST", "GET"])
 def logoutRequestPageHandler(): 
     # CORE
     mfaUserId = session.get("mfaUserId", None)
@@ -83,7 +88,7 @@ def logoutRequestPageHandler():
 
     return redirect(url_for("index.pageHandler"))
 
-@loginBlueprint.route("/loginRequest", methods = ["POST"]) # AJAX REQUEST
+@BluePrint.route("/loginRequest", methods = ["POST"]) # AJAX REQUEST
 def loginRequestPageHandler():
     # IF USER IS LOGGED IN
     if session.get("user", None):
