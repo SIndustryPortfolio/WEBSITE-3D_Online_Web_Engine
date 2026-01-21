@@ -1,7 +1,6 @@
 # MODULES
 # INTERNAL
 
-#from modules.database import databaseCluster
 from modules.userHandler import UserHandler
 from modules.debug import Debug
 from modules.utilities import Utilities

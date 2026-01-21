@@ -10,7 +10,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 # INT
 from modules.utilities import Utilities
-from modules.database import databaseCluster, Database
+from modules.database import Database
 from modules.google.email import Email
 from modules.debug import Debug
 
@@ -38,7 +38,7 @@ class OTP:
         timeNow = time.time()
         response = {"success": False, "alert": {"type": "danger", "message": ""}}
         recordFilter = {"userId": userId}
-        otpCollection = databaseCluster["otp"]
+        otpCollection = Database.getDatabaseCluster()["otp"]
 
         # Functions
         # INIT
@@ -74,7 +74,7 @@ class OTP:
         # Core
         response = {"success": True, "alert": {"type": "success", "message": ""}}
         recordFilter = {"userId": userId}
-        otpCollection = databaseCluster["otp"]
+        otpCollection = Database.getDatabaseCluster()["otp"]
         foundOTPRecord = otpCollection.find_one(recordFilter)
 
         if (foundOTPRecord != None):
@@ -97,7 +97,7 @@ class OTP:
         timeNow = time.time()
 
         otpPlainString = OTP.getRandomOTP()
-        otpCollection = databaseCluster["otp"]
+        otpCollection = Database.getDatabaseCluster()["otp"]
         timeNow = time.time()
 
         subject = "Email 2FA for: " + coreInfo["name"]

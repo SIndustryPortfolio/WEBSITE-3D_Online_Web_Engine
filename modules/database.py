@@ -20,10 +20,12 @@ class Database:
         client = MongoClient("mongodb+srv://" + current_app.config["DBUsername"] + ":" + current_app.config["DBKey"] + "@dissertationcluster.so7tm.mongodb.net/?retryWrites=true&w=majority&appName=dissertationCluster")
         return client
     
-    def getAndUpdateCounter(collectionName): # FOR NUMBER BASED IDs ON RECORDS
+    def getDatabaseCluster():
         client = Database.getDatabase()
-
-        databaseCluster = client["dissertationDatabase"]
+        return client["dissertationDatabase"]
+    
+    def getAndUpdateCounter(collectionName): # FOR NUMBER BASED IDs ON RECORDS
+        databaseCluster = Database.getDatabaseCluster()
         counterCollection = databaseCluster["counter"]
 
         document = counterCollection.find_one_and_update( 
