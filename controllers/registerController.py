@@ -12,7 +12,7 @@ from modules.google.recaptcha import Recaptcha
 import time
 import requests
 import json
-from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify
+from flask import Blueprint, session, request, redirect, url_for, jsonify
 
 # CORE
 BluePrint = Blueprint("register", __name__)
@@ -34,10 +34,8 @@ def pageHandler():
     if session.get("user", None):
         return redirect(url_for("index.pageHandler"))
     
-    siteKey = GoogleSiteKey
-
     form = RegisterForm()
-    return Shortcuts.renderPage("register.html", "Register", form=form, siteKey=siteKey)
+    return Shortcuts.renderPage("register.html", "Register", form=form, siteKey=GoogleSiteKey)
 
     
 

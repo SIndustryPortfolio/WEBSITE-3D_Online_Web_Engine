@@ -19,15 +19,15 @@ class Recaptcha:
         #verifyResponse = requests.post(url=f'{recaptchaVerifyURL}?secret={recaptchaSecretKey}&response={secretResponse}').json()
 
         success, verifyResponse = Debug.pcall(requests.post, url=f'{recaptchaVerifyURL}?secret={recaptchaSecretKey}&response={secretResponse}')
-        verifyResponse = verifyResponse.json()
+        
+        if success:
+            verifyResponse = verifyResponse.json()
 
-        # SKIP RECAPTCHA
-
-        #if not verifyResponse["success"] or verifyResponse["score"] < 0.5:
-        #    response["success"] = False
-        #    response["alert"]["type"] = "danger"
-        #    response["alert"]["message"] = "Failed google recaptcha"
-        #    return response
+        if not verifyResponse["success"] or verifyResponse["score"] < 0.5:
+            response["success"] = False
+            response["alert"]["type"] = "danger"
+            response["alert"]["message"] = "Failed google recaptcha"
+            return response
         
         response["success"] = True
         response["alert"]["type"] = "success"
