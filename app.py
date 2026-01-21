@@ -15,8 +15,6 @@ from modules.google.recaptcha import Recaptcha, recaptchaSecretKey
 from modules.utilities import Utilities
 from modules.debug import Debug
 
-from controllers.worldController import servers
-
 
 # CORE
 coreInfo = Utilities.loadJson("static/json/core.json")
@@ -54,7 +52,7 @@ socketIO = SocketIO(app)
 
 # CONTROLLERS
 from controllers.api.apiV1 import apiV1Blueprint
-from controllers.worldController import socketIO, worldControllerInitialise
+from controllers.worldController import socketIO, worldControllerInitialise, servers
 from controllers.indexController import indexBlueprint
 from controllers.homeController import homeBlueprint
 from controllers.loginController import loginBlueprint
