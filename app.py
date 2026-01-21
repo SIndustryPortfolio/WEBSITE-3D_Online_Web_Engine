@@ -51,15 +51,16 @@ csrf = CSRFProtect(app)
 socketIO = SocketIO(app)
 
 # CONTROLLERS
-from controllers.api.apiV1 import apiV1Blueprint
-from controllers.worldController import socketIO, worldControllerInitialise, servers
-from controllers.indexController import indexBlueprint
-from controllers.homeController import homeBlueprint
-from controllers.loginController import loginBlueprint
-from controllers.registerController import registerBlueprint
-from controllers.settingsController import settingsBlueprint
-from controllers.gameController import gameBlueprint
-from controllers.multiFactorAuthenticationController import multiFactorAuthenticationBlueprint
+with app.app_context():
+    from controllers.api.apiV1 import apiV1Blueprint
+    from controllers.worldController import socketIO, worldControllerInitialise, servers
+    from controllers.indexController import indexBlueprint
+    from controllers.homeController import homeBlueprint
+    from controllers.loginController import loginBlueprint
+    from controllers.registerController import registerBlueprint
+    from controllers.settingsController import settingsBlueprint
+    from controllers.gameController import gameBlueprint
+    from controllers.multiFactorAuthenticationController import multiFactorAuthenticationBlueprint
 
 # Functions
 # MECHANICS
