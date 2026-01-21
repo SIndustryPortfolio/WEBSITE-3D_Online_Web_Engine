@@ -75,7 +75,7 @@ def initialise():
     # Functions
     # INIT
     scheduler.start()
-    socketIO.run(app, host='0.0.0.0', port=5000, debug=True)
+    socketIO.run(app, host='0.0.0.0', port=5000, debug=False)
 
 def end():
     # Functions
