@@ -11,6 +11,7 @@ userServiceBlueprint = Blueprint("userService", __name__)
 # ROUTES
 @userServiceBlueprint.route("/<int:userId>", methods=["GET"])
 def getUserDict(userId): # RETURN BASIC USER INFO (NO SENSITIVE INFO)
+    print("RECEIVED API REQUEST: " + str(userId))
     return jsonify(UserServiceCache.get(userId))
 
 
