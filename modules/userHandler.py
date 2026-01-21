@@ -424,6 +424,7 @@ class UserHandler:
         success, pcallResponse = Debug.pcall(requests.get, request.host_url + "/api/v1/users/" + str(userId)) # API CALL FOR USER DATA
 
         if success:
+            print(pcallResponse)
             session["user"] = pcallResponse.json() #requests.get(request.host_url + "/api/v1/users/" + str(userId)).json() # API CALL FOR USER DATA
 
             response = UserHandler.resetUserToken(session["user"]["userId"]) #userLoginAuthorised(session["user"]["userId"])
