@@ -64,7 +64,7 @@ ControllerRegistry = {
     "controllers.multiFactorAuthenticationController"
 }
 
-RequiredModules = [] #CONTROLLERS
+RequiredModules = {} #CONTROLLERS
 
 #from controllers.api.apiV1 import apiV1Blueprint
 #from controllers.worldController import socketIO, servers
