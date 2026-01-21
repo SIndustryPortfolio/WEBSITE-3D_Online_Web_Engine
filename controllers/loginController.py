@@ -12,9 +12,7 @@ from forms.loginForm import LoginForm
 
 # EXTERNAL
 import time
-import requests
-import json
-from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify
+from flask import Blueprint, session, request, redirect, url_for, jsonify
 # CORE
 BluePrint = Blueprint("login", __name__)
 
@@ -65,7 +63,10 @@ def pageHandler():
     # IF NOT TOKEN AUTH
     form = LoginForm()
 
-    return Shortcuts.renderPage("login.html", "Login", form=form, siteKey = GoogleSiteKey)
+    print("GOOGLE SITE KEY")
+    print(GoogleSiteKey)
+
+    return Shortcuts.renderPage("login.html", "Login", form=form, siteKey=GoogleSiteKey)
     
 @BluePrint.route("/logout", methods = ["POST", "GET"])
 def logoutRequestPageHandler(): 

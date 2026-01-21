@@ -7,7 +7,7 @@ from controllers.worldController import servers
 
 # EXTERNAL
 import json
-from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify
+from flask import Blueprint, session, redirect, url_for
 
 # CORE
 BluePrint = Blueprint("home", __name__)
