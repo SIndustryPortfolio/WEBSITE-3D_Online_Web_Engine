@@ -1,4 +1,5 @@
 # MODULES
+import os
 
 # EXT
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -14,25 +15,43 @@ from modules.google.recaptcha import Recaptcha, recaptchaSecretKey
 from modules.utilities import Utilities
 from modules.debug import Debug
 
+from controllers.worldController import servers
 
 
 # CORE
 coreInfo = Utilities.loadJson("static/json/core.json")
-secureInfo = Utilities.loadJson("secure/json/secure.json")
+#secureInfo = Utilities.loadJson("secure/json/secure.json")
 
 scheduler = BackgroundScheduler()
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your_secret_key_here'
-app.config["RECAPTCHA_PUBLIC_KEY"] = secureInfo["google"]["recaptcha"]["siteKey"]
-app.config["RECAPTCHA_PRIVATE_KEY"] =  recaptchaSecretKey
-#
+
+## RESERVED CONFIG
+app.config['SECRET_KEY'] = os.environ.get('SecretKey')
+##
+app.config["RECAPTCHA_PUBLIC_KEY"] = os.environ.get("GoogleSiteKey") #secureInfo["google"]["recaptcha"]["siteKey"]
+app.config["RECAPTCHA_PRIVATE_KEY"] = recaptchaSecretKey  #recaptchaSecretKey
+##
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 465
 app.config["MAIL_USE_SSL"] = True
-app.config["MAIL_PASSWORD"] = secureInfo["google"]["email"]["appPassword"]
-app.config["MAIL_USERNAME"] = secureInfo["google"]["email"]["address"]
-app.config["MAIL_DEFAULT_SENDER"] = secureInfo["google"]["email"]["address"]
+app.config["MAIL_PASSWORD"] = os.environ.get("EmailPassword") #secureInfo["google"]["email"]["appPassword"]
+app.config["MAIL_USERNAME"] = os.environ.get("EmailAddress") #secureInfo["google"]["email"]["address"]
+app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("EmailAddress") #secureInfo["google"]["email"]["address"]
+
+
+## MY CONFIG
+app.config["DBUsername"] = os.environ.get("DBUsername")
+app.config["DBKey"] = os.environ.get("DBKey")
+##
+app.config["APICacheTimeout"] = os.environ.get("APICacheTimeout")
+app.config["APIKey"] = os.environ.get("APIKey")
+##
+DiscordURLKeys = ["errors", "joins", "server".join(*list(range(len(servers))))]
+
+for ChannelKey in DiscordURLKeys.items():
+    EnvironmentKey = "Discord" + ChannelKey + "URL"
+    app.config[EnvironmentKey] = os.environ.get(EnvironmentKey)
 #
 
 mail = Mail(app)

@@ -48,7 +48,7 @@ class Server:
         self.players = {}
         self.chat = []
 
-        self.subscriptableMethods =  {
+        self.subscriptableMethods =  { # CLIENT REQUESTS
             # GET
             "getNumberOfPlayers": self.getNumberOfPlayers,
             "getPlayerFromServer": self.getPlayerFromServer,

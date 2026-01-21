@@ -6,13 +6,15 @@ from modules.utilities import Utilities
 import json
 from pymongo import MongoClient
 
+from flask import current_app
+
 # CORE
 #coreInfo = Utilities.loadJson("static/json/core.json")
 
-secureInfo = Utilities.loadJson("secure/json/secure.json")
+#secureInfo = Utilities.loadJson("secure/json/secure.json")
 
 
-client = MongoClient("mongodb+srv://" + secureInfo["dbAuth"]["username"] + ":" + secureInfo["dbAuth"]["secretKey"] + "@dissertationcluster.so7tm.mongodb.net/?retryWrites=true&w=majority&appName=dissertationCluster")
+client = MongoClient("mongodb+srv://" + current_app.config["DBUsername"] + ":" + current_app.config["DBKey"] + "@dissertationcluster.so7tm.mongodb.net/?retryWrites=true&w=majority&appName=dissertationCluster")
 databaseCluster = client["dissertationDatabase"]
 
 # 

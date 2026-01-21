@@ -13,11 +13,11 @@ from modules.google.recaptcha import Recaptcha
 import time
 import requests
 import json
-from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify
+from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify, current_app
 
 # CORE
 registerBlueprint = Blueprint("register", __name__)
-secureInfo = Utilities.loadJson("secure/json/secure.json")
+#secureInfo = Utilities.loadJson("secure/json/secure.json")
 
 
 # Functions
@@ -31,7 +31,7 @@ def pageHandler():
     if session.get("user", None):
         return redirect(url_for("index.pageHandler"))
     
-    siteKey = secureInfo["google"]["recaptcha"]["siteKey"]
+    siteKey = current_app.config["GoogleSiteKey"] #secureInfo["google"]["recaptcha"]["siteKey"]
 
     form = RegisterForm()
     return Shortcuts.renderPage("register.html", "Register", form=form, siteKey=siteKey)

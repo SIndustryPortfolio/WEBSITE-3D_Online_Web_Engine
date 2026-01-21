@@ -15,11 +15,11 @@ from forms.loginForm import LoginForm
 import time
 import requests
 import json
-from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify
+from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify, current_app
 
 # CORE
 loginBlueprint = Blueprint("login", __name__)
-secureInfo = Utilities.loadJson("secure/json/secure.json")
+#secureInfo = Utilities.loadJson("secure/json/secure.json")
 
 # MECHANICS
 
@@ -37,7 +37,7 @@ def pageHandler():
     if session.get("mfaUserId", None) != None:
         return redirect(url_for("mfa.pageHandler"))
 
-    googleSiteKey =  secureInfo["google"]["recaptcha"]["siteKey"]
+    googleSiteKey = current_app.config["GoogleSiteKey"] #secureInfo["google"]["recaptcha"]["siteKey"]
 
     userIdCookie = request.cookies.get("userId", None)
     userAuthTokenCookie = request.cookies.get("userAuthToken", None) # AUTHENTICATION TOKEN STRING

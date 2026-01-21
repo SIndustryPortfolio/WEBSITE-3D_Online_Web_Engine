@@ -1,10 +1,14 @@
 # MODULES
+import os
+
 # EXT
 import requests
 
+from flask import current_app
+
 # CORE
 recaptchaVerifyURL = "https://www.google.com/recaptcha/api/siteverify"
-recaptchaSecretKey = "6LcAIdAqAAAAAJr5K8R2CTI8Edj9_LSnZjCfDO1P"
+recaptchaSecretKey = os.environ.get("GoogleSecretKey")
 
 class Recaptcha:
     def verifyForm(formDict): # CHECK IF FORM WAS COMPLETED BY HUMAN

@@ -5,10 +5,12 @@ from modules.utilities import Utilities
 import requests
 import json
 
+from flask import current_app
+
 # CORE
 #
 # coreInfo = Utilities.loadJson("static/json/core.json")
-secureInfo = Utilities.loadJson("secure/json/secure.json")
+# secureInfo = Utilities.loadJson("secure/json/secure.json")
 
 #
 class DiscordBot:
@@ -16,7 +18,7 @@ class DiscordBot:
         response = {"success": False, "alert": {"type": "danger", "message": ""}}
 
         try:
-            postResponse = requests.post(secureInfo["discord"][channel], data=json.dumps(message), headers={"Content-Type": "application/json"})
+            postResponse = requests.post(current_app.config["Discord" + channel + "URL"], data=json.dumps(message), headers={"Content-Type": "application/json"})
         
             if postResponse.status_code == 204:
                 response["success"] = True

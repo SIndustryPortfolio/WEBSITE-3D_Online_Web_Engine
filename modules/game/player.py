@@ -12,7 +12,7 @@ class Player:
         self.character = Character(self)
         self.lastActionTime = time.time()
 
-    def getDict(self):
+    def getDict(self): # Return whats necessary to client
         return {
             "user": self.user.getDict(),
             "character": self.character.getDict()

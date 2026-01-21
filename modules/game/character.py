@@ -13,7 +13,7 @@ class Character:
     def __setitem__(self, key, value): # SET SUBSCRIPTABLE
         self.subscriptable[key] = value
 
-    def getDict(self):
+    def getDict(self): # Return whats necessary to client
         return {
             "position": self.subscriptable["position"],
             "heading": self.subscriptable["heading"]
