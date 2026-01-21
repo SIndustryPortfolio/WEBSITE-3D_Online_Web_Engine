@@ -2,7 +2,7 @@
 # EXT
 import threading
 import time
-from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify, current_app
+from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify
 
 # INT
 from modules.userHandler import UserHandler
@@ -13,12 +13,13 @@ from controllers.api.v1.gameService import gameServiceBlueprint, MapServiceCache
 
 # CORE
 coreInfo = Utilities.loadJson("static/json/core.json")
-#secureInfo = Utilities.loadJson("secure/json/secure.json")
 caches = [UserServiceCache, MapServiceCache, TextureServiceCache]
 
-apiV1Blueprint = Blueprint("apiV1", __name__)
-apiV1Blueprint.register_blueprint(userServiceBlueprint, url_prefix="/users")
-apiV1Blueprint.register_blueprint(gameServiceBlueprint, url_prefix="/game")
+URLPrefix = "/api/v1"
+
+BluePrint = Blueprint("apiV1", __name__)
+
+CurrentApp = None
 
 # Functions
 # MECHANICS
@@ -33,7 +34,7 @@ def runtime(): # RUNNING THREAD FOR CACHE TIME OUTS
         # Functions
         # INIT
         for key, value in cacheDict.items():
-            if timeNow - value["time"] > current_app.config["APICacheTimeOut"]: #secureInfo["api"]["cacheTimeOut"]:
+            if timeNow - value["time"] > CurrentApp.config["APICacheTimeOut"]: #secureInfo["api"]["cacheTimeOut"]:
                 timedOutKeys.append(key)
 
         return timedOutKeys
@@ -51,7 +52,17 @@ def runtime(): # RUNNING THREAD FOR CACHE TIME OUTS
 
         time.sleep(5)
 
+def Initialise(app):
+    # Functions
+    # INIT
+    CurrentApp = app
+
+    BluePrint.register_blueprint(userServiceBlueprint, url_prefix="/users")
+    BluePrint.register_blueprint(gameServiceBlueprint, url_prefix="/game")
+
+
+    thread = threading.Thread(target=runtime)
+    thread.daemon = True
+    thread.start()
+
 # INIT
-thread = threading.Thread(target=runtime)
-thread.daemon = True
-thread.start()
