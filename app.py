@@ -3,8 +3,6 @@ import os
 import importlib
 
 # EXT
-from gevent import monkey
-monkey.patch_all()
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
@@ -52,7 +50,7 @@ app.config["APIKey"] = os.environ.get("APIKey")
 
 mail = Mail(app)
 csrf = CSRFProtect(app)
-socketIO = SocketIO(app, async_mode="gevent")
+socketIO = SocketIO(app)
 
 # CONTROLLERS
 ControllerRegistry = {
@@ -111,7 +109,7 @@ def initialise():
         #
 
         scheduler.start()
-        socketIO.run(app, host='0.0.0.0', port=5000, debug=False)
+        socketIO.run(app, host='0.0.0.0', port=5000, debug=False, allow_unsafe_werkzeug=True)
 
 def end():
     # Functions
