@@ -50,7 +50,7 @@ app.config["APIKey"] = os.environ.get("APIKey")
 
 mail = Mail(app)
 csrf = CSRFProtect(app)
-socketIO = SocketIO(app)
+socketIO = SocketIO(app, async_mode="threading")
 
 # CONTROLLERS
 ControllerRegistry = {
