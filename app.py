@@ -4,8 +4,6 @@ import importlib
 
 # EXT
 
-#from apscheduler.schedulers.background import BackgroundScheduler
-
 from flask import Flask, render_template, url_for
 from flask_socketio import SocketIO
 from flask_mail import Mail
@@ -67,17 +65,6 @@ ControllerRegistry = {
 
 RequiredModules = {} #CONTROLLERS
 
-#from controllers.api.apiV1 import apiV1Blueprint
-#from controllers.worldController import socketIO, servers
-#from controllers.indexController import indexBlueprint
-#from controllers.homeController import homeBlueprint
-#from controllers.loginController import loginBlueprint
-#from controllers.registerController import registerBlueprint
-#from controllers.settingsController import settingsBlueprint
-#from controllers.gameController import gameBlueprint
-#from controllers.multiFactorAuthenticationController import multiFactorAuthenticationBlueprint
-
-
 # Functions
 # MECHANICS
 def initialise():
@@ -111,29 +98,9 @@ def initialise():
 def end():
     # Functions
     # INIT
-   #scheduler.shutdown()
    pass
 
 # INIT
-#app.register_blueprint(apiV1Blueprint, url_prefix="/api/v1")
-
-#app.register_blueprint(indexBlueprint)
-#app.register_blueprint(homeBlueprint)
-#app.register_blueprint(loginBlueprint)
-#app.register_blueprint(multiFactorAuthenticationBlueprint)
-#app.register_blueprint(registerBlueprint)
-#app.register_blueprint(settingsBlueprint)
-#app.register_blueprint(gameBlueprint)
-
 if __name__ == "__main__":
-    #success, response = Debug.pcall(initialise)
     initialise()
     end()
-
-    #try:
-    #    scheduler.start()
-    #    socketIO.run(app, debug=True)
-    #except (KeyboardInterrupt, SystemExit):
-    #    pass
-    #finally:
-    #    scheduler.shutdown()
