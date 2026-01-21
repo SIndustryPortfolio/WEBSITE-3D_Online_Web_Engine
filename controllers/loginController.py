@@ -27,7 +27,7 @@ def Initialise(app):
     # Functions
     # INIT
     CurrentApp = app
-    GoogleSiteKey = app.config["GoogleSiteKey"]
+    GoogleSiteKey = app.config["RECAPTCHA_PUBLIC_KEY"]
 
 #  Routes
 @BluePrint.route("/login")
