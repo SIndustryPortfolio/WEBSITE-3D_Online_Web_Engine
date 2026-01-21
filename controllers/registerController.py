@@ -58,8 +58,10 @@ def registerRequestPageHandler():
     requestIP = Shortcuts.getClientIP()
 
     # GOOGLE VERIFY
+    print("Verifying Google")
     googleRecaptchaResponse = Recaptcha.verifyForm(data)
-
+    print("Verified via Google")
+    
     # IF USER NOT A BOT
     if not googleRecaptchaResponse["success"]:
         response["status"] = "failed"
