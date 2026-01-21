@@ -47,12 +47,6 @@ app.config["DBKey"] = os.environ.get("DBKey")
 app.config["APICacheTimeout"] = os.environ.get("APICacheTimeout")
 app.config["APIKey"] = os.environ.get("APIKey")
 ##
-DiscordURLKeys = ["errors", "joins", "server".join(*list(range(len(servers))))]
-
-for ChannelKey in DiscordURLKeys.items():
-    EnvironmentKey = "Discord" + ChannelKey + "URL"
-    app.config[EnvironmentKey] = os.environ.get(EnvironmentKey)
-#
 
 mail = Mail(app)
 csrf = CSRFProtect(app)
@@ -74,6 +68,18 @@ from controllers.multiFactorAuthenticationController import multiFactorAuthentic
 def initialise():
     # Functions
     # INIT
+    with app.app_context():
+        # Functions
+        # INIT
+        worldControllerInitialise()
+
+        DiscordURLKeys = ["errors", "joins", "server".join(*list(range(len(servers))))]
+
+        for ChannelKey in DiscordURLKeys.items():
+            EnvironmentKey = "Discord" + ChannelKey + "URL"
+            app.config[EnvironmentKey] = os.environ.get(EnvironmentKey)
+#
+
     scheduler.start()
     socketIO.run(app, host='0.0.0.0', port=5000, debug=False)
 
@@ -81,11 +87,6 @@ def end():
     # Functions
     # INIT
     scheduler.shutdown()
-
-with app.app_context():
-    # Functions
-    # INIT
-    worldControllerInitialise()
 
 # INIT
 app.register_blueprint(apiV1Blueprint, url_prefix="/api/v1")
