@@ -99,17 +99,14 @@ def initialise():
             
             RequiredModules[ModuleName] = RequiredModule
 
-        servers = RequiredModules["controllers.worldController"].servers
-
         DiscordURLKeys = ["errors", "joins", "server1", "server2", "server3"]
 
         for ChannelKey in DiscordURLKeys:
             EnvironmentKey = "Discord" + ChannelKey + "URL"
             app.config[EnvironmentKey] = os.environ.get(EnvironmentKey)
-        #
 
         scheduler.start()
-        socketIO.run(app, host='0.0.0.0', port=5000, debug=False, allow_unsafe_werkzeug=True)
+        socketIO.run(app, host='0.0.0.0', port=5000, debug=True, allow_unsafe_werkzeug=True)
 
 def end():
     # Functions
