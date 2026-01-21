@@ -1,5 +1,7 @@
 # Modules
 # INT
+import os
+
 from modules.utilities import Utilities
 
 # EXT
@@ -7,15 +9,26 @@ from pymongo import MongoClient
 from flask import current_app
 
 # CORE
+CurrentApp = None
+client = None
 
-# 
+# Functions
+# MECHANICS
+def Initialise(app):
+    # CORE
+    global CurrentApp, client
+
+    # Functions
+    # INIT
+    CurrentApp = app
+    client = MongoClient("mongodb+srv://" + app.config["DBUsername"] + ":" + app.config["DBKey"] + "@dissertationcluster.so7tm.mongodb.net/?retryWrites=true&w=majority&appName=dissertationCluster")
+
+
 class Database:
     def getDatabase():
-        client = MongoClient("mongodb+srv://" + current_app.config["DBUsername"] + ":" + current_app.config["DBKey"] + "@dissertationcluster.so7tm.mongodb.net/?retryWrites=true&w=majority&appName=dissertationCluster")
         return client
     
     def getDatabaseCluster():
-        client = Database.getDatabase()
         return client["dissertationDatabase"]
     
     def getAndUpdateCounter(collectionName): # FOR NUMBER BASED IDs ON RECORDS

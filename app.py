@@ -51,7 +51,12 @@ csrf = CSRFProtect(app)
 socketIO = SocketIO(app, async_mode="threading")
 
 # CONTROLLERS
-ControllerRegistry = {
+ModuleRegistry = {
+    # SERVICES
+    "modules.database",
+    "modules.discordBot",
+
+    # CONTROLLERS
     "controllers.api.apiV1",
     "controllers.worldController",
     "controllers.indexController",
@@ -60,7 +65,7 @@ ControllerRegistry = {
     "controllers.registerController",
     "controllers.settingsController",
     "controllers.gameController",
-    "controllers.multiFactorAuthenticationController"
+    "controllers.multiFactorAuthenticationController",
 }
 
 RequiredModules = {} #CONTROLLERS
@@ -71,7 +76,7 @@ def initialise():
     # Functions
     # INIT
     with app.app_context():
-        for ModuleName in ControllerRegistry:
+        for ModuleName in ModuleRegistry:
             RequiredModule = importlib.import_module(ModuleName)
             URLPrefix = None
 
