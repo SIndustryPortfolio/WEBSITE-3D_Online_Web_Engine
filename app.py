@@ -55,7 +55,7 @@ socketIO = SocketIO(app)
 ControllerRegistry = {
     "controllers.api.apiV1",
     "controllers.worldController",
-    "controllers.indexController"
+    "controllers.indexController",
     "controllers.homeController",
     "controllers.loginController",
     "controllers.registerController",
