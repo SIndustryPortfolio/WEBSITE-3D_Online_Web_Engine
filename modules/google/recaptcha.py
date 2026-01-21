@@ -4,8 +4,6 @@ import os
 # EXT
 import requests
 
-from flask import current_app
-
 # CORE
 recaptchaVerifyURL = "https://www.google.com/recaptcha/api/siteverify"
 recaptchaSecretKey = os.environ.get("GoogleSecretKey")

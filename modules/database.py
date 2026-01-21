@@ -14,12 +14,16 @@ from flask import current_app
 #secureInfo = Utilities.loadJson("secure/json/secure.json")
 
 
-client = MongoClient("mongodb+srv://" + current_app.config["DBUsername"] + ":" + current_app.config["DBKey"] + "@dissertationcluster.so7tm.mongodb.net/?retryWrites=true&w=majority&appName=dissertationCluster")
-databaseCluster = client["dissertationDatabase"]
-
 # 
 class Database:
+    def getDatabase():
+        client = MongoClient("mongodb+srv://" + current_app.config["DBUsername"] + ":" + current_app.config["DBKey"] + "@dissertationcluster.so7tm.mongodb.net/?retryWrites=true&w=majority&appName=dissertationCluster")
+        return client
+    
     def getAndUpdateCounter(collectionName): # FOR NUMBER BASED IDs ON RECORDS
+        client = Database.getDatabase()
+
+        databaseCluster = client["dissertationDatabase"]
         counterCollection = databaseCluster["counter"]
 
         document = counterCollection.find_one_and_update( 
