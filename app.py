@@ -4,7 +4,7 @@ import importlib
 
 # EXT
 
-from apscheduler.schedulers.background import BackgroundScheduler
+#from apscheduler.schedulers.background import BackgroundScheduler
 
 from flask import Flask, render_template, url_for
 from flask_socketio import SocketIO
@@ -22,7 +22,7 @@ from modules.debug import Debug
 coreInfo = Utilities.loadJson("static/json/core.json")
 #secureInfo = Utilities.loadJson("secure/json/secure.json")
 
-scheduler = BackgroundScheduler()
+#scheduler = BackgroundScheduler()
 
 app = Flask(__name__)
 
@@ -105,13 +105,14 @@ def initialise():
             EnvironmentKey = "Discord" + ChannelKey + "URL"
             app.config[EnvironmentKey] = os.environ.get(EnvironmentKey)
 
-        scheduler.start()
-        socketIO.run(app, host='0.0.0.0', port=5000, debug=True, allow_unsafe_werkzeug=True)
+        #scheduler.start()
+        socketIO.run(app, host='0.0.0.0', port=os.environ["PORT"], debug=False, allow_unsafe_werkzeug=True)
 
 def end():
     # Functions
     # INIT
-    scheduler.shutdown()
+   #scheduler.shutdown()
+   pass
 
 # INIT
 #app.register_blueprint(apiV1Blueprint, url_prefix="/api/v1")
