@@ -53,6 +53,7 @@ socketIO = SocketIO(app, async_mode="threading")
 # CONTROLLERS
 ModuleRegistry = {
     # SERVICES
+    "modules.shortcuts",
     "modules.database",
     "modules.discordBot",
 

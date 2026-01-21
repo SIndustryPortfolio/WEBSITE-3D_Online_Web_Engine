@@ -4,15 +4,28 @@ from modules.utilities import Utilities
 
 # EXT
 import json
-from flask import session, request, render_template, make_response, current_app
+from flask import session, request, render_template, make_response
+
+# CORE
+CurrentApp = None
+
+# Functions
+# MECHANICS
+def Initialise(app):
+    # CORE
+    global CurrentApp
+
+    # Functions
+    # INIT
+    CurrentApp = app
 
 # CLASS
 class Shortcuts:
     def getHostURL():
         # Functions
         # INIT
-        host = current_app.config.get("HOST", "127.0.0.1")
-        port = current_app.config.get("PORT", 5000)
+        host = CurrentApp.config.get("HOST", "127.0.0.1")
+        port = CurrentApp.config.get("PORT", 5000)
         scheme = "http"
 
         hostURL = f"{scheme}://{host}:{port}"
