@@ -100,7 +100,7 @@ def initialise():
 
         servers = RequiredModules["controllers.worldController"].servers
 
-        DiscordURLKeys = ["errors", "joins", "server".join(*list(range(len(servers))))]
+        DiscordURLKeys = ["errors", "joins", "server1", "server2", "server3"]
 
         for ChannelKey in DiscordURLKeys.items():
             EnvironmentKey = "Discord" + ChannelKey + "URL"
