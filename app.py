@@ -102,7 +102,7 @@ def initialise():
 
         DiscordURLKeys = ["errors", "joins", "server1", "server2", "server3"]
 
-        for ChannelKey in DiscordURLKeys.items():
+        for ChannelKey in DiscordURLKeys:
             EnvironmentKey = "Discord" + ChannelKey + "URL"
             app.config[EnvironmentKey] = os.environ.get(EnvironmentKey)
         #
