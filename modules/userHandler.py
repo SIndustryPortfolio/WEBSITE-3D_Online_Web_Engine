@@ -421,7 +421,7 @@ class UserHandler:
         requestIP = Shortcuts.getClientIP()
 
         success1, pcallResponse1 = Debug.pcall(userCollection.update_one, {"userId": str(userId)}, {"$set": {"lastLoginTime": timeNow, "IP": str(requestIP)}}) # UPDATE LAST LOGIN TIME
-        success, pcallResponse = UserHandler.getUserFromUserId(userId) #Debug.pcall(requests.get, request.host_url + "/api/v1/users/" + str(userId)) # API CALL FOR USER DATA
+        success, pcallResponse = Debug.pcall(UserHandler.getUserFromUserId, userId) #Debug.pcall(requests.get, request.host_url + "/api/v1/users/" + str(userId)) # API CALL FOR USER DATA
 
         if success:
             session["user"] = pcallResponse.json() #requests.get(request.host_url + "/api/v1/users/" + str(userId)).json() # API CALL FOR USER DATA
