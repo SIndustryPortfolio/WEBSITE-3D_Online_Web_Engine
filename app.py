@@ -3,8 +3,8 @@ import os
 import importlib
 
 # EXT
-import eventlet
-import eventlet.wsgi
+from gevent import monkey
+monkey.patch_all()
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
@@ -52,7 +52,7 @@ app.config["APIKey"] = os.environ.get("APIKey")
 
 mail = Mail(app)
 csrf = CSRFProtect(app)
-socketIO = SocketIO(app, async_mode='eventlet')
+socketIO = SocketIO(app, async_mode="gevent")
 
 # CONTROLLERS
 ControllerRegistry = {
