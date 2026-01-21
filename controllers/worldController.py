@@ -29,6 +29,10 @@ def setupServer(serverId):
     servers[str(serverId)] = Server(str(serverId), socketIO, servers)
 
 def Initialise(app):
+    # CORE
+    global CurrentApp
+    
+    # Functions
     # INIT
     CurrentApp = app
 

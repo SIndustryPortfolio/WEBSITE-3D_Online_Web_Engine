@@ -22,6 +22,9 @@ CurrentApp = None
 # FUNCTIONS
 # MECHANICS
 def Initialise(app):
+    # CORE
+    global CurrentApp
+    
     # Functions
     # INIT
     CurrentApp = app

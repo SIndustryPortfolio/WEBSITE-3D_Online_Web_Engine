@@ -22,13 +22,13 @@ GoogleSiteKey = None
 
 # MECHANICS
 def Initialise(app):
+    # CORE
+    global CurrentApp, GoogleSiteKey
+
     # Functions
     # INIT
     CurrentApp = app
     GoogleSiteKey = app.config["RECAPTCHA_PUBLIC_KEY"]
-
-    print("SETTING KEY")
-    print(app.config["RECAPTCHA_PUBLIC_KEY"])
 
 #  Routes
 @BluePrint.route("/login")

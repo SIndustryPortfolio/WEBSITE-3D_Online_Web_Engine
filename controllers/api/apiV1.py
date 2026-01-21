@@ -53,6 +53,9 @@ def runtime(): # RUNNING THREAD FOR CACHE TIME OUTS
         time.sleep(5)
 
 def Initialise(app):
+    # CORE
+    global CurrentApp
+    
     # Functions
     # INIT
     CurrentApp = app

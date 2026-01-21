@@ -22,6 +22,9 @@ GoogleSiteKey = None
 # Functions
 # MECHANICS
 def Initialise(app):
+    # CORE
+    global CurrentApp, GoogleSiteKey
+    
     # Functions
     # INIT
     CurrentApp = app
