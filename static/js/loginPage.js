@@ -60,6 +60,8 @@ function initialise()
 
  csrfToken = "{{ csrf_token() }}";
 
+ console.log("{{ siteKey }}");
+
  utilitiesHandlerModule.runModules(alertHandlerModule);
 
  handleForm();
