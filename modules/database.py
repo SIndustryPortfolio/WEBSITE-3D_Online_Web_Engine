@@ -31,7 +31,7 @@ class Database:
         return client
     
     def getDatabaseCluster():
-        return client["dissertationDatabase"]
+        return client#["dissertationDatabase"]
     
     def getAndUpdateCounter(collectionName): # FOR NUMBER BASED IDs ON RECORDS
         databaseCluster = Database.getDatabaseCluster()
