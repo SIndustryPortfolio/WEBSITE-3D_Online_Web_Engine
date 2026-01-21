@@ -78,8 +78,8 @@ def initialise():
             if hasattr(RequiredModule, "url_prefix"):
                 URLPrefix = RequiredModule.url_prefix
 
-            if hasattr(RequiredModule, "initialise"):
-                RequiredModule.initialise(app)
+            if hasattr(RequiredModule, "Initialise"):
+                RequiredModule.Initialise(app)
 
             if hasattr(RequiredModule, "BluePrint"):
                 app.register_blueprint(RequiredModule.BluePrint, url_prefix = URLPrefix)
