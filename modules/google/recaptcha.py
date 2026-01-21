@@ -18,11 +18,8 @@ class Recaptcha:
         secretResponse = formDict["g-recaptcha-response"]
         #verifyResponse = requests.post(url=f'{recaptchaVerifyURL}?secret={recaptchaSecretKey}&response={secretResponse}').json()
 
-        success, verifyResponse = Debug.pcall(requests.post, url=f'{recaptchaVerifyURL}?secret={recaptchaSecretKey}&response={secretResponse}')
+        verifyResponse = requests.post(url=f'{recaptchaVerifyURL}?secret={recaptchaSecretKey}&response={secretResponse}').json()
         
-        if success:
-            verifyResponse = verifyResponse.json()
-
         if not verifyResponse["success"] or verifyResponse["score"] < 0.5:
             response["success"] = False
             response["alert"]["type"] = "danger"
