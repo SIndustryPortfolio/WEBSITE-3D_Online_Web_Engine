@@ -3,6 +3,9 @@ import os
 import importlib
 
 # EXT
+import eventlet
+import eventlet.wsgi
+
 from apscheduler.schedulers.background import BackgroundScheduler
 
 from flask import Flask, render_template, url_for
@@ -49,7 +52,7 @@ app.config["APIKey"] = os.environ.get("APIKey")
 
 mail = Mail(app)
 csrf = CSRFProtect(app)
-socketIO = SocketIO(app)
+socketIO = SocketIO(app, async_mode='eventlet')
 
 # CONTROLLERS
 ControllerRegistry = {
