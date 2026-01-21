@@ -125,7 +125,7 @@ class UserHandler:
     def getUserFromUserId(userId): # RETURN USER FROM USER ID
         # Functions
         # INIT
-        userCollection = Database.getDatabaseCluster()["user"]
+        userCollection = Database.getDatabase()["user"]
         userRecord = userCollection.find_one({"userId": str(userId)})
 
         if userRecord != None:
@@ -136,7 +136,7 @@ class UserHandler:
     def getUserFromAttribute(attributeName, value, caseSensitive=True): # RETURN USER FROM USERNAME
         # Functions
         # INIT
-        userCollection = Database.getDatabaseCluster()["user"]
+        userCollection = Database.getDatabase()["user"]
         userRecord = None
         
         success = None
@@ -164,7 +164,7 @@ class UserHandler:
 
         # GENERATE RANDOM TOKEN STRING
         token = Token.generate()
-        userCollection = Database.getDatabaseCluster()["user"]
+        userCollection = Database.getDatabase()["user"]
         recordFilter = {"userId": userId}
 
         # Functions
@@ -209,7 +209,7 @@ class UserHandler:
 
         # Functions
         # INIT
-        userCollection = Database.getDatabaseCluster()["user"]
+        userCollection = Database.getDatabase()["user"]
         userRecord = userCollection.find_one({"userId": userId})
 
         if userRecord == None:
@@ -237,7 +237,7 @@ class UserHandler:
 
         # Functions
         # INIT
-        userCollection = Database.getDatabaseCluster()["user"]
+        userCollection = Database.getDatabase()["user"]
         userRecord = userCollection.find_one({"username": username})
 
         if userRecord == None:
@@ -261,7 +261,7 @@ class UserHandler:
     def deleteUser(user):
         # CORE
         response = {"success": False, "alert": {"type": "danger", "message": ""}}
-        userCollection = Database.getDatabaseCluster()["user"]
+        userCollection = Database.getDatabase()["user"]
 
         # Functions
         # INIT
@@ -280,7 +280,7 @@ class UserHandler:
     def updateUser(user, data):
         # CORE
         response = {"success": False, "alert": {"type": "danger", "message": ""}}
-        userCollection = Database.getDatabaseCluster()["user"]
+        userCollection = Database.getDatabase()["user"]
 
         # Functions
         # INIT
@@ -334,7 +334,7 @@ class UserHandler:
         #email = email.strip() # REMOVE EXCESS WHITESPACE
 
         print("a")
-        userCollection = Database.getDatabaseCluster()["user"]
+        userCollection = Database.getDatabase()["user"]
         print("b")
         emailResponse = UserHandler.isValidEmail(email)
         print("c")
@@ -412,7 +412,7 @@ class UserHandler:
 
     def loginToUser(userId):
         # CORE
-        userCollection = Database.getDatabaseCluster()["user"]
+        userCollection = Database.getDatabase()["user"]
         timeNow = time.time()
         response = {"success": True, "alert": {"type": "", "message": ""}}
 

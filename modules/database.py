@@ -28,14 +28,10 @@ def Initialise(app):
 
 class Database:
     def getDatabase():
-        return client
-    
-    def getDatabaseCluster():
-        return client#["dissertationDatabase"]
+        return client["dissertationDatabase"]
     
     def getAndUpdateCounter(collectionName): # FOR NUMBER BASED IDs ON RECORDS
-        databaseCluster = Database.getDatabaseCluster()
-        counterCollection = databaseCluster["counter"]
+        counterCollection = Database.getDatabase()["counter"]
 
         document = counterCollection.find_one_and_update( 
             {"collection": collectionName},

@@ -38,7 +38,7 @@ class OTP:
         timeNow = time.time()
         response = {"success": False, "alert": {"type": "danger", "message": ""}}
         recordFilter = {"userId": userId}
-        otpCollection = Database.getDatabaseCluster()["otp"]
+        otpCollection = Database.getDatabase()["otp"]
 
         # Functions
         # INIT
@@ -74,7 +74,7 @@ class OTP:
         # Core
         response = {"success": True, "alert": {"type": "success", "message": ""}}
         recordFilter = {"userId": userId}
-        otpCollection = Database.getDatabaseCluster()["otp"]
+        otpCollection = Database.getDatabase()["otp"]
         foundOTPRecord = otpCollection.find_one(recordFilter)
 
         if (foundOTPRecord != None):
@@ -97,7 +97,7 @@ class OTP:
         timeNow = time.time()
 
         otpPlainString = OTP.getRandomOTP()
-        otpCollection = Database.getDatabaseCluster()["otp"]
+        otpCollection = Database.getDatabase()["otp"]
         timeNow = time.time()
 
         subject = "Email 2FA for: " + coreInfo["name"]
