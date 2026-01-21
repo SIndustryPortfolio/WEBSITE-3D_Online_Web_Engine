@@ -2,7 +2,6 @@
 # INTERNAL
 from forms.registerForm import RegisterForm
 
-from modules.database import databaseCluster
 from modules.userHandler import UserHandler
 from modules.utilities import Utilities
 from modules.shortcuts import Shortcuts
