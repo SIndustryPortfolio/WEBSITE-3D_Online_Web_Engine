@@ -21,9 +21,9 @@ function onLoginClicked(token)
 {
     var formData = utilitiesHandlerModule.formToDict(document.getElementById("loginForm"));
 
-    const token = grecaptcha.execute(Options["SiteKey"], { action: 'login' });
+    let responseToken = grecaptcha.execute(Options["SiteKey"], { action: 'login' });
 
-    formData["g-recaptcha-response"] = token;
+    formData["g-recaptcha-response"] = responseToken;
 
     $.ajax({
         url: "/loginRequest",
