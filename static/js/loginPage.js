@@ -46,10 +46,11 @@ function handleForm()
     // Functions
     // DIRECT
     
-    //loginForm.addEventListener("submit", function(event) 
-    //{
-    //    event.preventDefault();
-    //});
+    loginForm.addEventListener("submit", function(event) 
+    {
+        event.preventDefault();
+        return onLoginClicked();
+    });
     
     // INIT
     console.log("Running Login Form");
