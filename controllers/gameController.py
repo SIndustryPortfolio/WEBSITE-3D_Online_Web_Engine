@@ -6,6 +6,8 @@ from modules.shortcuts import Shortcuts
 from controllers.api.caches.mapServiceCache import MapServiceCache
 from controllers.api.caches.textureServiceCache import TextureServiceCache
 
+from controllers.api.v1.gameService import getMeta
+
 from controllers.worldController import servers
 
 # EXTERNAL
@@ -50,7 +52,7 @@ def pageHandler(_serverId):
     textures = TextureServiceCache.get() #requests.get(request.host_url + "/api/v1/game/textures/raw").json()
 
     # MAP META DATA (TRANSLATE GRID TO RENDERABLE INFORMATION)
-    mapMeta = MapServiceCache.get("meta") #requests.get(request.host_url + "/api/v1/game/maps/meta").json()
+    mapMeta = getMeta() #requests.get(request.host_url + "/api/v1/game/maps/meta").json()
 
     return Shortcuts.renderPage("game.html", "Game", serverId=str(_serverId), mapData=mapData, textures=textures, mapMeta=mapMeta)
 
