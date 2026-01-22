@@ -43,17 +43,22 @@ function onLoginClicked(token)
 function handleForm()
 {
     // Functions
+    // DIRECT
+    loginForm.addEventListener("submit", function(event) 
+    {
+        event.preventDefault();
+    });
+    
     // INIT
     console.log("Running Login Form");
 
-    // DIRECT
     var loginButtonHolderDiv = document.getElementById("loginButtonHolder");
 
     var button = document.createElement("button");
     button.innerHTML = "LOGIN";
     button["data-sitekey"] = "{{siteKey}}";
     button["data-callback"] = "onLoginClicked";
-    //button["data-action"] = "submit";
+    button["data-action"] = "submit";
     button.classList.add("g-recpatcha", "btn", "btn-success");
 
     loginButtonHolderDiv.appendChild(button);
