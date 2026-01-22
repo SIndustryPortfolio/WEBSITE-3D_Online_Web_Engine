@@ -33,7 +33,7 @@ def getTextures(): # RETURN ALL TEXTURE IMAGE RGB DATA
     return jsonify(TextureServiceCache.get())
 
 @gameServiceBlueprint.route("maps/meta", methods = ["GET"])
-def getMeta(): # RETURN META TO TRANSLATE MAP GRID VALUES
+def getMeta(DontJSON): # RETURN META TO TRANSLATE MAP GRID VALUES
     # Functions
     # INIT
     metaDict = {
@@ -42,4 +42,7 @@ def getMeta(): # RETURN META TO TRANSLATE MAP GRID VALUES
         "walls": Utilities.loadJson("static/json/maps/meta/walls.json")
     }
 
-    return jsonify(metaDict) 
+    if DontJSON:
+        return metaDict
+    else:
+        return jsonify(metaDict) 
