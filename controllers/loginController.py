@@ -97,15 +97,19 @@ def logoutRequestPageHandler():
 
 @BluePrint.route("/loginRequest", methods = ["POST"]) # AJAX REQUEST
 def loginRequestPageHandler():
-    # IF USER IS LOGGED IN
-    if session.get("user", None):
-        return redirect(url_for("index.pageHandler"))
-    
     # CORE
     response = {
         "status": None,
         "redirect" : None
     }
+
+    # IF USER IS LOGGED IN
+    if session.get("user", None):
+        response["status"] = "success"
+        response["redirect"] = url_for("index.pageHandler")
+        #return redirect(url_for("index.pageHandler"))
+
+        return jsonify(response)
 
     data = request.get_json()
     clientIP = Shortcuts.getClientIP()
