@@ -523,7 +523,7 @@ class Camera extends Instance
         let quickColourCache = {}; // Less lerping needed for groups of pixel colour
         
         let iterations = 0;
-        for (let y = 0; y < textureHeight; /**y++**/ y += levelOfDetail) 
+        for (let y = 0; y < textureHeight; y += levelOfDetail) 
         {
             const pixelColourTable = textureRGBData[y][textureOffsetX];
             let pixelColour = color(pixelColourTable[0], pixelColourTable[1], pixelColourTable[2]);
@@ -646,7 +646,7 @@ class Camera extends Instance
         //this.drawFloors();
         //this.drawWalls();
 
-        let toDraw = []
+        let toDraw = [];
 
         const drawable = 
         {
@@ -654,7 +654,7 @@ class Camera extends Instance
         };
 
         toDraw = toDraw.concat(this.lookRays["walls"], this.entities); // COMBINE ALL DRAW / RAY INFO's
-        toDraw.sort((drawInfo1, drawInfo2) => drawInfo2["distance"] - drawInfo1["distance"]); // RE-ORDER RAYS BY DISTANCE FOR BETTER LAYERING
+        toDraw.sort((drawInfo1, drawInfo2) => floor(drawInfo2["distance"] - drawInfo1["distance"])); // RE-ORDER RAYS BY DISTANCE FOR BETTER LAYERING
 
         const wallWidth = this.engine.viewportSize.x / this.lookRays["walls"].length;
 
