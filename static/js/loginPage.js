@@ -21,6 +21,14 @@ function onLoginClicked(token)
 
     var formData = utilitiesHandlerModule.formToDict(document.getElementById("loginForm"));
 
+    const recaptchaResponse = grecaptcha.getResponse();
+    if (!recaptchaResponse) {
+      alert('Please complete the reCAPTCHA.');
+      return;
+    }
+
+    formData["g-recaptcha-response"] = recaptchaResponse;
+
     $.ajax({
         url: "/loginRequest",
         type: "POST",
