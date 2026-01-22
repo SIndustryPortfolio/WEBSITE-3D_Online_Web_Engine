@@ -6,6 +6,8 @@ import alertHandlerModule from "./handlers/alertHandler.js";
 import utilitiesHandlerModule from "./handlers/utilitiesHandler.js";
 
 // CORE
+var recaptchaWidgetId = null;
+
 var usernameInput = null;
 var passwordInput = null;
 var loginButton = null;
@@ -21,7 +23,12 @@ function onLoginClicked(token)
 
     var formData = utilitiesHandlerModule.formToDict(document.getElementById("loginForm"));
 
-    const recaptchaResponse = grecaptcha.getResponse();
+    if (recaptchaWidgetId === undefined) 
+    {
+        console.log("recaptcha not loaded yet!");
+    }
+
+    const recaptchaResponse = grecaptcha.getResponse(recaptchaWidgetId);
     if (!recaptchaResponse) {
       alert('Please complete the reCAPTCHA.');
       return;
@@ -53,7 +60,10 @@ function handleForm()
 {
     // Functions
     // DIRECT
-    
+    recaptchaWidgetId = grecaptcha.render('recaptcha-container', {
+        'sitekey': sitekey
+    });
+
     loginForm.addEventListener("submit", function(event) 
     {
         event.preventDefault();
