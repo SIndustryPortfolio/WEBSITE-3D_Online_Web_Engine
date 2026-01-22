@@ -51,7 +51,9 @@ function handleForm()
 
     var button = document.createElement("button");
     button.innerHTML = "LOGIN";
-    button.attributes.add({"data-sitekey":"{{siteKey}}"}, {"data-callback":"onLoginClicked"}, {"data-action":"submit"});
+    button["data-sitekey"] = "{{siteKey}}";
+    button["data-callback"] = "onLoginClicked";
+    button["data-action"] = "submit";
     button.classList.add("g-recpatcha", "btn", "btn-success");
 
     loginButtonHolderDiv.appendChild(button);
