@@ -21,28 +21,32 @@ function onLoginClicked(token)
 {
     var formData = utilitiesHandlerModule.formToDict(document.getElementById("loginForm"));
 
-    let responseToken = grecaptcha.execute(Options["SiteKey"], { action: 'login' });
+    grecaptcha.execute(Options["SiteKey"], { action: 'login' }).then(responseToken => 
+    {
+        // Functions
+        // INIT
 
-    formData["g-recaptcha-response"] = responseToken;
+        formData["g-recaptcha-response"] = responseToken;
 
-    $.ajax({
-        url: "/loginRequest",
-        type: "POST",
-        contentType: "application/json",
-        dataType: "json",
-        headers: 
-        {
-            "X-CSRFToken":  Options["CSRFToken"]
-        },
-        //dataType: "json",
-        data: JSON.stringify(formData),
-        success: function(response){
-            ajaxResponseHandlerModule.handleResponse(response);
-        },
-        error: function(error){
-            console.log("Error: ", error);
-        }
-    });
+        $.ajax({
+            url: "/loginRequest",
+            type: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            headers: 
+            {
+                "X-CSRFToken":  Options["CSRFToken"]
+            },
+            //dataType: "json",
+            data: JSON.stringify(formData),
+            success: function(response){
+                ajaxResponseHandlerModule.handleResponse(response);
+            },
+            error: function(error){
+                console.log("Error: ", error);
+            }
+        });
+    })
 }
 
 function handleForm()
