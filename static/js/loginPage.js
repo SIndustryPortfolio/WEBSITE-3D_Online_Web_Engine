@@ -51,10 +51,6 @@ function handleForm()
     // DIRECT
     console.log(Options);
 
-    recaptchaWidgetId = grecaptcha.render('recaptcha-container', {
-        "sitekey" : Options["SiteKey"]
-    });
-
     loginForm.addEventListener("submit", function(event) 
     {
         event.preventDefault();
