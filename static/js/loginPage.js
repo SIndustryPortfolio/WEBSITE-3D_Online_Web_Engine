@@ -69,7 +69,7 @@ function initialise()
     console.log("Initialising login page module");
 
  // CORE
- loginForm = $("#loginForm"); //document.getElementById("loginForm");
+ loginForm = document.getElementById("loginForm");
  usernameInput = document.getElementById("usernameInput1");
  passwordInput = document.getElementById("passwordInput1");
  loginButton = document.getElementById("formSubmit1");
