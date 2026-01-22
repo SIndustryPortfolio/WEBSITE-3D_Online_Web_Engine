@@ -51,6 +51,8 @@ export class ReplicationService
             "args": [...args]
         };
 
+        console.log("Sending");
+        console.log(toSend);
         this.socket.emit("clientRequest", toSend);
     }
 
@@ -77,7 +79,7 @@ export class ReplicationService
 
         push();
         colorMode(RGB);
-        rectMode(CENTER)
+        rectMode(CENTER);
         translate(0, 0);
 
         const position = createVector(this.engine.viewportSize.x / 2, this.engine.viewportSize.y / 2);
@@ -135,6 +137,9 @@ export class ReplicationService
             // Functions
             // INIT
 
+            console.log("Response received");
+            console.log(data);
+
             if (data == null || data === undefined) 
             {
                 return;
@@ -151,7 +156,6 @@ export class ReplicationService
                 {
                     //console.log("RESPOND TO");
                     //console.log(parentObject.respondTo);
-
 
                     //console.log("RESPONSE!!!");
                     //console.log(responseData);
