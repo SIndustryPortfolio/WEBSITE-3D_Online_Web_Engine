@@ -1,11 +1,10 @@
 # Modules
 # EXT
 import math
-import requests
 import random
 import time
 
-from flask import request, url_for, render_template, session
+from flask import render_template, session
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # INT
@@ -103,7 +102,7 @@ class OTP:
 
         subject = "Email 2FA for: " + coreInfo["name"]
 
-        userInfo = UserHandler.getUserFromUserId(userId) #requests.get(request.host_url + "/api/v1/users/" + str(userId)).json()
+        userInfo = UserHandler.getUserFromUserId(userId).getDict() #requests.get(request.host_url + "/api/v1/users/" + str(userId)).json()
 
         if userInfo == None:
             response["success"] = False
