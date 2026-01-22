@@ -21,18 +21,9 @@ function onLoginClicked(token)
 {
     var formData = utilitiesHandlerModule.formToDict(document.getElementById("loginForm"));
 
-    if (recaptchaWidgetId === undefined) 
-    {
-        console.log("recaptcha not loaded yet!");
-    }
+    const token = grecaptcha.execute(Options["SiteKey"], { action: 'login' });
 
-    const recaptchaResponse = grecaptcha.getResponse(recaptchaWidgetId);
-    if (!recaptchaResponse) {
-      alert('Please complete the reCAPTCHA.');
-      return;
-    }
-
-    formData["g-recaptcha-response"] = recaptchaResponse;
+    formData["g-recaptcha-response"] = token;
 
     $.ajax({
         url: "/loginRequest",
@@ -67,7 +58,10 @@ function handleForm()
     loginForm.addEventListener("submit", function(event) 
     {
         event.preventDefault();
-        return onLoginClicked();
+
+        grecaptcha.ready(async () => {
+         return onLoginClicked();
+        });
     });
     
     // INIT
