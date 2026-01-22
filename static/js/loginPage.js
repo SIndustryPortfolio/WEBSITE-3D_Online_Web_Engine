@@ -13,15 +13,12 @@ var passwordInput = null;
 var loginButton = null;
 var loginForm = null;
 
-var csrfToken = null;
-var siteKey = null;
+var Options = null;
 
 // Functions
 // MECHANICS
 function onLoginClicked(token) 
 {
-    csrfToken = $('meta[name="csrf-token"]').attr('content');
-
     var formData = utilitiesHandlerModule.formToDict(document.getElementById("loginForm"));
 
     if (recaptchaWidgetId === undefined) 
@@ -44,7 +41,7 @@ function onLoginClicked(token)
         dataType: "json",
         headers: 
         {
-            "X-CSRFToken":  csrfToken
+            "X-CSRFToken":  Options["CSRFToken"]
         },
         //dataType: "json",
         data: JSON.stringify(formData),
@@ -62,7 +59,7 @@ function handleForm()
     // Functions
     // DIRECT
     recaptchaWidgetId = grecaptcha.render('recaptcha-container', {
-        'sitekey': sitekey
+        'sitekey': Options["SiteKey"]
     });
 
     loginForm.addEventListener("submit", function(event) 
@@ -79,7 +76,7 @@ function handleForm()
     var button = document.createElement("button");
     button.innerHTML = "LOGIN";
 
-    button["data-sitekey"] = sitekey;
+    button["data-sitekey"] = Options["SiteKey"];
     button["data-callback"] = "onLoginClicked";
     button["data-action"] = "submit";
     button.classList.add("g-recpatcha", "btn", "btn-success");
@@ -87,12 +84,11 @@ function handleForm()
     loginButtonHolderDiv.appendChild(button);
 }
 
-function initialise() 
+function initialise(_Options) 
 {
     // CORE
-    csrfToken = "{{csrf_token()}}";
-    siteKey = "{{siteKey}}";
-    
+    Options = _Options;
+
     loginForm = document.getElementById("loginForm");
     usernameInput = document.getElementById("usernameInput1");
     passwordInput = document.getElementById("passwordInput1");

@@ -57,8 +57,13 @@
 <script type="module">
     import pageModule from "{{url_for('static', filename='js/loginPage.js')}}";
     
+
     document.addEventListener('DOMContentLoaded', function() {
-        pageModule.initialise();
+        pageModule.initialise(
+        {
+            "CSRFToken" : "{{csrf_token()}}",
+            "SiteKey" : "{{siteKey}}"
+        });
     });
 </script>
 
