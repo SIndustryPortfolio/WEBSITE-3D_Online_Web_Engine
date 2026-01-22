@@ -43,6 +43,9 @@ function onLoginClicked(token)
 function handleForm()
 {
     // Functions
+    // INIT
+    console.log("Running Login Form");
+
     // DIRECT
     var loginButtonHolderDiv = document.getElementById("loginButtonHolder");
 

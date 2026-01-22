@@ -60,14 +60,14 @@
 
     var coreInfo = {{ core | tojson }};
     var pagesInfo = {{ pages | tojson }};
-    var staticFolderlLocation = "{{ url_for('static', filename = '') }}";
+    var staticFolderlLocation = "{{url_for('static', filename = '')}}";
 
 
     var mapMeta = {{ mapMeta | tojson }};
     var mapData = {{ mapData | tojson }};
     var userData = {{ user | tojson }};
     var textures = {{ textures | tojson }};
-    var _serverId = "{{ serverId }}";
+    var _serverId = "{{serverId}}";
 
     document.addEventListener('DOMContentLoaded', function() {
         pageModule.initialise(coreInfo, pagesInfo, userData, _serverId, mapMeta, mapData, textures, staticFolderlLocation);
