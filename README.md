@@ -7,6 +7,7 @@ The project combines a **high-performance client-side engine**, real-time multip
 
 <img width="350" height="275" alt="image" src="https://github.com/user-attachments/assets/74c1a6b9-99cf-40f7-9d9d-615717555c30" /> <img width="350" height="275" alt="image" src="https://github.com/user-attachments/assets/0527e1cf-b3e0-4a22-bef7-8d56c82db4fb" />
 
+**TRY FOR YOURSELF:** https://www.pixel-world-298d11ef6df1.herokuapp.com/home
 
 ---
 
@@ -75,8 +76,8 @@ Some effects are intentionally capped at **30 FPS** to reduce processing cost.
 | Move | WASD |
 | Sprint | Hold Shift |
 | Look | Mouse movement |
-| Toggle FOV | X |
-| Toggle Resolution | C |
+| Toggle FOV | Z & X |
+| Toggle Resolution | Q & E |
 
 <img width="310" height="154" alt="image" src="https://github.com/user-attachments/assets/e197d931-d18d-4cb4-a385-e1a1eda0783d" />
 
