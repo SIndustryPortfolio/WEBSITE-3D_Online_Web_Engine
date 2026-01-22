@@ -15,7 +15,7 @@ import { Ray } from "./ray.js";
 import { Instance } from "./instance.js";
 import { UtilitiesService } from "../services/utilitiesService.js";
 
-export class Camera extends Instance
+class Camera extends Instance
 {
     constructor(engine) 
     {
@@ -672,3 +672,5 @@ export class Camera extends Instance
     }
 
 }
+
+export default Camera;

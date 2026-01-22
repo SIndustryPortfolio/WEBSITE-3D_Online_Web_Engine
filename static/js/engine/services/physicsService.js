@@ -5,7 +5,7 @@
  * 
  **/
 
-export class PhysicsService 
+class PhysicsService 
 {
     constructor(engine) 
     {
@@ -62,3 +62,6 @@ export class PhysicsService
         return insideObjects;
     }
 }
+
+
+export default PhysicsService;

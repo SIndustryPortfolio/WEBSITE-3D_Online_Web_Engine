@@ -2,7 +2,7 @@
 import { Instance } from "./instance.js";
 
 //
-export class Ray extends Instance
+class Ray extends Instance
 {
     constructor(index, position, angle, offsetAngle, maxDistance, colour) 
     {
@@ -79,3 +79,5 @@ export class Ray extends Instance
     }
 
 }
+
+export default Ray;

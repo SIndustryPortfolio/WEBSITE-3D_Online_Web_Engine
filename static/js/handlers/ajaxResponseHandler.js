@@ -1,3 +1,5 @@
+var ajaxResponseHandlerModule = {}
+
 /** 
  * AJAX HANDLER
  * -------------
@@ -5,8 +7,6 @@
  *      - REDIRECTS
  *      - ALERTS
  **/
-
-export default ajaxResponseHandlerModule = {}
 
 // Modules
 import { alertHandlerModule } from "./alertHandler.js";
@@ -56,3 +56,5 @@ function handleResponse(responseTable)
 
 // DIRECT
 ajaxResponseHandlerModule.handleResponse = handleResponse;
+
+export default ajaxResponseHandlerModule;

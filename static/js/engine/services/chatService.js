@@ -11,7 +11,7 @@ import { utilitiesHandlerModule } from "../../handlers/utilitiesHandler.js";
 import { UtilitiesService } from "./utilitiesService.js";
 
 //
-export class ChatService 
+class ChatService 
 {
     constructor(engine) 
     {
@@ -129,3 +129,6 @@ export class ChatService
     }
 
 }
+
+
+export default ChatService;

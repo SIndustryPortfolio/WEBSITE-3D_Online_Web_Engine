@@ -4,7 +4,7 @@
  * - THE MAIN RUNTIME
  **/
 
-export default engineModule = {}
+var engineModule = {}
 
 // Modules
 import { Camera } from "./modules/camera.js";
@@ -292,3 +292,6 @@ function end()
 // DIRECT
 engineModule.initialise = initialise
 engineModule.end = end
+
+
+export default engineModule;

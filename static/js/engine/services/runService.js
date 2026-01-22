@@ -12,7 +12,7 @@
 // MODULES
 
 //
-export class RunService
+class RunService
 {
     constructor(engine) 
     {
@@ -141,3 +141,5 @@ export class RunService
         }
     }
 }
+
+export default RunService;

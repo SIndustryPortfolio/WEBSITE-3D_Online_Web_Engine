@@ -9,7 +9,7 @@
  * 
  **/
 
-export class Instance 
+class Instance 
 {
     constructor(className) 
     {
@@ -53,3 +53,5 @@ export class Instance
 
     }
 }
+
+export default Instance;

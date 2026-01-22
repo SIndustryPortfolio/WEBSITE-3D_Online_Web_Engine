@@ -1,3 +1,5 @@
+var pageModule = {};
+
 // Modules
 import { ajaxResponseHandlerModule } from "./handlers/ajaxResponseHandler.js";
 import { alertHandlerModule } from "./handlers/alertHandler.js";
@@ -9,8 +11,6 @@ var otpResendForm = null;
 var otpCancelForm = null;
 
 var csrfToken = null;
-
-export default pageModule = {}
 
 // Functions
 // MECHANICS
@@ -130,3 +130,5 @@ function end()
 // DIRECT
 pageModule.initialise = initialise;
 pageModule.end = end;
+
+export default pageModule;

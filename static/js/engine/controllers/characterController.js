@@ -1,4 +1,4 @@
-export class CharacterController 
+class CharacterController 
 {
     constructor(engine, character, camera) 
     {
@@ -214,3 +214,5 @@ export class CharacterController
         this.updateMovement();
     }
 }
+
+export default CharacterController;

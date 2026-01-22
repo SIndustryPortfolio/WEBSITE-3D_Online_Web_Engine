@@ -9,7 +9,7 @@
 import { UtilitiesService } from "../services/utilitiesService.js";
 
 //
-export class FPS 
+class FPS 
 {
     constructor(textSize) 
     {
@@ -43,3 +43,5 @@ export class FPS
        
     }
 }
+
+export default FPS;

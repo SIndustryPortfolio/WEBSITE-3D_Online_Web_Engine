@@ -5,7 +5,7 @@
  * 
  **/
 
-export class Boundary 
+class Boundary 
 {
     constructor(parent, startPosition, endPosition, canQuery, colour, textureName, type) 
     {
@@ -27,3 +27,5 @@ export class Boundary
         pop();
     }
 }
+
+export default Boundary;

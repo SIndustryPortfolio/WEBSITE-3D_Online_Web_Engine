@@ -8,7 +8,7 @@
 import { UtilitiesService } from "../services/utilitiesService.js";
 import { Instance } from "./instance.js";
 
-export class Character extends Instance
+class Character extends Instance
 {
     constructor(engine, isOtherPlayer, speed) 
     {   
@@ -216,3 +216,5 @@ export class Character extends Instance
         this.heading = lerp(this.heading, this.heading + radians(mouseXDelta), this.rotateSmooth * UtilitiesService.getDeltaTime());
     }
 }
+
+export default Character;

@@ -1,7 +1,7 @@
 import { Boundary } from "./boundary.js";
 import { Instance } from "./instance.js";
 
-export class Wall extends Instance
+class Wall extends Instance
 {
     constructor(engine, position, size, boundariesToRemove, colour, textureName) 
     {
@@ -128,3 +128,6 @@ export class Wall extends Instance
         
     }
 }
+
+
+export default Wall;

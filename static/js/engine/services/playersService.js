@@ -6,7 +6,7 @@
 
 import { Character } from "../modules/character.js";
 
-export class PlayersService 
+class PlayersService 
 {
     constructor(engine) 
     {
@@ -136,3 +136,5 @@ export class PlayersService
         //this.replicationService.send("getCharacters"); // Request to -> updateCharacters
     }
 }
+
+export default PlayersService;

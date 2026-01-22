@@ -2,7 +2,7 @@
  * 
  **/
 
-export class SoundService
+class SoundService
 {
     constructor(engine) 
     {
@@ -96,3 +96,5 @@ export class SoundService
         return sound;
     }
 }
+
+export default SoundService;

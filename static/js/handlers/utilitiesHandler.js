@@ -1,10 +1,11 @@
+var utilitiesHandlerModule = {}
+
 /** 
  * UTILITIES HANDLER
  * -----------------
  * - GENERIC PAGE METHODS
  **/
 
-export default utilitiesHandlerModule = {}
 
 // Functions
 // MECHANICS
@@ -37,3 +38,6 @@ function formToDict(form) // FORM INPUT NAMES AND VALUES TO DICTIONARY
 // DIRECT
 utilitiesHandlerModule.runModules = runModules;
 utilitiesHandlerModule.formToDict = formToDict;
+
+
+export default utilitiesHandlerModule;

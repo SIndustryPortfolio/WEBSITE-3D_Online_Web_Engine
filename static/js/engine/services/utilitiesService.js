@@ -5,7 +5,7 @@
  * 
  **/
 
-export class UtilitiesService
+class UtilitiesService
 {
     constructor() 
     {
@@ -68,3 +68,5 @@ export class UtilitiesService
         return Math.max(min, Math.min(max, number));
     }
 }
+
+export default UtilitiesService;

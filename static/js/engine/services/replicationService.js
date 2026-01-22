@@ -4,7 +4,7 @@
  * - HANDLES QUICK CLIENT / SERVER WEB SOCKET COMMUNICATION (UDP)
  **/
 
-export class ReplicationService 
+class ReplicationService 
 {
     constructor(engine) 
     {
@@ -169,3 +169,5 @@ export class ReplicationService
         });
     }
 }
+
+export default ReplicationService;

@@ -11,7 +11,7 @@ import { Floor } from "./floor.js";
 import { UtilitiesService } from "../services/utilitiesService.js";
 
 //
-export class Map 
+class Map 
 {
     constructor(engine) 
     {
@@ -236,3 +236,5 @@ export class Map
         this.drawMapForeground();
     }
 }
+
+export default Map;

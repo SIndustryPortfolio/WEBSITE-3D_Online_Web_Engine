@@ -7,7 +7,7 @@
 
 import { Boundary } from "./boundary.js";
 
-export class Floor 
+class Floor 
 {
     constructor(engine, position, size, colour, textureName) 
     {
@@ -74,3 +74,5 @@ export class Floor
         pop();
     }
 }
+
+export default Floor;

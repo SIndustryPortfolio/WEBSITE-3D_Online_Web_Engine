@@ -5,7 +5,7 @@
  * 
  **/
 
-export class LightingService
+class LightingService
 {
     constructor(engine) 
     {
@@ -19,3 +19,5 @@ export class LightingService
         this.floorColour = color(floorColourTable[0], floorColourTable[1], floorColourTable[2]);
     }
 }
+
+export default LightingService;

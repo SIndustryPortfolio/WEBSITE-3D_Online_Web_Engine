@@ -1,3 +1,5 @@
+var alertHandlerModule = {}
+
 /** 
  * ALERT HANDLER
  * -------------
@@ -5,7 +7,6 @@
  * 
  **/
 
-export default alertHandlerModule = {}
 
 // Modules
 
@@ -120,5 +121,8 @@ function end()
 alertHandlerModule.addAlert = addAlert;
 alertHandlerModule.initialise = initialise;
 alertHandlerModule.end = end;
+
+
+export default alertHandlerModule;
 
 
