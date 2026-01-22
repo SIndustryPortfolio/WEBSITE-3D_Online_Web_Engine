@@ -44,10 +44,11 @@ function handleForm()
 {
     // Functions
     // DIRECT
-    loginForm.addEventListener("submit", function(event) 
-    {
-        event.preventDefault();
-    });
+    
+    //loginForm.addEventListener("submit", function(event) 
+    //{
+    //    event.preventDefault();
+    //});
     
     // INIT
     console.log("Running Login Form");
@@ -56,6 +57,7 @@ function handleForm()
 
     var button = document.createElement("button");
     button.innerHTML = "LOGIN";
+    
     button["data-sitekey"] = "{{siteKey}}";
     button["data-callback"] = "onLoginClicked";
     button["data-action"] = "submit";
@@ -68,20 +70,20 @@ function initialise()
 {
     console.log("Initialising login page module");
 
- // CORE
- loginForm = document.getElementById("loginForm");
- usernameInput = document.getElementById("usernameInput1");
- passwordInput = document.getElementById("passwordInput1");
- loginButton = document.getElementById("formSubmit1");
+    // CORE
+    loginForm = document.getElementById("loginForm");
+    usernameInput = document.getElementById("usernameInput1");
+    passwordInput = document.getElementById("passwordInput1");
+    loginButton = document.getElementById("formSubmit1");
 
- // Functions
- // INIT
- window.onLoginClicked = onLoginClicked;
+    // Functions
+    // INIT
+    window.onLoginClicked = onLoginClicked;
 
- csrfToken = "{{csrf_token()}}";
- handleForm();
+    csrfToken = "{{csrf_token()}}";
+    handleForm();
 
- utilitiesHandlerModule.runModules(alertHandlerModule);
+    utilitiesHandlerModule.runModules(alertHandlerModule);
 }
 
 function end() 
