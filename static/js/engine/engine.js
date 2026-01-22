@@ -267,6 +267,14 @@ function initialise(COREINFO, PAGESINFO, USERDATA, SERVERID, MAPMETA, MAPDATA, T
     _serverTextures = TEXTURES;
     _serverMapMeta = MAPMETA;
 
+    console.log(_staticFolderLocation);
+    console.log(_serverCoreInfo);
+    console.log(_serverId);
+    console.log(_localUser);
+    console.log(_serverMapData);
+    console.log(_serverTextures);
+    console.log(_serverMapMeta);
+
     //console.log(mapData);
 
     // SETUP GLOBALS FOR P5 SKETCH
