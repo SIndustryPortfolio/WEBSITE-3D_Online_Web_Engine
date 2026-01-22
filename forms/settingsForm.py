@@ -18,7 +18,6 @@ class SettingsForm(FlaskForm):
     def setup(self, user):
         # Functions
         # INIT
-        print("SETTING FORM!")
         self.email.render_kw["placeholder"] = user.email
         self.username.render_kw["placeholder"] = user.username
 

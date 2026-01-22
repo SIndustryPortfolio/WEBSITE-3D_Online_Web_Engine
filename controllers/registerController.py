@@ -61,9 +61,7 @@ def registerRequestPageHandler():
     requestIP = Shortcuts.getClientIP()
 
     # GOOGLE VERIFY
-    print("Verifying Google")
     googleRecaptchaResponse = Recaptcha.verifyForm(data)
-    print("Verified via Google")
 
     # IF USER NOT A BOT
     if not googleRecaptchaResponse["success"]:
@@ -78,23 +76,16 @@ def registerRequestPageHandler():
 
     # Functions
     # INIT        
-    print("1")
     registerUserResponse = UserHandler.registerUser(username, email, password, requestIP)
-    print("2")
     response["alert"] = registerUserResponse["alert"]
 
     # IF FAILED TO REGISTER
     if not registerUserResponse["success"]:
         return jsonify(response) 
-    print("3")
-
 
     # IF REGISTER SUCCESSFUL
     user = UserHandler.getUserFromAttribute("username", username, caseSensitive=False)
-    print("4")
     loginResponse = UserHandler.loginToUser(user.userId)
-    print("5")
-    #session["user"] = requests.get(request.host_url + "/api/v1/users/" + str(user.userId)).json() # API CALL FOR USER DATA
 
     if loginResponse["success"]:
         response["status"] = "success"
@@ -104,6 +95,5 @@ def registerRequestPageHandler():
     response["alert"] = loginResponse["alert"]
     response["redirect"] = url_for("index.pageHandler")
 
-    print("6")
     return jsonify(response) 
 

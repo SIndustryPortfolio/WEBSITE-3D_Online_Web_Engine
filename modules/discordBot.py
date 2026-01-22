@@ -32,8 +32,6 @@ class DiscordBot:
                 response["alert"]["type"] = "success"
                 response["alert"]["message"] = "Successfully sent discord message!"
             else:
-                print(postResponse.text)
-
                 response["success"] = False
                 response["alert"]["type"] = "danger"
                 response["alert"]["message"] = "Failed to send discord message!"

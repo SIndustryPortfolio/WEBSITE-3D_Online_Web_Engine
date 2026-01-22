@@ -137,8 +137,7 @@
     import pageModule from "{{url_for('static', filename='js/settingsPage.js')}}";
     
     let _fieldNames = {{ fieldNames | tojson }};
-    console.log(_fieldNames);
-
+    
     document.addEventListener('DOMContentLoaded', function() {
         pageModule.initialise(_fieldNames);
     });

@@ -69,9 +69,6 @@ def pageHandler():
     # IF NOT TOKEN AUTH
     form = LoginForm()
 
-    print("GOOGLE SITE KEY")
-    print(GoogleSiteKey)
-
     return Shortcuts.renderPage("login.html", "Login", form=form, siteKey=GoogleSiteKey)
     
 @BluePrint.route("/logout", methods = ["POST", "GET"])

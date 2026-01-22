@@ -15,8 +15,6 @@ function handleForm(fieldNames)
     // DIRECT
     for (let fieldName of fieldNames) 
     {
-        console.log(fieldName);
-
         let fieldForm = document.getElementById(fieldName + "Form");
 
         fieldForm.addEventListener("submit", function(event){

@@ -37,9 +37,6 @@ def pageHandler():
     if not user:
         return redirect(url_for("index.pageHandler"))
 
-
-    #print(user["username"])
-
     user = UserHandler.getUserFromAttribute("username", user["username"], caseSensitive=False)
     form = SettingsForm(user=user)
 
@@ -72,7 +69,6 @@ def settingsChangeRequest():
         return jsonify(response)
     
     user = UserHandler.getUserFromAttribute("username", session.get("user", None)["username"], caseSensitive=False)
-    print(data)
 
     if fieldName == "deleteAccount":
         deleteAccountResponse = UserHandler.deleteUser(user)

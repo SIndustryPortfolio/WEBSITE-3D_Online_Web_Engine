@@ -32,10 +32,7 @@ class ReplicationService
     {
         // Functions
         // INIT
-        //console.log("BINDING TO RESPOND TO");
         this.respondTo[objectName] = object;
-        //console.log("UPDATED RESPOND TO");
-        //console.log(this.respondTo);
     }
 
     send(methodName, ...args) 
@@ -51,8 +48,6 @@ class ReplicationService
             "args": [...args]
         };
 
-        console.log("Sending");
-        console.log(toSend);
         this.socket.emit("clientRequest", toSend);
     }
 
@@ -136,10 +131,6 @@ class ReplicationService
 
             // Functions
             // INIT
-
-            console.log("Response received");
-            console.log(data);
-
             if (data == null || data === undefined) 
             {
                 return;
@@ -154,12 +145,6 @@ class ReplicationService
     
                 if (responseData["respondTo"] != null) 
                 {
-                    //console.log("RESPOND TO");
-                    //console.log(parentObject.respondTo);
-
-                    //console.log("RESPONSE!!!");
-                    //console.log(responseData);
-
                     const respondToObject = parentObject.respondTo[responseData["respondTo"]["object"]];
                     let method = respondToObject.serverRequest.bind(respondToObject);
     

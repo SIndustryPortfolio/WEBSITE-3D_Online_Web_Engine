@@ -147,11 +147,9 @@ class UserHandler:
             success, userRecord = Debug.pcall(userCollection.find_one, {attributeName : {"$regex" : "^" + value + "$", "$options": "i"}})
 
         if not success:
-            #print("GET " + attributeName + " FAILED")
             return None
 
         if userRecord == None:
-            #print("NO " + attributeName + " FOUND")
             return None
         else:
             return UserHandler.getUserFromRecord(userRecord)
@@ -333,18 +331,14 @@ class UserHandler:
         #username = username.strip() # REMOVE EXCESS WHITESPACE
         #email = email.strip() # REMOVE EXCESS WHITESPACE
 
-        print("a")
         userCollection = Database.getDatabase()["user"]
-        print("b")
         emailResponse = UserHandler.isValidEmail(email)
-        print("c")
 
         if not emailResponse["success"]:
             return emailResponse
 
         email = emailResponse["formattedString"]
         emailAlreadyExists = UserHandler.getUserFromAttribute("email", email, caseSensitive=False)
-        print("d")
 
         if emailAlreadyExists:
             response["success"] = False
@@ -352,30 +346,21 @@ class UserHandler:
             response["alert"]["message"] = "Email already in use!"
             return response
 
-        print("e")
         usernameResponse = UserHandler.isValidUsername(username)
-        print("f")
 
         if not usernameResponse["success"]:
             return usernameResponse
 
-        print("g")
         username = usernameResponse["formattedString"]
         
         passwordResponse = UserHandler.isValidPassword(password)
 
-        print("h")
         if not passwordResponse["success"]:
             return passwordResponse
         
         password = passwordResponse["formattedString"]
-
-        print("i")
         nextUserId = Database.getAndUpdateCounter("user")
-
-        print("j")
         hashedPassword = generate_password_hash(password)
-        print("k")
 
         if nextUserId == None:
             response["success"] = False 
@@ -383,7 +368,6 @@ class UserHandler:
             response["alert"]["message"] = "Failed to connect!"
             return response
 
-        print("l")
         success, pcallResponse = Debug.pcall(userCollection.insert_one, {
             "userId": str(nextUserId),
             "username": username, 
@@ -395,7 +379,6 @@ class UserHandler:
             "IP": str(IP),
             "userType": str(1)
         })
-        print("m")
 
         if success:
             response["success"] = True
@@ -406,7 +389,6 @@ class UserHandler:
             response["alert"]["type"] = "danger"
             response["alert"]["message"] = "Connection failed! Please retry.."
 
-        print("n")
         return response
     
 
@@ -430,10 +412,7 @@ class UserHandler:
 
             if response["success"]:
                 session["user"]["authToken"] = response["token"]
-
-                print("Set Token to: ")
-                print(response["token"])
-
+                
             response["success"] = True
             response["alert"]["type"] = "success"
             response["alert"]["message"] = "Successful login!"

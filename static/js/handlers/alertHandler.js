@@ -76,8 +76,6 @@ function handleObserver() { // CHECK FOR MANUAL ALERT DIVS ARE ADDED TO THE DOCU
     const config = { childList: true, subtree: false };
 
    function childAdded (alertType, mutationsList, observer) {
-        console.log("Added!");
-
         for (const mutation of mutationsList) {
             if (mutation.type == "childList" && mutation.addedNodes.length > 0) {
                 for (var node of mutation.addedNodes) {
@@ -101,10 +99,7 @@ function initialise()
     mainAlertContainerDiv = document.getElementById("mainAlertContainer");
     hiddenMainAlertDumpDiv = document.getElementById("hiddenMainAlertDump");
 
-    console.log(hiddenMainAlertDumpDiv.children.length);
-
     for (var mainAlertElement of hiddenMainAlertDumpDiv.children) {
-        console.log("Adding alert node from startup");
         addAlert("main", mainAlertElement.getAttribute("type"), mainAlertElement.innerHTML);
     }
 

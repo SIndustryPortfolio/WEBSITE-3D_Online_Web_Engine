@@ -365,8 +365,6 @@ class Server:
 
         # Functions
         # INIT
-        print("CAUGHT PLAYER REMOVED")
-
         userId = user.userId
 
         if self.getPlayerFromServer(userId) == None:

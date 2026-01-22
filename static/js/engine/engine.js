@@ -256,8 +256,6 @@ function initialise(COREINFO, PAGESINFO, USERDATA, SERVERID, MAPMETA, MAPDATA, T
      * STORE DATA GIVEN FROM SERVER (GAME CONTROLLER.py)
      */
 
-    //console.log("SERVER ID: " + _serverId);
-
     _staticFolderLocation = STATICFOLDERLOCATION;
     _serverCoreInfo = COREINFO;
     _serverPagesInfo = PAGESINFO;
@@ -266,16 +264,6 @@ function initialise(COREINFO, PAGESINFO, USERDATA, SERVERID, MAPMETA, MAPDATA, T
     _serverMapData = MAPDATA;
     _serverTextures = TEXTURES;
     _serverMapMeta = MAPMETA;
-
-    console.log(_staticFolderLocation);
-    console.log(_serverCoreInfo);
-    console.log(_serverId);
-    console.log(_localUser);
-    console.log(_serverMapData);
-    console.log(_serverTextures);
-    console.log(_serverMapMeta);
-
-    //console.log(mapData);
 
     // SETUP GLOBALS FOR P5 SKETCH
     gameEngine = new Engine();

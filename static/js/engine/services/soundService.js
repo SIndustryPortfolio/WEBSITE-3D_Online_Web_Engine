@@ -61,9 +61,7 @@ class SoundService
 
             if (!pause) 
             {
-                console.log("Stopping");
                 this.currentMusicPauseTime = 0;
-                //this.currentMusic.currentTime = 0;
             }
             else 
             {

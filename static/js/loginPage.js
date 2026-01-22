@@ -53,8 +53,6 @@ function handleForm()
 {
     // Functions
     // DIRECT
-    console.log(Options);
-
     loginForm.addEventListener("submit", function(event) 
     {
         event.preventDefault();
@@ -65,8 +63,6 @@ function handleForm()
     });
     
     // INIT
-    console.log("Running Login Form");
-
     var loginButtonHolderDiv = document.getElementById("loginButtonHolder");
 
     var button = document.createElement("button");
