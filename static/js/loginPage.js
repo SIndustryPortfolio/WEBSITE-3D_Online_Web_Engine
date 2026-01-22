@@ -25,6 +25,7 @@ function onLoginClicked(token)
         url: "/loginRequest",
         type: "POST",
         contentType: "application/json",
+        dataType: "json",
         headers: 
         {
             "X-CSRFToken":  csrfToken
@@ -57,7 +58,7 @@ function handleForm()
 
     var button = document.createElement("button");
     button.innerHTML = "LOGIN";
-    
+
     button["data-sitekey"] = "{{siteKey}}";
     button["data-callback"] = "onLoginClicked";
     button["data-action"] = "submit";
