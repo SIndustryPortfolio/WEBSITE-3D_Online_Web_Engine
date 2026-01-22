@@ -59,6 +59,8 @@ function handleForm()
 
 function initialise() 
 {
+    console.log("Initialising login page module");
+
  // CORE
  loginForm = $("#loginForm"); //document.getElementById("loginForm");
  usernameInput = document.getElementById("usernameInput1");
