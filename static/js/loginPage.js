@@ -53,7 +53,7 @@ function handleForm()
     button.innerHTML = "LOGIN";
     button["data-sitekey"] = "{{siteKey}}";
     button["data-callback"] = "onLoginClicked";
-    button["data-action"] = "submit";
+    //button["data-action"] = "submit";
     button.classList.add("g-recpatcha", "btn", "btn-success");
 
     loginButtonHolderDiv.appendChild(button);
