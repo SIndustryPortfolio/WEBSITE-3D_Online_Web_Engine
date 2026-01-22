@@ -6,7 +6,7 @@
  *      - ALERTS
  **/
 
-export var ajaxResponseHandlerModule = {}
+export default ajaxResponseHandlerModule = {}
 
 // Modules
 import { alertHandlerModule } from "./alertHandler.js";

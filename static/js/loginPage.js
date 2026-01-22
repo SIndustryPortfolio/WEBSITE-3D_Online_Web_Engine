@@ -11,7 +11,7 @@ var loginForm = null;
 
 var csrfToken = null;
 
-export var pageModule = {}
+export default pageModule = {}
 
 // Functions
 // MECHANICS

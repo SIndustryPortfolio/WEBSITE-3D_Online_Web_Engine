@@ -4,7 +4,7 @@
  * - THE MAIN RUNTIME
  **/
 
-export var engineModule = {}
+export default engineModule = {}
 
 // Modules
 import { Camera } from "./modules/camera.js";

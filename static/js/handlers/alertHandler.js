@@ -5,7 +5,7 @@
  * 
  **/
 
-export var alertHandlerModule = {}
+export default alertHandlerModule = {}
 
 // Modules
 

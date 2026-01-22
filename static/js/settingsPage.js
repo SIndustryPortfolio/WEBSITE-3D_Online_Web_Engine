@@ -4,7 +4,7 @@ import { alertHandlerModule } from "./handlers/alertHandler.js";
 import { utilitiesHandlerModule } from "./handlers/utilitiesHandler.js";
 
 // CORE
-export var pageModule = {}
+export default pageModule = {}
 
 // Functions
 // MECHANICS

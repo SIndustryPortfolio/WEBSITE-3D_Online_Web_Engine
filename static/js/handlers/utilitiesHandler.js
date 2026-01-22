@@ -4,7 +4,7 @@
  * - GENERIC PAGE METHODS
  **/
 
-export var utilitiesHandlerModule = {}
+export default utilitiesHandlerModule = {}
 
 // Functions
 // MECHANICS

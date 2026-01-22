@@ -7,7 +7,7 @@ import { utilitiesHandlerModule } from "./handlers/utilitiesHandler.js";
 import { engineModule } from "./engine/engine.js"
 
 // CORE
-export var pageModule = {}
+export default pageModule = {}
 
 // Functions
 // MECHANICS
