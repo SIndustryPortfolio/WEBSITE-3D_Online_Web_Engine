@@ -17,17 +17,20 @@ from flask import Blueprint, session, request, redirect, url_for, jsonify
 # CORE
 BluePrint = Blueprint("register", __name__)
 CurrentApp = None
+SocketIO = None
 GoogleSiteKey = None
 
 # Functions
 # MECHANICS
-def Initialise(app):
+def Initialise(app, socketIO):
     # CORE
-    global CurrentApp, GoogleSiteKey
+    global CurrentApp, SocketIO, GoogleSiteKey
     
     # Functions
     # INIT
     CurrentApp = app
+    SocketIO = socketIO
+
     GoogleSiteKey = app.config["RECAPTCHA_PUBLIC_KEY"]
 
 #  Routes

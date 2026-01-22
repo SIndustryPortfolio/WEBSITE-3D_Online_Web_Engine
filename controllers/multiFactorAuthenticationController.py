@@ -11,23 +11,23 @@ from modules.shortcuts import Shortcuts
 from forms.mfaForm import MFAForm
 
 # EXTERNAL
-import requests
-import json
-from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify
+from flask import Blueprint, session, request, redirect, url_for, jsonify
 
 # CORE
 BluePrint = Blueprint("mfa", __name__)
 CurrentApp = None
+SocketIO = None
 
 # FUNCTIONS
 # MECHANICS
-def Initialise(app):
+def Initialise(app, socketIO):
     # CORE
-    global CurrentApp
+    global CurrentApp, SocketIO
     
     # Functions
     # INIT
     CurrentApp = app
+    SocketIO = socketIO
 
 def userLoginAuthorised(userId):
     # Functions

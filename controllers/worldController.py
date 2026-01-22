@@ -1,17 +1,12 @@
 # MODULES
 # INTERNAL
-from app import socketIO
-
 from modules.utilities import Utilities
-from modules.shortcuts import Shortcuts
 from modules.userHandler import UserHandler
 
 from modules.game.server import Server
 
 # EXTERNAL
-import requests
-import json
-from flask_socketio import SocketIO, send, emit
+from flask_socketio import emit
 
 # CORE
 coreInfo = Utilities.loadJson("static/json/core.json")
@@ -20,30 +15,16 @@ userCache = {}
 servers = {}
 
 CurrentApp = None
+SocketIO = None
 
 
 # MECHANICS
 def setupServer(serverId):
     # Functions
     # INIT
-    servers[str(serverId)] = Server(str(serverId), socketIO, servers)
+    servers[str(serverId)] = Server(str(serverId), SocketIO, servers)
 
-def Initialise(app):
-    # CORE
-    global CurrentApp
-    
-    # Functions
-    # INIT
-    CurrentApp = app
-
-    for serverId, serverInfo in coreInfo["servers"]["worlds"].items():
-        setupServer(serverId)
-
-#  Routes
-@socketIO.on("clientRequest")
-def handle_invoke(data): # CLIENT REQUEST
-    # CORE
-
+def clientRequest(data):
     # Functions
     # INIT
     if not data["userId"] in userCache:
@@ -65,6 +46,25 @@ def handle_invoke(data): # CLIENT REQUEST
         toBroadcast = response["broadcast"]
 
     return emit("serverRequest", [response], broadcast=toBroadcast)
+
+
+def Initialise(app, socketIO):
+    # CORE
+    global CurrentApp, SocketIO
+    
+    # Functions
+    # INIT
+    CurrentApp = app
+    SocketIO = socketIO
+
+    for serverId, serverInfo in coreInfo["servers"]["worlds"].items():
+        setupServer(serverId)
+
+    #  Routes
+    @socketIO.on("clientRequest")
+    def onClientRequest(*args):
+        return clientRequest(*args)
+  
 
 
 

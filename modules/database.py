@@ -10,17 +10,20 @@ from flask import current_app
 
 # CORE
 CurrentApp = None
+SocketIO = None
+
 client = None
 
 # Functions
 # MECHANICS
-def Initialise(app):
+def Initialise(app, socketIO):
     # CORE
-    global CurrentApp, client
+    global CurrentApp, SocketIO, client
 
     # Functions
     # INIT
     CurrentApp = app
+    SocketIO = socketIO
 
     print("Connecting to MONGO")
     client = MongoClient("mongodb+srv://" + app.config["DBUsername"] + ":" + app.config["DBKey"] + "@dissertationcluster.so7tm.mongodb.net/?retryWrites=true&w=majority&appName=dissertationCluster")

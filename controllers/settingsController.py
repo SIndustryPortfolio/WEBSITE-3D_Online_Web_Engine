@@ -6,27 +6,27 @@ from modules.userHandler import UserHandler
 from modules.utilities import Utilities
 from modules.shortcuts import Shortcuts
 
-from modules.google.recaptcha import Recaptcha
-
 # EXTERNAL
 import requests
 import json
-from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify
+from flask import Blueprint, session, request, redirect, url_for, jsonify
 
 # CORE
 BluePrint = Blueprint("settings", __name__)
+SocketIO = None
 CurrentApp = None
 
 
 # Functions
 # MECHANICS
-def Initialise(app):
+def Initialise(app, socketIO):
     # CORE
-    global CurrentApp
+    global CurrentApp, SocketIO
 
     # Functions
     # INIT
     CurrentApp = app
+    SocketIO = socketIO
 
 #  Routes
 @BluePrint.route("/settings")

@@ -12,13 +12,14 @@ CurrentApp = None
 
 # FUNCTIONS
 # MECHANICS
-def Initialise(app):
+def Initialise(app, socketIO):
     # CORE
-    global CurrentApp
+    global CurrentApp, SocketIO
 
     # Functions
     # INIT
     CurrentApp = app
+    SocketIO = socketIO
 
 #  Routes
 @BluePrint.route("/")

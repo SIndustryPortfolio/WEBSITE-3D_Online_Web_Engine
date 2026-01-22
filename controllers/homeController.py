@@ -12,16 +12,18 @@ from flask import Blueprint, session, redirect, url_for
 # CORE
 BluePrint = Blueprint("home", __name__)
 CurrentApp = None
+SocketIO = None
 
 # FUNCTIONS
 # MECHANICS
-def Initialise(app):
+def Initialise(app, socketIO):
     # CORE
-    global CurrentApp
+    global CurrentApp, SocketIO
 
     # Functions
     # INIT
     CurrentApp = app
+    socketIO = socketIO
 
 #  Routes
 @BluePrint.route("/home")

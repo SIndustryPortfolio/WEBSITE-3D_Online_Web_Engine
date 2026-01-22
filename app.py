@@ -85,7 +85,7 @@ def initialise():
                 URLPrefix = RequiredModule.url_prefix
 
             if hasattr(RequiredModule, "Initialise"):
-                RequiredModule.Initialise(app)
+                RequiredModule.Initialise(app, socketIO)
 
             if hasattr(RequiredModule, "BluePrint"):
                 app.register_blueprint(RequiredModule.BluePrint, url_prefix = URLPrefix)

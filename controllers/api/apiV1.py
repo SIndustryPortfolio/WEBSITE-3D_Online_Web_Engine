@@ -20,6 +20,7 @@ URLPrefix = "/api/v1"
 BluePrint = Blueprint("apiV1", __name__)
 
 CurrentApp = None
+SocketIO = None
 
 # Functions
 # MECHANICS
@@ -52,13 +53,14 @@ def runtime(): # RUNNING THREAD FOR CACHE TIME OUTS
 
         time.sleep(5)
 
-def Initialise(app):
+def Initialise(app, socketIO):
     # CORE
-    global CurrentApp
+    global CurrentApp, SocketIO
     
     # Functions
     # INIT
     CurrentApp = app
+    SocketIO = socketIO
 
     BluePrint.register_blueprint(userServiceBlueprint, url_prefix="/users")
     BluePrint.register_blueprint(gameServiceBlueprint, url_prefix="/game")

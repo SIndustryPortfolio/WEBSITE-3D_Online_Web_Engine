@@ -8,16 +8,18 @@ from flask import session, request, render_template, make_response
 
 # CORE
 CurrentApp = None
+SocketIO = None
 
 # Functions
 # MECHANICS
-def Initialise(app):
+def Initialise(app, socketIO):
     # CORE
-    global CurrentApp
+    global CurrentApp, SocketIO
 
     # Functions
     # INIT
     CurrentApp = app
+    SocketIO = socketIO
 
 # CLASS
 class Shortcuts:
