@@ -47,7 +47,7 @@ def pageHandler(_serverId):
     mapData = MapServiceCache.get(server.map) #requests.get(request.host_url + "/api/v1/game/maps/" + server.map).json()
     
     # TEXTURE RGB DATA
-    textures = TextureServiceCache.get("raw") #requests.get(request.host_url + "/api/v1/game/textures/raw").json()
+    textures = TextureServiceCache.get() #requests.get(request.host_url + "/api/v1/game/textures/raw").json()
 
     # MAP META DATA (TRANSLATE GRID TO RENDERABLE INFORMATION)
     mapMeta = MapServiceCache.get("meta") #requests.get(request.host_url + "/api/v1/game/maps/meta").json()
