@@ -11,59 +11,72 @@ var passwordInput = null;
 var registerForm = null;
 var registerButton = null;
 
-var csrfToken = null;
+var Options = null;
 
 // Functions
 // MECHANICS
 function onRegisterClicked(token) 
 {
-    csrfToken = $('meta[name="csrf-token"]').attr('content');
-
     var formData = utilitiesHandlerModule.formToDict(document.getElementById("registerForm"));
 
-    $.ajax({
-        url: "/registerRequest",
-        type: "POST",
-        contentType: "application/json",
-        headers: 
-        {
-            "X-CSRFToken":  csrfToken
-        },
-        //dataType: "json",
-        data: JSON.stringify(formData),
-        success: function(response){
-            ajaxResponseHandlerModule.handleResponse(response);
-        },
-        error: function(error){
-            console.log("Error: ", error);
-        }
-    });
+    grecaptcha.execute(Options["SiteKey"]).then(responseToken => 
+    {
+        // Functions
+        // INIT
+
+        formData["g-recaptcha-response"] = responseToken;
+
+        $.ajax({
+            url: "/registerRequest",
+            type: "POST",
+            contentType: "application/json",
+            headers: 
+            {
+                "X-CSRFToken":  Options["CSRFToken"]
+            },
+            dataType: "json",
+            data: JSON.stringify(formData),
+            success: function(response){
+                ajaxResponseHandlerModule.handleResponse(response);
+            },
+            error: function(error){
+                console.log("Error: ", error);
+            }
+        });
+    })
 }
 
 function handleForm()
 {
     // Functions
     // DIRECT
-  
+    registerForm.addEventListener("submit", function(event) 
+    {
+        event.preventDefault();
+
+        grecaptcha.ready(async () => {
+         return onRegisterClicked();
+        });
+    });
 }
 
-function initialise() 
+function initialise(_Options) 
 {
-  // CORE
-  registerForm = $("#registerForm"); //document.getElementById("loginForm");
-  usernameInput = document.getElementById("usernameInput1");
-  passwordInput = document.getElementById("passwordInput1");
-  registerButton = document.getElementById("formSubmit1");
- 
-  // Functions
-  // INIT
-  window.onRegisterClicked = onRegisterClicked;
- 
-  csrfToken = "{{ csrf_token() }}";
- 
-  utilitiesHandlerModule.runModules(alertHandlerModule);
- 
-  handleForm();
+    // CORE
+    Options = _Options;
+
+    registerForm = document.getElementById("loginForm");
+    usernameInput = document.getElementById("usernameInput1");
+    passwordInput = document.getElementById("passwordInput1");
+    registerButton = document.getElementById("formSubmit1");
+    
+    // Functions
+    // INIT
+    window.onRegisterClicked = onRegisterClicked;
+    
+        handleForm();
+
+    utilitiesHandlerModule.runModules(alertHandlerModule); 
 }
 
 function end() 

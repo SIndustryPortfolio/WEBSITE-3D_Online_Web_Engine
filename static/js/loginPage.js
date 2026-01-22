@@ -21,7 +21,7 @@ function onLoginClicked(token)
 {
     var formData = utilitiesHandlerModule.formToDict(document.getElementById("loginForm"));
 
-    grecaptcha.execute(Options["SiteKey"], { action: 'login' }).then(responseToken => 
+    grecaptcha.execute(Options["SiteKey"]).then(responseToken => 
     {
         // Functions
         // INIT

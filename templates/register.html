@@ -5,7 +5,7 @@
 
 <!-- HEAD -->
 <head>
-
+    <script src="https://www.google.com/recaptcha/api.js?render={{siteKey}}" async defer></script> <!-- RECAPTCHA : ROBOT CHECK -->
 </head>
 
 <!-- BODY -->
@@ -67,7 +67,11 @@
     import pageModule from "{{url_for('static', filename='js/registerPage.js')}}";
     
     document.addEventListener('DOMContentLoaded', function() {
-        pageModule.initialise();
+        pageModule.initialise(
+        {
+            "CSRFToken" : "{{csrf_token()}}",
+            "SiteKey" : "{{siteKey}}"
+        });
     });
 </script>
 
