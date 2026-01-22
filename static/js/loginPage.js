@@ -44,6 +44,14 @@ function handleForm()
 {
     // Functions
     // DIRECT
+    var loginButtonHolderDiv = document.getElementById("loginButtonHolder");
+
+    var button = document.createElement("button");
+    button.innerHTML = "LOGIN";
+    button.attributes.add({"data-sitekey":"{{siteKey}}"}, {"data-callback":"onLoginClicked"}, {"data-action":"submit"});
+    button.classList.add("g-recpatcha", "btn", "btn-success");
+
+    loginButtonHolderDiv.appendChild(button);
 }
 
 function initialise() 
