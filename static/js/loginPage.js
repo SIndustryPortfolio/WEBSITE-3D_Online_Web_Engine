@@ -66,10 +66,10 @@ function initialise()
  // INIT
  window.onLoginClicked = onLoginClicked;
 
- csrfToken = "{{ csrf_token() }}";
- utilitiesHandlerModule.runModules(alertHandlerModule);
-
+ csrfToken = "{{csrf_token()}}";
  handleForm();
+
+ utilitiesHandlerModule.runModules(alertHandlerModule);
 }
 
 function end() 
