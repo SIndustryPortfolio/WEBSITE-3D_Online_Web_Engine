@@ -14,6 +14,7 @@ var loginButton = null;
 var loginForm = null;
 
 var csrfToken = null;
+var siteKey = null;
 
 // Functions
 // MECHANICS
@@ -78,7 +79,7 @@ function handleForm()
     var button = document.createElement("button");
     button.innerHTML = "LOGIN";
 
-    button["data-sitekey"] = "{{siteKey}}";
+    button["data-sitekey"] = sitekey;
     button["data-callback"] = "onLoginClicked";
     button["data-action"] = "submit";
     button.classList.add("g-recpatcha", "btn", "btn-success");
@@ -88,9 +89,10 @@ function handleForm()
 
 function initialise() 
 {
-    console.log("Initialising login page module");
-
     // CORE
+    csrfToken = "{{csrf_token()}}";
+    siteKey = "{{siteKey}}";
+    
     loginForm = document.getElementById("loginForm");
     usernameInput = document.getElementById("usernameInput1");
     passwordInput = document.getElementById("passwordInput1");
@@ -100,7 +102,6 @@ function initialise()
     // INIT
     window.onLoginClicked = onLoginClicked;
 
-    csrfToken = "{{csrf_token()}}";
     handleForm();
 
     utilitiesHandlerModule.runModules(alertHandlerModule);
