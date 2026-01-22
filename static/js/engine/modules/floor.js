@@ -5,7 +5,7 @@
  * - HANDLES FLOOR TILES BENEATH WALLS
  **/
 
-import { Boundary } from "./boundary.js";
+import Boundary from "./boundary.js";
 
 class Floor 
 {

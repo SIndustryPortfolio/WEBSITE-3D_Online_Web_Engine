@@ -5,8 +5,8 @@
  * 
  **/
 
-import { UtilitiesService } from "../services/utilitiesService.js";
-import { Instance } from "./instance.js";
+import UtilitiesService from "../services/utilitiesService.js";
+import Instance from "./instance.js";
 
 class Character extends Instance
 {

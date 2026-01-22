@@ -4,7 +4,7 @@
  * - HANDLES OTHER PLAYERS IN SERVER FOR REALTIME ONLINE MULTIPLAYER
  **/
 
-import { Character } from "../modules/character.js";
+import Character from "../modules/character.js";
 
 class PlayersService 
 {

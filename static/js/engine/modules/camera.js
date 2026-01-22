@@ -11,9 +11,9 @@
  *      - WALL RENDERING
  **/
 
-import { Ray } from "./ray.js";
-import { Instance } from "./instance.js";
-import { UtilitiesService } from "../services/utilitiesService.js";
+import Ray from "./ray.js";
+import Instance from "./instance.js";
+import UtilitiesService from "../services/utilitiesService.js";
 
 class Camera extends Instance
 {

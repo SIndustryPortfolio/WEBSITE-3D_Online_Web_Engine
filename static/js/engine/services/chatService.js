@@ -5,10 +5,10 @@
  **/
 
 // MODULES
-import { utilitiesHandlerModule } from "../../handlers/utilitiesHandler.js";
+import utilitiesHandlerModule from "../../handlers/utilitiesHandler.js";
 
 // SERVICES
-import { UtilitiesService } from "./utilitiesService.js";
+import UtilitiesService from "./utilitiesService.js";
 
 //
 class ChatService 
@@ -131,4 +131,4 @@ class ChatService
 }
 
 
-export default ChatService;
+export default ChatService

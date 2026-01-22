@@ -7,21 +7,21 @@
 var engineModule = {}
 
 // Modules
-import { Camera } from "./modules/camera.js";
-import { Character } from "./modules/character.js";
-import { Map } from "./modules/map.js";
-import { FPS } from "./modules/fps.js";
+import Camera from "./modules/camera.js";
+import Character from "./modules/character.js";
+import Map from "./modules/map.js";
+import FPS from "./modules/fps.js";
 
 // Services
-import { ReplicationService } from "./services/replicationService.js";
-import { LightingService } from "./services/lightingService.js";
-import { RunService } from "./services/runService.js";
-import { CharacterController } from "./controllers/characterController.js";
-import { PhysicsService } from "./services/physicsService.js";
-import { UtilitiesService } from "./services/utilitiesService.js";
-import { PlayersService } from "./services/playersService.js";
-import { ChatService } from "./services/chatService.js";
-import { SoundService } from "./services/soundService.js";
+import ReplicationService from "./services/replicationService.js";
+import LightingService from "./services/lightingService.js";
+import RunService from "./services/runService.js";
+import CharacterController from "./controllers/characterController.js";
+import PhysicsService from "./services/physicsService.js";
+import UtilitiesService from "./services/utilitiesService.js";
+import PlayersService from "./services/playersService.js";
+import ChatService from "./services/chatService.js";
+import SoundService from "./services/soundService.js";
 
 // CORE
 let _staticFolderLocation;

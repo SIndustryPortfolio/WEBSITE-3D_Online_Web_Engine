@@ -134,7 +134,7 @@
 </body>
 
 <script type="module">
-    import { pageModule } from "{{url_for('static', filename='js/settingsPage.js')}}";
+    import pageModule from "{{url_for('static', filename='js/settingsPage.js')}}";
     
     let _fieldNames = {{ fieldNames | tojson }};
     console.log(_fieldNames);

@@ -6,9 +6,9 @@
  **/
 
 // MODULES
-import { Wall } from "./wall.js";
-import { Floor } from "./floor.js";
-import { UtilitiesService } from "../services/utilitiesService.js";
+import Wall from "./wall.js";
+import Floor from "./floor.js";
+import UtilitiesService from "../services/utilitiesService.js";
 
 //
 class Map 

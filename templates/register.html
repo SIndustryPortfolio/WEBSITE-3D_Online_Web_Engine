@@ -64,7 +64,7 @@
 </body>
 
 <script type="module">
-    import { pageModule } from "{{url_for('static', filename='js/registerPage.js')}}";
+    import pageModule from "{{url_for('static', filename='js/registerPage.js')}}";
     
     document.addEventListener('DOMContentLoaded', function() {
         pageModule.initialise();

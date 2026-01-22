@@ -56,7 +56,7 @@
 </body>
 
 <script type="module">
-    import { pageModule } from "{{url_for('static', filename='js/gamePage.js')}}";
+    import pageModule from "{{url_for('static', filename='js/gamePage.js')}}";
 
     var coreInfo = {{ core | tojson }};
     var pagesInfo = {{ pages | tojson }};

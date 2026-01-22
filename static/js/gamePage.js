@@ -1,12 +1,11 @@
 var pageModule = {}
 
 // Modules
-import { ajaxResponseHandlerModule } from "./handlers/ajaxResponseHandler.js";
-import { alertHandlerModule } from "./handlers/alertHandler.js";
-import { utilitiesHandlerModule } from "./handlers/utilitiesHandler.js";
+import alertHandlerModule from "./handlers/alertHandler.js";
+import utilitiesHandlerModule from "./handlers/utilitiesHandler.js";
 
 //
-import { engineModule } from "./engine/engine.js"
+import engineModule from "./engine/engine.js"
 
 // CORE
 

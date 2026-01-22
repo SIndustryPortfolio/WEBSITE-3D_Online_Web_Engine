@@ -1,5 +1,5 @@
-import { Boundary } from "./boundary.js";
-import { Instance } from "./instance.js";
+import Boundary from "./boundary.js";
+import Instance from "./instance.js";
 
 class Wall extends Instance
 {
@@ -93,6 +93,8 @@ class Wall extends Instance
         //rect(this.position.x, this.position.y, this.size.x, this.size.y);
         rect(mappedPosition.x, mappedPosition.y, mappedSize.x, mappedSize.y);
         pop();
+
+        // TEXTURE MAPPING TO UI vv -> VERY EXPENSIVE
 
         /**const textureRGBData = this.runService.textures[this.textureName];
         const drawEvery = 6; // 4th Pixel

@@ -6,7 +6,7 @@
  **/
 
 // Modules
-import { UtilitiesService } from "../services/utilitiesService.js";
+import UtilitiesService from "../services/utilitiesService.js";
 
 //
 class FPS 

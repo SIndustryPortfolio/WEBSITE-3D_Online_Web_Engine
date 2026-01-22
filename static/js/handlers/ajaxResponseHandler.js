@@ -9,7 +9,7 @@ var ajaxResponseHandlerModule = {}
  **/
 
 // Modules
-import { alertHandlerModule } from "./alertHandler.js";
+import alertHandlerModule from "./alertHandler.js";
 
 // CORE
 

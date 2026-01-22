@@ -1,5 +1,5 @@
 // MODULES
-import { Instance } from "./instance.js";
+import Instance from "./instance.js";
 
 //
 class Ray extends Instance
