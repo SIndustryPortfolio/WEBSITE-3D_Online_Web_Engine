@@ -21,10 +21,6 @@ class Character extends Instance
         this.colour = color(255);
         this.shape = "square";
         this.canCollide = true;
-
-        //this.physicsService = physicsService
-        //this.replicationService = replicationService;
-        //this.soundService = soundService;
         
         if (isOtherPlayer) 
         {

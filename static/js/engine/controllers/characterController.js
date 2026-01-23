@@ -4,9 +4,6 @@ class CharacterController
     {
         this.engine = engine;
 
-        //this.replicationService = replicationService;
-        //this.viewportSize = viewportSize;
-        //this.canvas = canvas;
         this.character = character;
         this.camera = camera;
 

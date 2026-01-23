@@ -14,7 +14,6 @@ class Wall extends Instance
         this.boundariesToRemove = boundariesToRemove;
         this.colour = colour;
         this.textureName = textureName;
-        //this.runService = runService;
         this.shape = "square";
         this.canCollide = true;
         this.canQuery = true;

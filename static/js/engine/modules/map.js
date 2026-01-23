@@ -14,9 +14,7 @@ import UtilitiesService from "../services/utilitiesService.js";
 class Map 
 {
     constructor(engine) 
-    {
-        //this.mapContent = mapDict["data"]; // Meta
-        
+    {        
         this.engine = engine;
 
         this.gameMapContent = {
@@ -32,8 +30,6 @@ class Map
         this.canvasSize = this.engine.gameMapCanvasSize;
 
         this.backgroundColour = color(0, 0, 0);
-        //this.runService = runService;
-        //this.lightingService = lightingService;
         this.gameMapMeta = engine.serverMapMeta;
 
         this.walls = [];

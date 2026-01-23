@@ -23,7 +23,6 @@ class Camera extends Instance
 
         this.engine = engine;
 
-        //this.gameMap = gameMap;
         this.position = createVector();
         this.bobOffset = createVector();
         this.focusSubject = null;
@@ -41,12 +40,8 @@ class Camera extends Instance
         this.bobAmount = 1;
         this.bobHeight = this.projectBy / 2.5; //15;
         this.bobSmooth = 20;
-        //this.bobSpeed = 6.25;
-
         //
 
-        //this.runService = runService;
-        //this.lightingService = lightingService;
         //
         this.shadeTo = color(0, 0, 0);
 
@@ -61,7 +56,7 @@ class Camera extends Instance
             "walls": []
         }
 
-        this.qualityPresetToRange = 
+        this.qualityPresetToRange = // Quality Settings -> Max Render Distance
         {
             1: 0.4, // LOW QUALITY
             2: 0.6, // MEDIUM QUALITY
@@ -69,7 +64,7 @@ class Camera extends Instance
             
         }
 
-        this.qualityPresetToLevelOfDetail = { 
+        this.qualityPresetToLevelOfDetail = {  // Distance -> Texture Skip
             1: { // LOW QUALITY
                 0.75: 4, // Higher is lower graphics fidelity! (4 = Lowest)
                 0.4: 4,
@@ -94,7 +89,7 @@ class Camera extends Instance
             3: 3, // HIGH QUALITY
         }
 
-        this.levelToFOV = 
+        this.levelToFOV =  // Z & X for interchangable Field of View
         {
             1: 30,
             2: 60,
