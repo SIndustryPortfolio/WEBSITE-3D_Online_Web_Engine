@@ -9,7 +9,6 @@ from email.mime.multipart import MIMEMultipart
 
 # INT
 from modules.utilities import Utilities
-from modules.debug import Debug
 
 # CORE
 coreInfo = Utilities.loadJson("static/json/core.json")
@@ -28,7 +27,7 @@ class Email:
         _message = Message(subject, recipients=[receiverEmailAddress])
         _message.html = htmlBody
 
-        success, pcallResponse = Debug.pcall(mail.send, _message)
+        success, pcallResponse = Utilities.pcall(mail.send, _message)
 
         if success:
             response["success"] = True

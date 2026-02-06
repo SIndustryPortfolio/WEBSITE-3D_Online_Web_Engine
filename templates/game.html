@@ -7,71 +7,48 @@
 <!-- HEAD -->
 <head>
     <!-- P5 CANVAS LIBRARY -->
-    <script src="{{url_for('static', filename='js/libraries/p5.js')}}"></script>
+    <!--<script src="{{url_for('static', filename='js/libraries/p5.js')}}"></script>-->
 
     <!-- REAL-TIME SERVER COMMUNICATION LIBRARY-->
     <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+
+    <script>
+        window.PageData = {}
+        window.PageData["mapMeta"] = {{ mapMeta | tojson }};
+        window.PageData["mapData"] = {{ mapData | tojson }};
+        window.PageData["userData"] = {{ user | tojson }};
+        window.PageData["textures"] = {{ textures | tojson }};
+        window.PageData["serverId"] = "{{serverId}}";
+    </script>
 </head>
 
 <!-- BODY -->
 <body>
-    <div class="" style="margin:auto; width: 1600px;">
-        <div class="row" style="justify-content: center; align-items: center; width: 100%;">
-            <div class="card bg-dark" style="width: 300px; height: 720px; margin-right: 20px;">
-                <div class="card-header">
-                    <h5 class="card-title text-light">Chat</h5>
-                </div>
-                <div class="card-body">
-                    <div class="scrollableChat" id="chatList" style="width: 100%; height: 580px; overflow-y: scroll; justify-content: center; resize: none;">
-                        
-                    </div>
+    <div class="Content" style="display: flex; justify-content: center; align-items: center;">
 
-
-                    <!-- HIDE SCROLL BAR ON CHAT -->
-                    <style>
-                        .scrollableChat::-webkit-scrollbar 
-                        {
-                            display: none; 
-                        }
-                    </style>
-
-                </div>
-                <div class="card-footer">
-                    <form id="chatForm" action="#">
-                        <div class="text-center d-flex justify-content-center align-items-center">
-                            <!-- CHAT TEXT FIELD TO SEND MESSAGES-->
-                            <input id="chatInput" name="chatText" class="form-control mr-2" type="text" placeholder="Enter Chat" style="margin-right: 10px;">
-                            <input type="submit" class="btn btn-secondary" value="Submit">
+        <div style="width: 75%; height: 85%; display: flex; flex-direction: row; align-items: center; justify-content: center; margin: auto; vertical-align: center;">
+            <div class="card bg-dark Outline shadow LoadItem" style="width: 100%; height: 100%; overflow: hidden; border-radius: 12px;">
+                <div id="CardContent" style="width: 100%; height: 100%; display: flex; flex-direction: row;">
+                    <div style="width: 20%; display: flex; flex-direction: column; justify-content: space-between; flex-shrink: 0;">
+                        <div>
+                            <h4 class="card-title text-light text-center Shadow" style="background: var(--TopbarColour); display: block; width: 100%; padding-bottom: 10px;">Chat</h4>
                         </div>
-                    </form>
+                        <div class="HideScrollbar" id="chatList" style="width: 95%; margin: auto; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 5px;"></div>
+                        <hr>
+                        <form id="chatForm" style="width: 100%; margin: auto; padding-top: 10px; padding-bottom: 10px; box-shadow: 0 -10px 12px rgba(0, 0, 0, 0.3);" action="#">
+                             <input id="chatInput" name="chatText" class="Input" type="text" placeholder="Enter Chat" autocomplete="off" style="border-bottom: 0;">
+                        </form>
+                    </div>
+                    <div style="flex: 1; width: 80%;">
+                        <div id="ContainerLoad" class="Loading"></div>
+                        <div class="" id="gameContainer" style="position: absolute; top: 0; width: 100%; height: 100%;"></div>
+                    </div>
                 </div>
             </div>
-    
-            <!-- Game Container -->
-            <div id="gameContainer" style="width: 1280px; height: 720px;">
-            </div>
-    
         </div>
+
     </div>
 </body>
 
-<script type="module">
-    import pageModule from "{{url_for('static', filename='js/gamePage.js')}}";
-
-    var coreInfo = {{ core | tojson }};
-    var pagesInfo = {{ pages | tojson }};
-    var staticFolderlLocation = "{{url_for('static', filename = '')}}";
-
-
-    var mapMeta = {{ mapMeta | tojson }};
-    var mapData = {{ mapData | tojson }};
-    var userData = {{ user | tojson }};
-    var textures = {{ textures | tojson }};
-    var _serverId = "{{serverId}}";
-
-    document.addEventListener('DOMContentLoaded', function() {
-        pageModule.initialise(coreInfo, pagesInfo, userData, _serverId, mapMeta, mapData, textures, staticFolderlLocation);
-    });
-</script>
 
 </html>

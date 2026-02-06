@@ -1,4 +1,6 @@
 # Modules
+# INT
+from modules.utilities import Utilities
 
 # EXT
 import requests
@@ -21,23 +23,19 @@ def Initialise(app, socketIO):
 
 #
 class DiscordBot:
-    def send(channel, message): # SEND WEBHOOK TO DISCORD SERVER CHANNEL THROUGH PACKAGED JSON MESSAGE
+    @staticmethod
+    async def send(channel, message): # SEND WEBHOOK TO DISCORD SERVER CHANNEL THROUGH PACKAGED JSON MESSAGE
         response = {"success": False, "alert": {"type": "danger", "message": ""}}
 
-        try:
-            postResponse = requests.post(CurrentApp.config["Discord" + channel + "URL"], data=json.dumps(message), headers={"Content-Type": "application/json"})
-        
-            if postResponse.status_code == 204:
-                response["success"] = True
-                response["alert"]["type"] = "success"
-                response["alert"]["message"] = "Successfully sent discord message!"
-            else:
-                response["success"] = False
-                response["alert"]["type"] = "danger"
-                response["alert"]["message"] = "Failed to send discord message!"
-        except Exception as e:
+        postSuccess, postResponse = Utilities.pcall(requests.post, CurrentApp.config["Discord" + channel + "URL"], data=json.dumps(message), headers={"Content-Type": "application/json"})
+
+        if postSuccess and postResponse.status_code == 204:
+            response["success"] = True
+            response["alert"]["type"] = "success"
+            response["alert"]["message"] = "Successfully sent discord message!"
+        else:
             response["success"] = False
             response["alert"]["type"] = "danger"
             response["alert"]["message"] = "Failed to send discord message!"
-        
+
         return response

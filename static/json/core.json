@@ -13,7 +13,8 @@
         {
             "1": {"name": "Server 1", "map": "map1"},
             "2": {"name": "Server 2", "map": "map2"},
-            "3": {"name": "Server 3", "map": "map3"}
+            "3": {"name": "Server 3", "map": "map3"},
+            "4": {"name": "Server 4", "map": "map4"}
         }
     },
 

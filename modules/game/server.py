@@ -1,5 +1,6 @@
 # Modules
 # EXT
+import asyncio
 import requests
 import time
 import threading
@@ -10,7 +11,7 @@ from types import SimpleNamespace
 # INT
 from controllers.api.v1.gameService import MapServiceCache
 
-from modules.debug import Debug
+
 from modules.utilities import Utilities
 from modules.discordBot import DiscordBot
 from modules.game.player import Player
@@ -20,8 +21,79 @@ from modules.shortcuts import Shortcuts
 coreInfo = Utilities.loadJson("static/json/core.json")
 hexInfo = Utilities.loadJson("static/json/hex.json")
 
+fetchable = ["serverId", "region", "serverInfo", "worldInfo", "map", "mapData", "playerTimeOut", "maxChats", "name", "players", "chat"]
+
 #
 class Server:
+    def getDict(self):
+        # CORE
+        Dict = {}
+
+        # Functions
+        # MECHANICS
+        def rebuildDict(_dict):
+            # CORE
+            newDict = {}
+
+            # Functions
+            # INIT
+            for key, value in _dict.items():
+                newKey = key
+                newValue = value
+
+                if hasattr(key, "getDict"):
+                    newKey = key.getDict()
+
+                if hasattr(value, "getDict"):
+                    newValue = value.getDict()
+
+                newDict[newKey] = newValue
+            
+            return newDict
+
+        def rebuildList(_list):
+            # CORE
+            newList = []
+
+            # Functions
+            # INIT
+            for item in _list:
+                if hasattr(fieldValue, "getDict"):
+                    newList.append(item.getDict())
+                    continue
+
+                newList.append(item)
+            
+            return newList
+
+        # INIT
+        for key in fetchable:
+            fieldValue = getattr(self, key)
+
+            if isinstance(fieldValue, list):
+                Dict[key] = rebuildList(fieldValue)
+            elif isinstance(fieldValue, dict):
+                Dict[key] = rebuildDict(fieldValue)
+            else:
+                if hasattr(fieldValue, "getDict"):
+                    Dict[key] = fieldValue.getDict()
+                else:
+                    Dict[key] = fieldValue
+
+        return Dict
+
+    def getRegion(self):
+        # Functions
+        # INIT
+        success, response = Utilities.pcall(requests.get, "http://ip-api.com/json/")
+
+        if not success:
+            return None
+        
+        response = response.json()
+
+        return response["country"]
+
     def __init__(self, serverId, socketIO, servers):
         self.serverId = serverId
         self.socketIO = socketIO
@@ -40,6 +112,8 @@ class Server:
             "username": "AUTO",
             "userType": "4"
         })
+
+        self.region = self.getRegion()    
 
         self.map = self.worldInfo["map"] # NAME OF MAP
         self.mapData = MapServiceCache.get(self.map) # MAP DATA: LIGHTING, CONTENT, NAME, ETC
@@ -207,7 +281,7 @@ class Server:
         }
 
         if logInDiscord:
-            botResponse = DiscordBot.send("server" + self.serverId, packagedToSend)
+            botResponse = asyncio.run(DiscordBot.send("server" + self.serverId, packagedToSend))
 
         return response
         
@@ -350,7 +424,7 @@ class Server:
         }
 
         if not rejoin:
-            botResponse = DiscordBot.send("joins", packagedToSend)
+            botResponse = asyncio.run(DiscordBot.send("joins", packagedToSend))
 
             # SERVER MESSAGE
             serverMessage = self.players[userId].user.username + " has joined the world!"
@@ -398,7 +472,7 @@ class Server:
             "embeds": [messageEmbed]
         }
 
-        botResponse = DiscordBot.send("joins", packagedToSend)
+        botResponse = asyncio.run(DiscordBot.send("joins", packagedToSend))
         
         # SERVER MESSAGE
         serverMessage = user.username + " has left the world!"

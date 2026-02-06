@@ -3,7 +3,6 @@
 from modules.utilities import Utilities
 
 # EXT
-import json
 from flask import session, request, render_template, make_response
 
 # CORE
@@ -12,14 +11,6 @@ SocketIO = None
 
 # Functions
 # MECHANICS
-def Initialise(app, socketIO):
-    # CORE
-    global CurrentApp, SocketIO
-
-    # Functions
-    # INIT
-    CurrentApp = app
-    SocketIO = socketIO
 
 # CLASS
 class Shortcuts:
@@ -38,11 +29,12 @@ class Shortcuts:
         # Functions
         # INIT
         return { 
-        "pages" : Utilities.loadJson("static/json/pages.json"), 
-        "core" : Utilities.loadJson("static/json/core.json"),
-        "hostURL": request.host_url,
-        "user" : session.get("user", None),
-        "alert": session.get("alert", None)
+            "pages" : Utilities.loadJson("static/json/pages.json"), 
+            "core" : Utilities.loadJson("static/json/core.json"),
+            "country" : Utilities.loadJson("static/json/country.json"),
+            "hostURL": request.host_url,
+            "user" : session.get("user", None),
+            "alert": session.get("alert", None)
         }
     
     def getClientIP():
@@ -61,10 +53,10 @@ class Shortcuts:
         # Functions
         # INIT
         response = make_response(render_template(
-        htmlFileName, 
-        currentPage = currentPageName,
-        **kwargs or {},
-        **Shortcuts.getPageEssentials()
+            htmlFileName, 
+            currentPage = currentPageName,
+            **kwargs or {},
+            **Shortcuts.getPageEssentials()
         ))
 
         user = session.get("user", None)
@@ -117,3 +109,13 @@ class Shortcuts:
 
         return response
 
+
+##
+def Initialise(app, socketIO):
+    # CORE
+    global CurrentApp, SocketIO
+
+    # Functions
+    # INIT
+    CurrentApp = app
+    SocketIO = socketIO

@@ -1,5 +1,7 @@
 {
     "name": "greenland",
+    "description": "An enclosed natural habitat surrounded with fresh grass and the sound of birds yet structured like a PVP map.",
+
     "lighting": 
     {
         "skyColour": [135, 206, 235],

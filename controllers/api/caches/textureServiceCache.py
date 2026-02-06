@@ -3,7 +3,6 @@
 import time
 import os
 from PIL import Image
-from flask import current_app
 
 # INT
 from modules.utilities import Utilities
@@ -11,6 +10,11 @@ from modules.utilities import Utilities
 # CORE
 cache = {}
 
+CurrentApp = None
+SocketIO = None
+
+# Functions
+## MECHANICS
 class TextureServiceCache:
     def remove(key):
         # Functions
@@ -28,7 +32,7 @@ class TextureServiceCache:
         if not "textures" in cache:
             textures = {}
         
-            texturesDirectory = os.path.join(current_app.root_path, "static", "images", "textures")
+            texturesDirectory = os.path.join(CurrentApp.root_path, "static", "images", "textures")
             filesInDirectory = os.listdir(texturesDirectory)
 
             for folder in filesInDirectory:
@@ -70,3 +74,13 @@ class TextureServiceCache:
         # Functions
         # INIT
         cache[key] = {"time": timeNow, "value": value}
+
+##
+def Initialise(app, socketIO):
+    # CORE
+    global CurrentApp, SocketIO
+
+    # Functions
+    # INIT
+    CurrentApp = app
+    SocketIO = socketIO

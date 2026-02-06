@@ -177,7 +177,10 @@ class CharacterController
     {
          // Functions
         // INIT
-        console.log("Pressed");
+        if (!this.mouseLocked) 
+        {
+            return;
+        }
 
         if (key === "q" || key === "Q") // Q
         {

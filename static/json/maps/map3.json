@@ -1,5 +1,7 @@
 {
     "name": "desert",
+    "description" : "Hot, dry and many many pillars. This place was once used for hide and seek.",
+
     "lighting": 
     {
         "skyColour": [135, 206, 235],

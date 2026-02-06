@@ -6,54 +6,85 @@
 
 <!-- HEAD -->
 <head>
-
+    <script>
+        window.PageData = {}
+        window.PageData["servers"] = {{servers | tojson}};
+    </script>
 </head>
 
 <!-- BODY -->
 <body>
     <!-- SHOW SERVER LIST -->
-    {% for serverId, server in servers.items()  %}
-        <div class="container" style="margin: auto; justify-content: center;">
-            <div class="row", style="margin: auto; align-items: center; display: flex;">
-                <div class="card expandable bg-dark shadow-lg mx-auto" style="width: 40%;">
-                    <div class="card-header">
-                        <h5 class="card-title text-light">{{ server["name"] }}</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="text-secondary">🌎 Map: {{ server.mapData["name"] }}</p>
+    <div class="Content" style="display: flex; justify-content: center; align-items: center;">
+        <div style="width: 50%; height: 60%; display: flex; flex-direction: row; align-items: center; justify-content: center; margin: auto; vertical-align: center; overflow: hidden;">
+            <div class="card bg-dark Outline shadow LoadItem" style="width: 100%; height: 100%; max-height: 100%; padding-left: 10px; display: flex; flex-direction: row; justify-content: space-between; overflow: hidden; gap: 5px;">
 
-                        <div>
-                            <p class="text-secondary" style="display: inline-block;">🎮 Players Online: </p>
-                            
-                            <p class="
-                                {% if (server["players"] | length) > 0 %}
-                                    {{ 'text-success' }}
-                                {% else %}
-                                    {{ 'text-secondary' }}
-                                {% endif %}
-                                " style="display: inline-block">{{ server["players"] | length }}</p>
-                        </div>
-                        
-                        <!-- JOIN SERVER BUTTON -->
-                        <form action="/game/{{serverId}}" method="get">
-                            <input type="submit" class="btn btn-success" value="JOIN">
-                        </form>
+                <div style="width: 55%; display: flex; flex-direction: column; justify-content: center;">
+                    
+                    <!--<div id="WorldCards" class="HideScrollbar" style="height: 95%; width: 100%; padding-left: 10px; display: flex; flex-direction: column; align-items: center; justify-items: flex-start; overflow-y: auto; overflow-x: hidden; gap: 10px;">-->
+                    <div id="WorldCards" class="HideScrollbar" style="height: 95%; width: 100%; padding-left: 10px; display: grid; grid-template-columns: repeat(2, auto); gap: 10px; overflow-x: hidden; overflow-y: auto;">
+                        {% for serverId, server in servers.items()  %}
+                            <button class="InvisibleButton" style="display: flex;">
+                                <div name="{{serverId}}" class="card Outline  expandable shadow-lg mx-auto" style="background: var(--TopbarColour);">
+                                    <img src="{{url_for('static', filename='images/maps/' + server.mapData['name'] + '.png')}}" class="card-img-top" alt="...">
+                                    <div class="card-header">
+                                        <h5 class="card-title text-light">{{ server["name"] }}</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-secondary">🌎 Map: {{ server.mapData["name"] }}</p>
+
+                                        <div>
+                                            <p class="text-secondary" style="display: inline-block;">🎮 Players Online: </p>
+                                            
+                                            <p class="
+                                                {% if (server["players"] | length) > 0 %}
+                                                    {{ 'text-success' }}
+                                                {% else %}
+                                                    {{ 'text-secondary' }}
+                                                {% endif %}
+                                                " style="display: inline-block">{{ server["players"] | length }}</p>
+                                        </div>
+                                        
+                                        <!--<div style="display: flex; flex-direction: row; align-items: flex-end; justify-content: flex-end; gap: 10px">
+                                            <button id="{{serverId}}ViewButton" class="btn btn-secondary btn-lg" style="float: right;">VIEW</button>
+
+                                        
+                                            <form action="/game/{{serverId}}" method="get">
+                                                <input type="submit" class="btn btn-success" value="QUICK JOIN">
+                                            </form>
+                                        </div>-->
+                                    </div>
+
+                                </div>
+                            </button>
+                        {% endfor %}
                     </div>
                 </div>
+
+                <div style="height: 100%; width: 5px; background: white; display: block;"></div>
+                
+                <div style="width: 45%; height: 100%; display: flex; flex-direction: column; justify-content: space-between; align-items: center; overflow: hidden;">
+                    <div class="Shadow" style="z-index: 2; width: 100%; padding-bottom: 8px; margin-bottom: 8px; background: var(--TopbarColour); flex-shrink: 0;">
+                        <h4 id="WorldName" class="text-light text-center"></h4> 
+                    </div>
+
+                    <div id="MidSection" class="HideScrollbar" style="width: 80%; display: flex; flex-direction: column; align-items: center; justify-items: space-between; overflow-y: auto; overflow-x: hidden; gap: 10px;">
+                        <img id="WorldImage" class="Outline" style="width: 100%; object-fit: contain; border-radius: 12px;">
+                        <p id="WorldDescription" class="text-secondary text-center">Test Description</p>
+                        <table class="table table-dark table-striped">
+                            <tbody id="WorldMetaTable"></tbody>
+                        </table>
+                    </div>
+
+                    <form id="WorldJoin" action="" method="get" style="z-index: 2; width: 100%; display: flex; justify-content: center; align-items: center; padding: 10px 0; box-shadow: 0 -10px 12px rgba(0,0,0,0.3); flex-shrink: 0;">
+                        <input type="submit" class="btn btn-warning btn-lg fw-bold" value="JOIN WORLD" style="width: 90%; margin: auto;">
+                    </form>
+                </div>
+
             </div>
         </div>
-
-        <br>
-
-    {% endfor %}
+    </div>
 </body>
 
-<script type="module">
-    import pageModule from "{{url_for('static', filename='js/homePage.js')}}";
-    
-    document.addEventListener('DOMContentLoaded', function() {
-        pageModule.initialise();
-    });
-</script>
 
 </html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- MODULES -->
+{% include "handlers/topBarHandler.html" %}
+
+<!-- HEAD -->
+<head>
+
+</head>
+
+<!-- BODY -->
+<body>
+    <!-- SHOW SERVER LIST -->
+    {% for serverId, server in servers.items()  %}
+        <div class="container" style="margin: auto; justify-content: center;">
+            <div class="row", style="margin: auto; align-items: center; display: flex;">
+                <div class="card expandable bg-dark shadow-lg mx-auto" style="width: 40%;">
+                    <div class="card-header">
+                        <h5 class="card-title text-light">{{ server["name"] }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-secondary">🌎 Map: {{ server.mapData["name"] }}</p>
+
+                        <div>
+                            <p class="text-secondary" style="display: inline-block;">🎮 Players Online: </p>
+                            
+                            <p class="
+                                {% if (server["players"] | length) > 0 %}
+                                    {{ 'text-success' }}
+                                {% else %}
+                                    {{ 'text-secondary' }}
+                                {% endif %}
+                                " style="display: inline-block">{{ server["players"] | length }}</p>
+                        </div>
+                        
+                        <!-- JOIN SERVER BUTTON -->
+                        <form action="/game/{{serverId}}" method="get">
+                            <input type="submit" class="btn btn-success" value="JOIN">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+    {% endfor %}
+</body>
+
+<script type="module">
+    import pageModule from "{{url_for('static', filename='js/homePage.js')}}";
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        pageModule.initialise();
+    });
+</script>
+
+</html>

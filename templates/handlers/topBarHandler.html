@@ -2,9 +2,24 @@
 
 <html lang="en">
 
+<script>
+    window.Config = {}
+
+    window.Config["pagesInfo"] = {{pages | tojson}};
+    window.Config["coreInfo"] = {{core | tojson}};
+    window.Config["countryInfo"] = {{country | tojson}};
+    window.Config["hostURL"] = "{{request.host_url}}";
+    window.Config["user"] = {{user | tojson}};
+    window.Config["alert"] = {{alert | tojson}};
+    window.Config["staticFolder"] = "{{url_for('static', filename='')}}";
+    window.Config["currentPage"] = "{{currentPage}}";
+    window.Config["CSRFToken"] = "{{csrf_token()}}";
+</script>
+
 <head>
     <title>{{ core.name }}</title>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- EXTERNAL -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,26 +34,27 @@
     <!-- INTERNAL -->
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/Icon.png') }}">
     <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet"> <!-- MAIN : CONSISTENT DESIGN -->
+    <link href="{{ url_for('static', filename='css/' + currentPage + '.css') }}" rel="stylesheet"> <!-- MAIN : CONSISTENT DESIGN -->
+
 </head>
 <body>
     
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <div hidden id="hiddenDump"></div>
+    <div hidden id="hiddenDump"></div>   
 
     <!-- LOG OUT POP UP MODAL -->
     <div class = "modal fade" id="logoutModal" tabindex="-1" style="display: none;">
-        <div class = "modal-dialog">
-            <div class = "modal-content bg-dark">
-                <div class = "modal-body">
-                    <h4 class = "modal-title text-light">Logout</h4>
-                    <hr class="border-top border-secondary opacity-50 my-2">
+        <div class = "modal-dialog" style="padding: 0;">
+            <div class = "modal-content bg-dark Outline" style="overflow: hidden; padding: 0 0 10px 0;">
+                <div class = "modal-body" style="padding: 0;">
+                    <h4 class = "modal-title text-center text-light padding-bottom: 10px;" style="background-color: var(--TopbarColour);">Logout</h4>
 
-                    <p class="text-secondary">Are you sure you want to log out?</p>
+                    <br>
+
+                    <p class="text-secondary text-center">Are you sure you want to log out?</p>
 
                     <hr class="border-top border-secondary opacity-50 my-2">
                             
-                    <div class="row" style="justify-content: flex-end;">
+                    <div style="width: 100%; display: flex; align-items: center; justify-content: flex-end;">
                         <button class="btn btn-secondary" data-bs-dismiss="modal" style="display: inline-block; width: 20%; margin: 0 2% 0 2%">Cancel</button>
 
                         <!-- LOG OUT OPTION -->
@@ -52,77 +68,61 @@
         </div>
     </div>
 
+    <!--TOP BAR-->
 
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark shadow-sm">
-        <div class="container-fluid">
-
-            <!-- NAV BAR ITEMS ON LEFT -->
-            <ul class="navbar-nav mr-auto">
-                <li class="navbar-brand" style="align-items: center; display: flex; white-space: nowrap; width: 15%; height: 80%">
-                    <a href="/"><img src="{{url_for('static', filename='images/Logo.png')}}" class="card-title img-fluid" alt="Home"></a>
-                </li>
-                
-                {% for pageKey, pageInfo in pages.items() %}
-                    
-                    {% if "topBar" in pageInfo %}
-                        {% if pageInfo.topBar.side == "left" %}
-                            {% if not pageInfo.topBar.userAuthorisedOnly or (pageInfo.topBar.userAuthorisedOnly and user) %}
-                                <li class="nav-item" style="align-items: center; display: flex;">
-                                    <a class="nav-link
-                                    {% if currentPage == pageInfo.name %}
-                                        active
-                                    {% endif %}
-                                    " href="{{ pageInfo.redirectLink }}">{{ pageInfo.topBar.displayName }}</a>
-                                </li>
-                            {% endif %}
+    <div class="Topbar Shadow">
+        <div class="col" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start;">
+            <a href="/"><img src="{{url_for('static', filename='images/Logo.png')}}" alt="Home" style="object-fit: fill; height: var(--TopbarHeight);"></a>
+            {% for pageKey, pageInfo in pages.items() %}    
+                {% if "topBar" in pageInfo %}
+                    {% if pageInfo.topBar.side == "left" %}
+                        {% if not pageInfo.topBar.userAuthorisedOnly or (pageInfo.topBar.userAuthorisedOnly and user) %}
+                            <a class="nav-link text-center text-light {% if currentPage == pageInfo.name %} fw-bold {% endif %}" href="{{ pageInfo.redirectLink }}">{{ pageInfo.topBar.displayName }}</a>
                         {% endif %}
                     {% endif %}
-
-                {% endfor %}
-            </ul>
-
-            <!-- NAV BAR ITEMS ON RIGHT -->
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item ms-auto ml-auto" style="align-items: center; display: flex; float: right;">
-                    {% for pageKey, pageInfo in pages.items() %}
-                        {% if "topBar" in pageInfo %}
-                            {% if pageInfo.topBar.side ==  "right" %}
-                                {% if not pageInfo.topBar.userAuthorisedOnly or (pageInfo.topBar.userAuthorisedOnly and user) %}
-                                    <li class="nav-item" style="align-items: center; display: flex;">
-                                        <a class="nav-link
-                                        {% if currentPage == pageInfo.name %}
-                                            active
-                                        {% endif %}
-                                        " href="{{ pageInfo.redirectLink }}">{{ pageInfo.topBar.displayName }}</a>
-                                    </li>
-                                {% endif %}
-                            {% endif %}
-                        {% endif %}
-                    {% endfor %}
-
-                    {% if user %}
-                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
-
-                    {% else %}
-                         <a class="nav-link
-                         
-                         {% if currentPage == 'Login' %}
-                            active
-                         {% endif %}
-                         
-                         " href="/login">Login</a>
-                    {% endif %}
-                </li>
-            </ul>
+                {% endif %}
+            {% endfor %}
         </div>
-    </nav>
+
+        <div class="col" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-end;">
+            {% for pageKey, pageInfo in pages.items() %}
+                {% if "topBar" in pageInfo %}
+                    {% if pageInfo.topBar.side == "right" %}
+                        {% if not pageInfo.topBar.userAuthorisedOnly or (pageInfo.topBar.userAuthorisedOnly and user) %}
+                            <a class="nav-link text-center text-light {% if currentPage == pageInfo.name %} fw-bold {% endif %}" href="{{ pageInfo.redirectLink }}">{{ pageInfo.topBar.displayName }}</a>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% if user %}
+                <a class="nav-link text-light" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
+
+            {% else %}
+                    <a class="nav-link text-light
+                    
+                    {% if currentPage == 'Login' %}
+                    active
+                    {% endif %}
+                    
+                    " href="/login">Login</a>
+            {% endif %}
+        </div>
+    </div>
 
     <!-- ALERT -->
     {% include "handlers/alertHandler.html" %}
 
      <!-- AJAX -->
-    {% include "handlers/ajaxResponseHandler.html" %}
+    {#{% include "handlers/ajaxResponseHandler.html" %}#}
 
 </body>
+
+
+<script type="module">
+    import topbarModule from "{{url_for('static', filename='js/pages/topbar.js')}}";
+
+    topbarModule.initialise();
+</script>
 
 </html>

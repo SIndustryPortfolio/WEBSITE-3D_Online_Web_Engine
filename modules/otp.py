@@ -12,7 +12,7 @@ from modules.userHandler import UserHandler
 from modules.utilities import Utilities
 from modules.database import Database
 from modules.google.email import Email
-from modules.debug import Debug
+
 
 # CORE
 coreInfo = Utilities.loadJson("static/json/core.json")
@@ -78,7 +78,7 @@ class OTP:
         foundOTPRecord = otpCollection.find_one(recordFilter)
 
         if (foundOTPRecord != None):
-            success, pcallResponse = Debug.pcall(otpCollection.delete_one, recordFilter)
+            success, pcallResponse = Utilities.pcall(otpCollection.delete_one, recordFilter)
 
             if success:
                 response["success"] = True
@@ -102,7 +102,7 @@ class OTP:
 
         subject = "Email 2FA for: " + coreInfo["name"]
 
-        userInfo = UserHandler.getUserFromUserId(userId).getDict() #requests.get(request.host_url + "/api/v1/users/" + str(userId)).json()
+        userInfo = UserHandler.getUserFromUserId(userId).getDict()
 
         if userInfo == None:
             response["success"] = False

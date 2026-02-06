@@ -19,6 +19,20 @@ SocketIO = None
 
 
 # MECHANICS
+def getServers(JSON=False):
+    # CORE
+    _servers = {}
+
+    # Functions
+    # INIT
+    for serverId, server in servers.items():
+        if JSON:
+            _servers[serverId] = server.getDict()
+        else:
+            _servers[serverId] = server
+    
+    return _servers
+
 def setupServer(serverId):
     # Functions
     # INIT

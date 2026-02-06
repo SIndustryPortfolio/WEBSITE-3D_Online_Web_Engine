@@ -1,5 +1,7 @@
 {
     "name": "space",
+    "description": "An vast open space with no obstacles, travel where ever but do not get lost in the void.",
+
     "lighting": 
     {
         "skyColour": [86, 3, 252],

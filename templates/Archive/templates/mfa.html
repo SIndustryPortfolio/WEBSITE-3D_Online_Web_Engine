@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<!-- MODULES -->
+{% include "handlers/topBarHandler.html" %}
+
+<!-- HEAD -->
+<head>
+</head>
+
+<!-- BODY -->
+<body>
+    <div class="container" style="margin: auto; justify-content: center;">
+        <div class="row", style="margin: auto; align-items: center; display: flex;">
+            <div class="card expandable bg-dark shadow-lg mx-auto" style="width: 40%;">
+                <div class="card-head">
+                    <img src="{{url_for('static', filename='images/Logo.png')}}" class="card-title img-fluid" alt="Logo">
+                </div>
+                <hr class="border-top border-secondary opacity-50 my-2">
+                <div class="card-body">
+                    <h5 class="card-title text-light">Email Verification</h5>
+                    
+                    <p class="text-secondary">Check your inbox, spam and junk folders for the one time verification code</p>
+
+                    <form id="otpForm" action="#" method="post">
+                        {{ form.hidden_tag() }}
+
+                        <div class="form-group">
+                            <label for="otpInput1" class="form-label text-secondary">🔑 One Time Passcode</label>
+                            {{ form.otp(size=32) }}
+                        </div>
+
+                        <br>
+                        
+                        <div>
+                            <div class="form-group" style="display: inline-block;">
+                                {{ form.submit(size=32) }}
+                            </div>
+                    </form>
+                        <!-- CANCEL OTP OPTION -->
+                        <form id="otpCancelForm" action="#" method="post" style="display: inline-block;">
+                            <input id="cancelHiddenToken" name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+                            <input type="submit" class="btn btn-secondary" value="Cancel">
+                        </form>
+                    </div>
+
+                    <hr class="border-top border-secondary opacity-50 my-3">
+
+                    <!-- RESEND OTP OPTION -->
+                    <p class="text-secondary">Email not arrived?</p>
+                    <form id="otpResendForm" action="#" method="post">
+                        <input id="resendHiddenToken" name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+                        <input type="submit" class="text text-primary text-start" id="otpResendFormSubmit" value="Re-send OTP to Email" style="border: none; outline: none; background: none; padding: 0; margin: 0;">
+                    </form>
+                    <br>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<script type="module">
+    import pageModule from "{{url_for('static', filename='js/mfaPage.js')}}";
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        pageModule.initialise();
+    });
+</script>
+
+</html>

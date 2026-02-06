@@ -1,6 +1,6 @@
 # MODULES
 # EXT
-from flask import Flask, jsonify, Blueprint, request
+from flask import jsonify, Blueprint, request
 
 # CACHES
 from controllers.api.caches.userServiceCache import UserServiceCache

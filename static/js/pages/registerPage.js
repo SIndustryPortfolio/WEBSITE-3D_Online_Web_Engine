@@ -1,9 +1,9 @@
 var pageModule = {};
 
 // Modules
-import ajaxResponseHandlerModule from "./handlers/ajaxResponseHandler.js";
-import alertHandlerModule from "./handlers/alertHandler.js";
-import utilitiesHandlerModule from "./handlers/utilitiesHandler.js";
+import ajaxResponseHandlerModule from "../handlers/ajaxResponseHandler.js";
+import alertHandlerModule from "../handlers/alertHandler.js";
+import utilitiesHandlerModule from "../handlers/utilitiesHandler.js";
 
 // CORE
 var usernameInput = null;
@@ -15,11 +15,17 @@ var Options = null;
 
 // Functions
 // MECHANICS
-function onRegisterClicked(token) 
+function onRegisterClicked(token)
 {
-    var formData = utilitiesHandlerModule.formToDict(document.getElementById("registerForm"));
+    // CORE
+    const pageData = window.PageData;
 
-    grecaptcha.execute(Options["SiteKey"]).then(responseToken => 
+    let siteKey = pageData["siteKey"];
+    var formData = utilitiesHandlerModule.formToDict(registerForm);
+
+    // Functions
+    // INIT
+    grecaptcha.execute(siteKey).then((responseToken) => 
     {
         // Functions
         // INIT
@@ -32,7 +38,7 @@ function onRegisterClicked(token)
             contentType: "application/json",
             headers: 
             {
-                "X-CSRFToken":  Options["CSRFToken"]
+                "X-CSRFToken":  window.Config["CSRFToken"]
             },
             dataType: "json",
             data: JSON.stringify(formData),
@@ -60,12 +66,10 @@ function handleForm()
     });
 }
 
-function initialise(_Options) 
+function initialise() 
 {
     // CORE
-    Options = _Options;
-
-    registerForm = document.getElementById("loginForm");
+    registerForm = document.getElementById("registerForm");
     usernameInput = document.getElementById("usernameInput1");
     passwordInput = document.getElementById("passwordInput1");
     registerButton = document.getElementById("formSubmit1");
@@ -74,7 +78,7 @@ function initialise(_Options)
     // INIT
     window.onRegisterClicked = onRegisterClicked;
     
-        handleForm();
+    handleForm();
 
     utilitiesHandlerModule.runModules(alertHandlerModule); 
 }

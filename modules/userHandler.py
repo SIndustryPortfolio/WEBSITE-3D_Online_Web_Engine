@@ -12,7 +12,7 @@ from modules.utilities import Utilities
 from modules.database import Database
 from modules.user import User
 from modules.token import Token
-from modules.debug import Debug
+
 from modules.shortcuts import Shortcuts
 
 # CORE
@@ -142,9 +142,9 @@ class UserHandler:
         success = None
 
         if caseSensitive == True:
-            success, userRecord = Debug.pcall(userCollection.find_one, {attributeName: value})
+            success, userRecord = Utilities.pcall(userCollection.find_one, {attributeName: value})
         else:
-            success, userRecord = Debug.pcall(userCollection.find_one, {attributeName : {"$regex" : "^" + value + "$", "$options": "i"}})
+            success, userRecord = Utilities.pcall(userCollection.find_one, {attributeName : {"$regex" : "^" + value + "$", "$options": "i"}})
 
         if not success:
             return None
@@ -178,7 +178,7 @@ class UserHandler:
 
 
         # INIT
-        success, pcallResponse = Debug.pcall(replace)
+        success, pcallResponse = Utilities.pcall(replace)
 
         if success:
             response["success"] = True
@@ -263,7 +263,7 @@ class UserHandler:
 
         # Functions
         # INIT
-        success, error = Debug.pcall(userCollection.delete_one, {"userId": str(user.userId)})
+        success, error = Utilities.pcall(userCollection.delete_one, {"userId": str(user.userId)})
 
         response["success"] = success
         if success:
@@ -305,7 +305,7 @@ class UserHandler:
         if not validInputResponse["success"]:
             return validInputResponse
         
-        success, pcallResponse = Debug.pcall(userCollection.update_one, {"userId": str(user.userId)}, {"$set": {fieldToUpdate: input1Data}})
+        success, pcallResponse = Utilities.pcall(userCollection.update_one, {"userId": str(user.userId)}, {"$set": {fieldToUpdate: input1Data}})
 
         if success:
             response["success"] = True
@@ -368,7 +368,7 @@ class UserHandler:
             response["alert"]["message"] = "Failed to connect!"
             return response
 
-        success, pcallResponse = Debug.pcall(userCollection.insert_one, {
+        success, pcallResponse = Utilities.pcall(userCollection.insert_one, {
             "userId": str(nextUserId),
             "username": username, 
             "email": email, 
@@ -402,8 +402,8 @@ class UserHandler:
         # INIT
         requestIP = Shortcuts.getClientIP()
 
-        success1, pcallResponse1 = Debug.pcall(userCollection.update_one, {"userId": str(userId)}, {"$set": {"lastLoginTime": timeNow, "IP": str(requestIP)}}) # UPDATE LAST LOGIN TIME
-        success, pcallResponse = Debug.pcall(UserHandler.getUserFromUserId, userId) #Debug.pcall(requests.get, request.host_url + "/api/v1/users/" + str(userId)) # API CALL FOR USER DATA
+        success1, pcallResponse1 = Utilities.pcall(userCollection.update_one, {"userId": str(userId)}, {"$set": {"lastLoginTime": timeNow, "IP": str(requestIP)}}) # UPDATE LAST LOGIN TIME
+        success, pcallResponse = Utilities.pcall(UserHandler.getUserFromUserId, userId) #Utilities.pcall(requests.get, request.host_url + "/api/v1/users/" + str(userId)) # API CALL FOR USER DATA
 
         if success:
             session["user"] = pcallResponse.getDict() #pcallResponse.json() #requests.get(request.host_url + "/api/v1/users/" + str(userId)).json() # API CALL FOR USER DATA

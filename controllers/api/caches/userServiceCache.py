@@ -8,6 +8,11 @@ from modules.userHandler import UserHandler
 # CORE
 cache = {}
 
+CurrentApp = None
+SocketIO = None
+
+# Functions
+# MECHANICS
 class UserServiceCache:
     def remove(userId):
         # Functions
@@ -42,3 +47,13 @@ class UserServiceCache:
         # Functions
         # INIT
         cache[userId] = {"value": value, "time": timeNow}
+
+##
+def Initialise(app, socketIO):
+    # CORE
+    global CurrentApp, SocketIO
+
+    # Functions
+    # INIT
+    CurrentApp = app
+    SocketIO = socketIO

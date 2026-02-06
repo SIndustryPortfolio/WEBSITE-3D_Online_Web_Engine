@@ -1,3 +1,131 @@
+:root 
+{
+    --TopbarHeight: 50px;
+    --TopbarColour: rgba(32, 32, 32, 1);
+}
+
+.HideScrollbar::-webkit-scrollbar 
+{
+   display: none; 
+}
+
+/* LOADER */
+.Loading 
+{
+    height: 100%;
+    width: 100%;
+
+    top: 0;
+    left: 0;
+    position: sticky;
+    z-index: 100;
+    display: flex;
+    background-color: var(--TopbarColour) !important;
+    justify-content: center;
+    align-items: center;
+
+    transition: opacity 0.75s ease, visibility 0.75s ease;
+}
+
+.Loading::after 
+{
+    content:  "";
+    width: 25vh;
+    height: 25vh;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    border: 5vh solid lightgrey;
+    border-top-color: royalblue;
+
+    z-index: 2;
+    
+    animation: LoadingAnimation 0.75s ease infinite;
+}
+
+.LoadingHidden 
+{
+    opacity: 0;
+    visibility: hidden;
+}
+
+@keyframes LoadingAnimation 
+{
+    from { transform: rotate(0turn) }
+    to {transform: rotate(1turn) }
+}
+
+/* INVISIBLE */
+.InvisibleButton 
+{
+    background: transparent;
+    border: none !important;
+}
+
+/* SHADOW */
+.Shadow 
+{
+    box-shadow: 0 16px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* TOP BAR */
+.Topbar 
+{
+    width: 100vw;
+    height: var(--TopbarHeight);
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    vertical-align: center;
+
+    background: var(--TopbarColour);
+    z-index: 2;
+}
+
+.Topbar .col 
+{
+    height: var(--TopbarHeight);
+}
+
+.Topbar .col a 
+{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.Content 
+{
+    position: fixed;
+    top: var(--TopbarHeight);
+    height: calc(100vh - var(--TopbarHeight));
+    width: 100vw;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 1;
+}
+
+/* INPUTS */
+.Input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 8px 4px;
+  font-size: 16px;
+  outline: none;
+  width: 100%;
+  color: var(--bs-light);
+}
+
+.Outline 
+{
+    border: 3px solid rgba(0, 0, 0, 1) !important;
+}
+
+.OutlineHighlight
+{
+    border: 3px solid rgba(255, 255, 255, 1) !important;
+}
+
 /** CORE **/
 body 
 {
@@ -9,8 +137,18 @@ body
     animation: backgroundCycle 10s linear infinite;
 }
 
-
 /** EVENTS **/
+.btn 
+{
+    border: 3px solid rgba(0, 0, 0, 1) !important;
+    transition: transform 0.3s !important;
+}
+
+.btn:hover 
+{
+    transform: scale(1.05);;
+}
+
 .expandable:hover
 {
     transform: scale(1.05);
@@ -19,6 +157,16 @@ body
 .expandable 
 {
     transition: transform 0.3s;    
+}
+
+.LoadItem 
+{
+    animation: LoadItem 0.75s ease;
+}
+
+.HideItem 
+{
+    animation: HideItem 0.75s ease !important;
 }
 
 /** ANIMATIONS **/
@@ -31,5 +179,33 @@ body
     100% 
     {
         background-position: 150px 150px;
+    }
+}
+
+@keyframes HideItem 
+{
+    from 
+    {
+        opacity: 1;
+        visibility: visible;
+    }
+    to
+    {
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+
+@keyframes LoadItem 
+{
+    from 
+    {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    to 
+    {
+        transform: translateY(0);
+        opacity: 1;
     }
 }

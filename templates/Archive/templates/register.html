@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<!-- MODULES -->
+{% include "handlers/topBarHandler.html" %}
+
+<!-- HEAD -->
+<head>
+    <script src="https://www.google.com/recaptcha/api.js?render={{siteKey}}" async defer></script> <!-- RECAPTCHA : ROBOT CHECK -->
+</head>
+
+<!-- BODY -->
+<body>
+    <div class="container mt-5" style="margin: auto; justify-content: center;">
+        <div class="row", style="margin: auto; align-items: center; display: flex;">
+            <div class="card expandable bg-dark shadow-lg mx-auto" style="width: 40%;">
+                <div class="card-header">
+                    <img src="{{url_for('static', filename='images/Logo.png')}}" class="card-title img-fluid" alt="Logo">
+                </div>
+                <hr class="border-top border-secondary opacity-50 my-2">
+                <div class="card-body">
+
+                    <h5 class="card-title text-light">Register</h5>
+
+                    <form id="registerForm" action="/registerRequest" method="post">
+                        {{ form.hidden_tag() }}
+
+                        <div class="form-group">
+                            <label for="usernameInput1" class="form-label text-secondary">👤 Username</label>
+                            {{ form.username(size=32) }}
+                        </div>
+
+                        <br>
+
+                        <div class="form-group">
+                            <label for="emailInput1" class="form-label text-secondary">📧 Email</label>
+                            {{ form.email(size=32) }}
+                        </div>
+
+                        <br>
+
+                        <div class="form-group">
+                            <label for="passwordInput1" class="form-label text-secondary">🔑 Password</label>
+                            {{ form.password(size=32) }}
+                        </div>
+                        
+                        <br>
+
+                        <!-- SIGN UP OPTION + GOOGLE RECAPTCHA -->
+                        <div class="form-group">
+                            <button class="g-recaptcha btn btn-success" data-sitekey = "{{ siteKey }}" data-callback = "onRegisterClicked" data-action="submit">REGISTER</button>
+                        </div>
+                    </form>
+
+                    <hr class="border-top border-secondary opacity-50 my-3">
+                    
+                    <!-- LOGIN OPTION -->
+                    <p class="text-secondary">Already have an account?</p>
+                    <a href="/login" class="text-primary">Login here!</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+<script type="module">
+    import pageModule from "{{url_for('static', filename='js/registerPage.js')}}";
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        pageModule.initialise(
+        {
+            "CSRFToken" : "{{csrf_token()}}",
+            "SiteKey" : "{{siteKey}}"
+        });
+    });
+</script>
+
+</html>

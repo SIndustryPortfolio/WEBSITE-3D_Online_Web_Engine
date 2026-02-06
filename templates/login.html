@@ -6,66 +6,54 @@
 <!-- HEAD -->
 <head>
     <script src="https://www.google.com/recaptcha/api.js?render={{siteKey}}" async defer></script> <!-- RECAPTCHA : ROBOT CHECK -->
+
+    <script>
+        window.PageData = {};
+        window.PageData["siteKey"] = "{{siteKey}}";
+    </script>
 </head>
 
 <!-- BODY -->
 <body>
-    <div class="container" style="margin: auto; justify-content: center;">
-        <div class="row", style="margin: auto; align-items: center; display: flex;">
-            <div class="card expandable bg-dark shadow-lg mx-auto" style="width: 40%;">
-                <div class="card-header">
-                    <img src="{{url_for('static', filename='images/Logo.png')}}" class="card-title img-fluid" alt="Logo">
-                </div>
+    <div class="Content" style="display: flex; justify-content: center; align-items: center;">
+        <div class="card expandable bg-dark Outline shadow-lg mx-auto LoadItem" style="width: 550px; aspect-ratio: 1;">
+            <div class="card-body">
+                <img src="{{url_for('static', filename='images/Logo.png')}}" class="card-title img-fluid" alt="Logo">
+                
                 <hr class="border-top border-secondary opacity-50 my-2">
-                <div class="card-body">
-                    <h5 class="card-title text-light">Login</h5>
 
-                    <form id="loginForm" action="/loginRequest" method="post">
-                        {{ form.hidden_tag() }}
+                <h5 class="card-title text-light">Login</h5>
 
-                        <div class="form-group">
-                            <label for="usernameInput1" class="form-label text-secondary">👤 Username</label>
-                            {{ form.username(size=32) }}
-                        </div>
+                <form id="loginForm" action="/loginRequest" method="post">
+                    {{ form.hidden_tag() }}
 
-                        <br>
+                    <div class="form-group">
+                        <label for="usernameInput1" class="form-label text-secondary">👤 Username</label>
+                        {{ form.username(size=32) }}
+                    </div>
 
-                        <div class="form-group">
-                            <label for="passwordInput1" class="form-label text-secondary">🔑 Password</label>
-                            {{ form.password(size=32) }}
-                        </div>
-                        
-                        <br>
+                    <br>
 
-                        <!-- LOGIN OPTION + GOOGLE RECAPTCHA -->
-                        <div id="loginButtonHolder" class="form-group">
-                        </div>
-                    </form>
+                    <div class="form-group">
+                        <label for="passwordInput1" class="form-label text-secondary">🔑 Password</label>
+                        {{ form.password(size=32) }}
+                    </div>
+                    
+                    <br>
 
-                    <hr class="border-top border-secondary opacity-50 my-3">
+                    <!-- LOGIN OPTION + GOOGLE RECAPTCHA -->
+                    <div id="loginButtonHolder" class="form-group">
+                    </div>
+                </form>
 
-                    <!-- REGISTER OPTION -->
-                    <p class="text-secondary">Don't have an account?</p>
-                    <a href="/register" class="text-primary">Sign up here!</a>
-                </div>
+                <hr class="border-top border-secondary opacity-50 my-3">
+
+                <!-- REGISTER OPTION -->
+                <p class="text-secondary">Don't have an account?</p>
+                <a href="/register" class="text-primary">Sign up here!</a>
             </div>
-
         </div>
     </div>
 </body>
-
-
-<script type="module">
-    import pageModule from "{{url_for('static', filename='js/loginPage.js')}}";
-    
-
-    document.addEventListener('DOMContentLoaded', function() {
-        pageModule.initialise(
-        {
-            "CSRFToken" : "{{csrf_token()}}",
-            "SiteKey" : "{{siteKey}}"
-        });
-    });
-</script>
 
 </html>

@@ -18,11 +18,6 @@ class ChatService
         // Functions
         // INIT
         this.engine = engine;
-
-        //this.localUser = localUser;
-        //this.soundService = soundService;
-        //this.replicationService = replicationService;
-        //this.coreInfo = coreInfo;
         this.chatInput = document.getElementById("chatInput");
         this.chatListDiv = document.getElementById("chatList");
         this.chatForm = document.getElementById("chatForm");
@@ -92,30 +87,66 @@ class ChatService
         // INIT
         this.clientChatCount += 1;
 
-        let chatParentDiv = document.createElement("div");
-        chatParentDiv.style.width = "100%";
+        let chatHolderDiv = document.createElement("div");
+        chatHolderDiv.classList.add("Chat");
+        chatHolderDiv.style.display = "flex";
+        chatHolderDiv.style.flexDirection = "column";
 
-        // TIME
-        chatParentDiv.innerHTML = "<p style='display: inline-block;' class='text-light fw-bold'>" + chatInfo["time"] + " |  ";
+        let firstRow = document.createElement("row");
 
-        // USER + TAG + SPECIAL COLOUR
+        /* TIME */
+        let chatMetaText = document.createElement("p");
+        chatMetaText.style.display = "inline-block";
+        chatMetaText.classList.add("text-light", "fw-bold");
+        chatMetaText.innerHTML = chatInfo["time"] + " |  ";
 
-        chatParentDiv.innerHTML += "<p style='display: inline-block;' class='text-" + userTypeInfo["colour"] + "'>" + " [" + userTypeInfo["name"] + "] " + username + ":</p></p>";
+        /* TAG + Username */
+        let chatUsernameText = document.createElement("p");
+        chatUsernameText.style.display = "inline-block";
+        chatUsernameText.classList.add("text-sm", "text-" + userTypeInfo["colour"])
+        chatUsernameText.innerHTML = "[" + userTypeInfo["name"] + "] " + username + ":"
+
+        firstRow.append(chatMetaText, chatUsernameText);
+
+        let secondRow = document.createElement("row");
+
+        let messageHolderDiv = document.createElement("div");
+        messageHolderDiv.classList.add("shadow-sm");
+        messageHolderDiv.style.borderRadius = "8px";
+        messageHolderDiv.style.padding = "5px";
+
+        let messageText = document.createElement("p");
+        messageText.classList.add("text-sm", "text-light");
+        messageText.innerHTML = message;
+
 
         // MESSAGE
-        chatParentDiv.innerHTML += " <p class='text-secondary'>" + message + "</p>";
         
         // SPLITTER
-        chatParentDiv.innerHTML += "<hr class='border-secondary'></hr>"; 
 
-        this.chatListDiv.appendChild(chatParentDiv);
+        messageHolderDiv.appendChild(messageText);
+        secondRow.appendChild(messageHolderDiv);
+
+        chatHolderDiv.append(firstRow, secondRow);
+
+        this.chatListDiv.appendChild(chatHolderDiv);
         this.chatListDiv.scrollTop = this.chatListDiv.scrollHeight;
+
+        if (username != this.engine.localUser["username"]) 
+        {
+            messageHolderDiv.classList.add("bg-secondary");
+            messageHolderDiv.style.float = "left";
+        }
+        else 
+        {
+            messageHolderDiv.classList.add("bg-primary");
+            messageHolderDiv.style.float = "right";
+        }
 
         if (!isOldChat && username != this.engine.localUser["username"]) 
         {
             this.engine.soundService.playSound("misc", "notification");
         }
-        
     }
 
     addPreviousChats(chatTable) 

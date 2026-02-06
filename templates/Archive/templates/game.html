@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- MODULES -->
+{% include "handlers/topBarHandler.html" %}
+
+<!-- HEAD -->
+<head>
+    <!-- P5 CANVAS LIBRARY -->
+    <script src="{{url_for('static', filename='js/libraries/p5.js')}}"></script>
+
+    <!-- REAL-TIME SERVER COMMUNICATION LIBRARY-->
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+</head>
+
+<!-- BODY -->
+<body>
+    <div class="" style="margin:auto; width: 1600px;">
+        <div class="row" style="justify-content: center; align-items: center; width: 100%;">
+            <div class="card bg-dark" style="width: 300px; height: 720px; margin-right: 20px;">
+                <div class="card-header">
+                    <h5 class="card-title text-light">Chat</h5>
+                </div>
+                <div class="card-body">
+                    <div class="scrollableChat" id="chatList" style="width: 100%; height: 580px; overflow-y: scroll; justify-content: center; resize: none;">
+                        
+                    </div>
+
+
+                    <!-- HIDE SCROLL BAR ON CHAT -->
+                    <style>
+                        .scrollableChat::-webkit-scrollbar 
+                        {
+                            display: none; 
+                        }
+                    </style>
+
+                </div>
+                <div class="card-footer">
+                    <form id="chatForm" action="#">
+                        <div class="text-center d-flex justify-content-center align-items-center">
+                            <!-- CHAT TEXT FIELD TO SEND MESSAGES-->
+                            <input id="chatInput" name="chatText" class="form-control mr-2" type="text" placeholder="Enter Chat" style="margin-right: 10px;">
+                            <input type="submit" class="btn btn-secondary" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+    
+            <!-- Game Container -->
+            <div id="gameContainer" style="width: 1280px; height: 720px;">
+            </div>
+    
+        </div>
+    </div>
+</body>
+
+<script type="module">
+    import pageModule from "{{url_for('static', filename='js/gamePage.js')}}";
+
+    var coreInfo = {{ core | tojson }};
+    var pagesInfo = {{ pages | tojson }};
+    var staticFolderlLocation = "{{url_for('static', filename = '')}}";
+
+
+    var mapMeta = {{ mapMeta | tojson }};
+    var mapData = {{ mapData | tojson }};
+    var userData = {{ user | tojson }};
+    var textures = {{ textures | tojson }};
+    var _serverId = "{{serverId}}";
+
+    document.addEventListener('DOMContentLoaded', function() {
+        pageModule.initialise(coreInfo, pagesInfo, userData, _serverId, mapMeta, mapData, textures, staticFolderlLocation);
+    });
+</script>
+
+</html>

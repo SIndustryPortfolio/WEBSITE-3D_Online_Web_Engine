@@ -83,10 +83,31 @@ class Engine
 
     // Functions
     // MECHANICS
+    resize() 
+    {
+        const cardSize = createVector(this.cardContentDiv.offsetWidth, this.cardContentDiv.offsetHeight);
+        const chatDiv = this.cardChildren[0];
+        const chatSize = createVector(chatDiv.offsetWidth, this.offsetHeight);
+
+        const gameplayAreaSize = createVector(cardSize.x - chatSize.x, cardSize.y);
+
+        this.viewportSize.x = gameplayAreaSize.x + 1;
+        this.viewportSize.y = gameplayAreaSize.y + 1;
+
+        if (this.canvas) 
+        {
+            resizeCanvas(this.viewportSize.x, this.viewportSize.y);
+        }
+
+        this.viewportLongestLength = Math.sqrt(Math.pow(this.viewportSize.x, 2) + Math.pow(this.viewportSize.y, 2));
+    }
+
     setup() // THE FIRST FRAME BEFORE DRAW, UPDATE, LATE UPDATE
     {
         // Functions
         // INIT
+        this.setupFinishedCalled = false;
+
         this.staticFolderLocation = _staticFolderLocation;
         this.serverCoreInfo = _serverCoreInfo;
         this.serverPagesInfo = _serverPagesInfo;
@@ -97,21 +118,24 @@ class Engine
         this.serverTextures = _serverTextures;
         //
 
-        this.height = 720;
-        this.width = 1280;
+        //this.height = 720;
+        //this.width = 1280;
 
         this.gameMapWidth = 1000;
         this.gameMapHeight = 500;
 
         this.containerName = "gameContainer";
-
+ 
         this.viewportSize = createVector(this.width, this.height);
         this.viewportPosition = createVector(0, 0);
-        this.viewportLongestLength = Math.sqrt(Math.pow(this.viewportSize.x, 2) + Math.pow(this.viewportSize.y, 2));
+
+        this.cardContentDiv = document.getElementById("CardContent");
+        this.cardChildren = this.cardContentDiv.children;
 
         this.gameContainer = document.getElementById(this.containerName);
-        this.gameContainer.width = this.viewportSize.x;
-        this.gameContainer.height = this.viewportSize.y;
+        this.gameContainer.style.aspectRatio = "1;";
+
+        this.resize();
 
         this.canvas = createCanvas(this.viewportSize.x, this.viewportSize.y);
         this.canvas.parent(this.containerName);
@@ -171,6 +195,8 @@ class Engine
         let parent = this;
 
         // DIRECT (EVENTS)
+        window.addEventListener("resize", this.resize.bind(this));
+
         document.addEventListener("mouseLocked", function(event) {
             parent.soundService.playMusic("ambience", parent.serverMapData["sound"]["ambience"]);
         });
@@ -203,6 +229,20 @@ class Engine
             noLoop(); // END P5.JS SKETCH -> STOP RENDER DRAW LOOP
             parent.playersService.localUserLeft = true;
         });
+    }
+
+    setupFinished() // FIRE ON FIRST FRAME
+    {
+        // Functions
+        // INIT
+        if (!this.setupFinishedCalled) 
+        {
+            this.setupFinishedCalled = true;
+
+            let setupFinishedCallback = window.setupFinishedCallback;
+
+            setupFinishedCallback();
+        }
     }
 
     drawStats() 
@@ -244,23 +284,28 @@ class Engine
         this.runService.lateUpdate();
 
         this.drawStats();
+        this.setupFinished();
     }
 }
 //
 
-function initialise(COREINFO, PAGESINFO, USERDATA, SERVERID, MAPMETA, MAPDATA, TEXTURES, STATICFOLDERLOCATION) 
+async function initialise(SERVERID, MAPMETA, MAPDATA, TEXTURES) 
 {
+    // CORE
+    let Config = window.Config;
+
     // Functions
     // INIT
+
     /**
      * STORE DATA GIVEN FROM SERVER (GAME CONTROLLER.py)
      */
 
-    _staticFolderLocation = STATICFOLDERLOCATION;
-    _serverCoreInfo = COREINFO;
-    _serverPagesInfo = PAGESINFO;
+    _staticFolderLocation = Config["staticFolder"];
+    _serverCoreInfo = Config["coreInfo"];
+    _serverPagesInfo = Config["pagesInfo"];
     _serverId = SERVERID;
-    _localUser = USERDATA;
+    _localUser = Config["user"];
     _serverMapData = MAPDATA;
     _serverTextures = TEXTURES;
     _serverMapMeta = MAPMETA;
@@ -270,6 +315,9 @@ function initialise(COREINFO, PAGESINFO, USERDATA, SERVERID, MAPMETA, MAPDATA, T
 
     window.setup = gameEngine.setup.bind(gameEngine);
     window.draw = gameEngine.draw.bind(gameEngine);
+
+    // IMPORT P5 LIB -> Auto Runs
+    let {default: p5Module} = await import(window.Config["staticFolder"] + "js/libraries/p5.js");
 }
 
 function end() 

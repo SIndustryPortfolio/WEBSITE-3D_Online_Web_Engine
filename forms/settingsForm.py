@@ -4,14 +4,16 @@ from flask_wtf import FlaskForm
 from wtforms import Form, StringField, PasswordField, SubmitField, EmailField
 from wtforms.validators import DataRequired
 
+from modules.utilities import Utilities
+
 # INT
-from modules.debug import Debug
+
 
 class SettingsForm(FlaskForm):
     # CORE
-    username = StringField("username", render_kw = {"class": "form-control", "id": "usernameInput1", "disabled": True}, validators=[DataRequired()])
-    email = EmailField("email", render_kw = {"class": "form-control", "id": "emailInput1", "disabled": True}, validators = [DataRequired()])
-    password = PasswordField("password", render_kw = {"class": "form-control", "id": "passwordInput1", "disabled": True }, validators=[DataRequired()])
+    username = StringField("username", render_kw = {"class": "Input", "id": "usernameInput1", "disabled": True}, validators=[DataRequired()])
+    email = EmailField("email", render_kw = {"class": "Input", "id": "emailInput1", "disabled": True}, validators = [DataRequired()])
+    password = PasswordField("password", render_kw = {"class": "Input", "id": "passwordInput1", "disabled": True }, validators=[DataRequired()])
     #submit = SubmitField("submit", render_kw = {"class" : "btn btn-success", "value": "Save", "id" : "formSubmit1"})
 
 
@@ -25,4 +27,4 @@ class SettingsForm(FlaskForm):
         # Functions
         # INIT
         super(SettingsForm, self).__init__()
-        success, error = Debug.pcall(self.setup, user)
+        success, error = Utilities.pcall(self.setup, user)

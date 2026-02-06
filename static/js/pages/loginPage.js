@@ -1,9 +1,9 @@
 var pageModule = {}
 
 // Modules
-import ajaxResponseHandlerModule from "./handlers/ajaxResponseHandler.js";
-import alertHandlerModule from "./handlers/alertHandler.js";
-import utilitiesHandlerModule from "./handlers/utilitiesHandler.js";
+import ajaxResponseHandlerModule from "../handlers/ajaxResponseHandler.js";
+import alertHandlerModule from "../handlers/alertHandler.js";
+import utilitiesHandlerModule from "../handlers/utilitiesHandler.js";
 
 // CORE
 var recaptchaWidgetId = null;
@@ -19,9 +19,15 @@ var Options = null;
 // MECHANICS
 function onLoginClicked(token) 
 {
+    // CORE
+    const PageData = window.PageData;
+
+    const siteKey = PageData["siteKey"];
     var formData = utilitiesHandlerModule.formToDict(document.getElementById("loginForm"));
 
-    grecaptcha.execute(Options["SiteKey"]).then(responseToken => 
+    // Functions
+    // INIT
+    grecaptcha.execute(siteKey).then((responseToken) => 
     {
         // Functions
         // INIT
@@ -35,7 +41,7 @@ function onLoginClicked(token)
             dataType: "json",
             headers: 
             {
-                "X-CSRFToken":  Options["CSRFToken"]
+                "X-CSRFToken":  window.Config["CSRFToken"]
             },
             //dataType: "json",
             data: JSON.stringify(formData),
@@ -51,6 +57,9 @@ function onLoginClicked(token)
 
 function handleForm()
 {
+    // CORE
+    const PageData = window.PageData;
+
     // Functions
     // DIRECT
     loginForm.addEventListener("submit", function(event) 
@@ -68,19 +77,18 @@ function handleForm()
     var button = document.createElement("button");
     button.innerHTML = "LOGIN";
 
-    button["data-sitekey"] = Options["SiteKey"];
+    button["data-sitekey"] = PageData["siteKey"];
     button["data-callback"] = "onLoginClicked";
     button["data-action"] = "submit";
+    
     button.classList.add("g-recpatcha", "btn", "btn-success");
 
     loginButtonHolderDiv.appendChild(button);
 }
 
-function initialise(_Options) 
+function initialise() 
 {
     // CORE
-    Options = _Options;
-
     loginForm = document.getElementById("loginForm");
     usernameInput = document.getElementById("usernameInput1");
     passwordInput = document.getElementById("passwordInput1");

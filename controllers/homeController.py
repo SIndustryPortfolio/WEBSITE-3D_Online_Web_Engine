@@ -3,7 +3,7 @@
 from modules.utilities import Utilities
 from modules.shortcuts import Shortcuts
 
-from controllers.worldController import servers
+from controllers.worldController import getServers
 
 # EXTERNAL
 import json
@@ -11,6 +11,7 @@ from flask import Blueprint, session, redirect, url_for
 
 # CORE
 BluePrint = Blueprint("home", __name__)
+
 CurrentApp = None
 SocketIO = None
 
@@ -34,5 +35,5 @@ def pageHandler():
         return redirect(url_for("login.pageHandler"))
 
 
-    return Shortcuts.renderPage("home.html", "Home", servers = servers)
+    return Shortcuts.renderPage("home.html", "Home", servers = getServers(JSON=True))
 

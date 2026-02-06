@@ -68,6 +68,6 @@ def Initialise(app, socketIO):
 
     thread = threading.Thread(target=runtime)
     thread.daemon = True
-    thread.start()
+    Utilities.pcall(thread.start)
 
 # INIT

@@ -20,6 +20,13 @@ function runModules(...modules) // EXECUTES RUNTIME "MAIN" JS FILES
     }
 }
 
+function getSizeOfDict(dict) 
+{
+    // Functions
+    // INIT
+    return Object.keys(dict).length
+}
+
 function formToDict(form) // FORM INPUT NAMES AND VALUES TO DICTIONARY
 {
     // Functions
@@ -38,6 +45,7 @@ function formToDict(form) // FORM INPUT NAMES AND VALUES TO DICTIONARY
 // DIRECT
 utilitiesHandlerModule.runModules = runModules;
 utilitiesHandlerModule.formToDict = formToDict;
+utilitiesHandlerModule.getSizeOfDict = getSizeOfDict;
 
 
 export default utilitiesHandlerModule;

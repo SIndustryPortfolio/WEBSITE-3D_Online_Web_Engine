@@ -1,6 +1,6 @@
 # MODULES
 # EXT
-from flask import Flask, jsonify, Blueprint, url_for
+from flask import jsonify, Blueprint
 import os
 
 # INT

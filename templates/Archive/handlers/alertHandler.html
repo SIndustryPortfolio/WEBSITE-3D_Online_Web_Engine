@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<!-- SPACING FOR MAIN ALERT -->
+<style>
+    .mainAlert 
+    {
+        --bs-alert-padding-x: .125rem;
+        --bs-alert-padding-y: .125rem;
+    }
+</style>
+
+
+<body>
+    <!-- HIDDEN MANUALLY CONSTRUCTED ALERTS -->
+    <div hidden id="hiddenMainAlertDump">
+        {% if alert %}
+            <div class="mainAlertPlaceholder" type="{{alert.type}}">{{alert.message}}</div>
+        {% endif %}
+    </div>
+    
+    <br>
+
+    <!-- MAIN ALERT HOLDER -->
+    <div id ="mainAlertContainer" class="container mx-auto" style="width: 40%; height: 15%; overflow-y: auto;">
+
+    </div>
+</body>
+
+</html>

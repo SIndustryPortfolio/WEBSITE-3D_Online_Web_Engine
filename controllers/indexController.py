@@ -8,7 +8,9 @@ from flask import Blueprint, session, request, redirect, url_for
 
 # CORE
 BluePrint = Blueprint("index", __name__)
+
 CurrentApp = None
+SocketIO = None
 
 # FUNCTIONS
 # MECHANICS

@@ -7,8 +7,6 @@ from modules.utilities import Utilities
 from modules.shortcuts import Shortcuts
 
 # EXTERNAL
-import requests
-import json
 from flask import Blueprint, session, request, redirect, url_for, jsonify
 
 # CORE

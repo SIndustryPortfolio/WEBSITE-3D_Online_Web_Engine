@@ -2,7 +2,7 @@
 # INTERNAL
 from modules.otp import OTP
 
-from modules.debug import Debug
+
 from modules.token import Token
 from modules.userHandler import UserHandler
 from modules.utilities import Utilities
@@ -131,7 +131,7 @@ def resendMFA():
     if (mfaUserId == None):
         return None
         
-    success, otpResponse = Debug.pcall(OTP.startOtp, mfaUserId)
+    success, otpResponse = Utilities.pcall(OTP.startOtp, mfaUserId)
 
     if not success:
         response["status"] = "failed"

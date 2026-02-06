@@ -1,9 +1,9 @@
 var pageModule = {};
 
 // Modules
-import ajaxResponseHandlerModule from "./handlers/ajaxResponseHandler.js";
-import alertHandlerModule from "./handlers/alertHandler.js";
-import utilitiesHandlerModule from "./handlers/utilitiesHandler.js";
+import ajaxResponseHandlerModule from "../handlers/ajaxResponseHandler.js";
+import alertHandlerModule from "../handlers/alertHandler.js";
+import utilitiesHandlerModule from "../handlers/utilitiesHandler.js";
 
 // CORE
 
@@ -48,9 +48,11 @@ function handleForm(fieldNames)
 
 }
 
-function initialise(fieldNames) 
+function initialise() 
 {
   // CORE
+  const fieldNames = {{ fieldNames | tojson }};
+
   utilitiesHandlerModule.runModules(alertHandlerModule);
  
   handleForm(fieldNames);

@@ -10,8 +10,6 @@ from modules.google.recaptcha import Recaptcha
 
 # EXTERNAL
 import time
-import requests
-import json
 from flask import Blueprint, session, request, redirect, url_for, jsonify
 
 # CORE
@@ -56,7 +54,7 @@ def registerRequestPageHandler():
         "status": "failed",
         "redirect" : None
     }
-
+    
     data = request.get_json()
     requestIP = Shortcuts.getClientIP()
 

@@ -2,7 +2,7 @@
 # INTERNAL
 
 from modules.userHandler import UserHandler
-from modules.debug import Debug
+
 from modules.utilities import Utilities
 from modules.shortcuts import Shortcuts
 from modules.otp import OTP
@@ -13,6 +13,7 @@ from forms.loginForm import LoginForm
 # EXTERNAL
 import time
 from flask import Blueprint, session, request, redirect, url_for, jsonify
+
 # CORE
 BluePrint = Blueprint("login", __name__)
 
@@ -79,8 +80,8 @@ def logoutRequestPageHandler():
 
     # IF USER IS LOGGED IN
     if (userInfo != None):
-        otpCancelSuccess, otpCancelResponse = Debug.pcall(OTP.cancelOtp, userInfo["userId"]) # CANCEL MULTI-FACTOR-AUTHENTICATION -> SAVE DB SPACE
-        resetUserIdSuccess, resetUserIdResponse = Debug.pcall(UserHandler.resetUserToken, userInfo["userId"]) # RESET TOKEN
+        otpCancelSuccess, otpCancelResponse = Utilities.pcall(OTP.cancelOtp, userInfo["userId"]) # CANCEL MULTI-FACTOR-AUTHENTICATION -> SAVE DB SPACE
+        resetUserIdSuccess, resetUserIdResponse = Utilities.pcall(UserHandler.resetUserToken, userInfo["userId"]) # RESET TOKEN
 
     session["user"] = None # UNSET USER
     session["mfaUserId"] = None # UNSET MFA 
@@ -88,7 +89,7 @@ def logoutRequestPageHandler():
 
     # IF MFA IS IN PROCESS
     if (mfaUserId != None):
-        otpCancelSuccess, otpCancelResponse = Debug.pcall(OTP.cancelOtp, mfaUserId) # CANCEL MULTI-FACTOR-AUTHENTICATION -> SAVE DB SPACE
+        otpCancelSuccess, otpCancelResponse = Utilities.pcall(OTP.cancelOtp, mfaUserId) # CANCEL MULTI-FACTOR-AUTHENTICATION -> SAVE DB SPACE
 
     return redirect(url_for("index.pageHandler"))
 

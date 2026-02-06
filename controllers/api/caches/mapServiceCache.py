@@ -5,10 +5,15 @@ import os
 
 # INT
 from modules.utilities import Utilities
-from flask import current_app
 
 # CORE
 cache = {}
+
+CurrentApp = None
+SocketIO = None
+
+## Functions
+# MECHANICS
 
 class MapServiceCache:
     def remove(mapName):
@@ -19,7 +24,7 @@ class MapServiceCache:
     def getAll():
         # Functions
         # INIT
-        mapsDirectory = os.path.join(current_app.root_path, "static", "json", "maps")
+        mapsDirectory = os.path.join(CurrentApp.root_path, "static", "json", "maps")
         filesInDirectory = os.listdir(mapsDirectory)
 
         for file in os.listdir(mapsDirectory):
@@ -45,3 +50,14 @@ class MapServiceCache:
         # Functions
         # INIT
         cache[mapName] = {"value": value, "time": timeNow}
+
+##
+def Initialise(app, socketIO):
+    # CORE
+    global CurrentApp, SocketIO
+
+    # Functions
+    # INIT
+    CurrentApp = app
+    SocketIO = socketIO
+     

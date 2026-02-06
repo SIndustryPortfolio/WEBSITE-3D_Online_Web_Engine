@@ -1,0 +1,12 @@
+/* Chat */
+.scrollableChat::-webkit-scrollbar 
+{
+   display: none; 
+}
+
+
+.WorldCard 
+{
+    animation: LoadItem .5s ease;
+}
+

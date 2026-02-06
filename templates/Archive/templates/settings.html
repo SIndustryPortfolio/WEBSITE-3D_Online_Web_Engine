@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<!-- MODULES -->
+{% include "handlers/topBarHandler.html" %}
+
+<!-- HEAD -->
+<head>
+
+</head>
+
+<!-- BODY -->
+<body>
+<div class = "modal fade" id="deleteAccountModal" tabIndex = "-1" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark">
+            <div class="modal-body">
+                <h4 class="modal-title text-light">Delete Account</h4>
+                <div class="row" style="justify-content: center; align-items: center;">
+
+                    <form id="deleteAccountForm" action="#" method="POST" style="display: inline-block; margin: 0 2% 0 2%">
+                        <input id="deleteAccountModalcsrf_token" name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+                        <input name="fieldName" type="hidden" value="deleteAccount">
+
+                        <hr class="border-top border-secondary opacity-50 my-2">
+                    </form>
+
+                    <div>
+                        <button type="submit" class="btn btn-danger" form="deleteAccountForm" style="display: inline-block; width: 20%; margin: 0 2% 0 2%">Delete Account</button>
+                        <button class="btn btn-secondary" data-bs-dismiss="modal" style="display: inline-block; width: 20%; margin: 0 2% 0 2%">Cancel</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% for field in form %}
+    <div class = "modal fade" id="{{field.name}}Modal" tabindex="-1" style="display: none;">
+        <div class = "modal-dialog">
+            <div class = "modal-content bg-dark">
+                <div class = "modal-body">
+                    <h4 class = "modal-title text-light">Change {{field.name}}</h4>
+                    <hr class="border-top border-secondary opacity-50 my-2">
+
+                            
+                    <div class="row" style="justify-content: center; align-items: center;">
+
+                        <form id="{{field.name}}Form" action="#" method="POST" style="display: inline-block; margin: 0 2% 0 2%">
+                            <input id="{{field.name}}Modalcsrf_token" name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+                            <input name="fieldName" type="hidden" value="{{field.name}}">
+
+                            <div class="form-group">
+                                <label for="{{field.Name}}ModalInput1" class="form-label text-secondary">New {{field.name}}</label>
+                                <input type="text" class="form-control" name="input1" id="{{field.name}}ModalInput1">
+                            </div>
+                            
+                            <br>
+
+                            <div class="form-group">
+                                <label for="{{field.name}}ModalInput2" class="form-label text-secondary">Confirm new {{field.name}}</label>
+                                <input type="text" class="form-control" name="input2" id="{{field.name}}ModalInput2">
+                            </div>
+
+                            <hr class="border-top border-secondary opacity-50 my-2">
+                            <!--<input type="submit" class="btn btn-success" value="Save" style="display: inline-block;"/>-->
+                        </form>
+
+                        <div>
+                            <button type="submit" class="btn btn-success" form="{{field.name}}Form" style="display: inline-block; width: 20%; margin: 0 2% 0 2%">Save</button>
+                            <button class="btn btn-secondary" data-bs-dismiss="modal" style="display: inline-block; width: 20%; margin: 0 2% 0 2%">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endfor %}
+
+    <div class="container mt-5" style="margin: auto; justify-content: center;">
+        <div class="row", style="margin: auto; align-items: center; display: flex;">
+            <div class="card expandable bg-dark shadow-lg mx-auto" style="width: 40%;">
+                <div class="card-body">
+
+                    <h5 class="card-title text-light">Settings</h5>
+
+                    <!--<form id="registerForm" action="/settingsChangeRequest" method="post">-->
+                    <div>
+
+                        <div class="form-group">
+                            <label for="usernameInput1" class="form-label text-secondary">👤 Username</label>
+                            {{ form.username(size=32) }}
+                        </div>
+
+                        <br>
+
+                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#usernameModal" style="right: 0%; float: right;">Change</button>
+
+                        <br>
+
+                        <div class="form-group">
+                            <label for="emailInput1" class="form-label text-secondary">📧 Email</label>
+                            {{ form.email(size=32) }}
+                        </div>
+
+                        <br>
+
+                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#emailModal" style="right: 0%; float: right;">Change</button>
+
+                        <br>
+
+                        <div class="form-group">
+                            <label for="passwordInput1" class="form-label text-secondary">🔑 Password</label>
+                            {{ form.password(size=32) }}
+                        </div>
+
+                        <br>
+
+                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#passwordModal" style="right: 0%; float: right;">Change</button>
+                        
+                        <br>
+
+                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal" style="right: 0%; float: left;">Delete Account</button>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+<script type="module">
+    import pageModule from "{{url_for('static', filename='js/settingsPage.js')}}";
+    
+    let _fieldNames = {{ fieldNames | tojson }};
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        pageModule.initialise(_fieldNames);
+    });
+</script>
+
+</html>
