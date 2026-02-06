@@ -24,7 +24,7 @@ class Utilities:
     def loadJson(path): # RETURN PARSED JSON DATA FROM FILE
         data = {}
 
-        success, jsonFile = Utilities.pcall(open, "r", encoding="utf-8")
+        success, jsonFile = Utilities.pcall(open, path, "r", encoding="utf-8")
 
         if success:
             data = json.load(jsonFile)
