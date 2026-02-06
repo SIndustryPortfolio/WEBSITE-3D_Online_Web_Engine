@@ -22,11 +22,13 @@ SocketIO = None
 class Utilities:
     @staticmethod
     def loadJson(path): # RETURN PARSED JSON DATA FROM FILE
-        data = None
+        data = {}
 
-        with open(path, "r", encoding = "utf-8") as file:
-            data = json.load(file)
+        success, jsonFile = Utilities.pcall(open, "r", encoding="utf-8")
 
+        if success:
+            data = json.load(jsonFile)
+            
         return data
 
     @staticmethod
