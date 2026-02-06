@@ -39,7 +39,7 @@ def pageHandler():
         return redirect(url_for("index.pageHandler"))
     
     form = RegisterForm()
-    return Shortcuts.renderPage("register.html", "Register", form=form, siteKey=GoogleSiteKey)
+    return Shortcuts.renderPage("register.html", "register", form=form, siteKey=GoogleSiteKey)
 
     
 

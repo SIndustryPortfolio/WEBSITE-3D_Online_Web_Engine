@@ -77,7 +77,7 @@
                 {% if "topBar" in pageInfo %}
                     {% if pageInfo.topBar.side == "left" %}
                         {% if not pageInfo.topBar.userAuthorisedOnly or (pageInfo.topBar.userAuthorisedOnly and user) %}
-                            <a class="nav-link text-center text-light {% if currentPage == pageInfo.name %} fw-bold {% endif %}" href="{{ pageInfo.redirectLink }}">{{ pageInfo.topBar.displayName }}</a>
+                            <a class="nav-link text-center text-light {% if currentPage == pageKey %} fw-bold {% endif %}" href="{{ pageInfo.redirectLink }}">{{ pageInfo.topBar.displayName }}</a>
                         {% endif %}
                     {% endif %}
                 {% endif %}
@@ -89,7 +89,7 @@
                 {% if "topBar" in pageInfo %}
                     {% if pageInfo.topBar.side == "right" %}
                         {% if not pageInfo.topBar.userAuthorisedOnly or (pageInfo.topBar.userAuthorisedOnly and user) %}
-                            <a class="nav-link text-center text-light {% if currentPage == pageInfo.name %} fw-bold {% endif %}" href="{{ pageInfo.redirectLink }}">{{ pageInfo.topBar.displayName }}</a>
+                            <a class="nav-link text-center text-light {% if currentPage == pageKey %} fw-bold {% endif %}" href="{{ pageInfo.redirectLink }}">{{ pageInfo.topBar.displayName }}</a>
                         {% endif %}
                     {% endif %}
                 {% endif %}

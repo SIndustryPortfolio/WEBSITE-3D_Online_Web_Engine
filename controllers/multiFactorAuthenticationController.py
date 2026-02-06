@@ -157,7 +157,7 @@ def pageHandler():
     response = OTP.startOtp(mfaUserId)
 
     form = MFAForm()
-    return Shortcuts.renderPage("mfa.html", "MFA", form=form)
+    return Shortcuts.renderPage("mfa.html", "mfa", form=form)
 
 
 

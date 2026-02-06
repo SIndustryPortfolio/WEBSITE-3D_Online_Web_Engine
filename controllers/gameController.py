@@ -56,5 +56,5 @@ def pageHandler(_serverId):
     # MAP META DATA (TRANSLATE GRID TO RENDERABLE INFORMATION)
     mapMeta = getMeta(True) #requests.get(request.host_url + "/api/v1/game/maps/meta").json()
 
-    return Shortcuts.renderPage("game.html", "Game", serverId=str(_serverId), mapData=mapData, textures=textures, mapMeta=mapMeta)
+    return Shortcuts.renderPage("game.html", "game", serverId=str(_serverId), mapData=mapData, textures=textures, mapMeta=mapMeta)
 

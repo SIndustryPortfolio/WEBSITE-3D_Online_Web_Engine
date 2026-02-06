@@ -40,7 +40,7 @@ def pageHandler():
 
     fieldNames = ["username", "password", "email", "deleteAccount"]
 
-    return Shortcuts.renderPage("settings.html", "Settings", form=form, fieldNames=fieldNames)
+    return Shortcuts.renderPage("settings.html", "settings", form=form, fieldNames=fieldNames)
 
 
 @BluePrint.route("/settingChangeRequest", methods = ["POST"]) # AJAX

@@ -35,5 +35,5 @@ def pageHandler():
         return redirect(url_for("login.pageHandler"))
 
 
-    return Shortcuts.renderPage("home.html", "Home", servers = getServers(JSON=True))
+    return Shortcuts.renderPage("home.html", "home", servers = getServers(JSON=True))
 
