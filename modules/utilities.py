@@ -28,7 +28,7 @@ class Utilities:
 
         if success:
             data = json.load(jsonFile)
-            
+
         return data
 
     @staticmethod
@@ -110,7 +110,7 @@ class Utilities:
         if not success:
             DebugService = None
             
-            if "Debug" in CurrentApp.config["Required"]:
+            if CurrentApp and ("Debug" in CurrentApp.config["Required"]):
                 DebugService = CurrentApp.config["Required"]["Debug"]
 
             if DebugService:
