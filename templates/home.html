@@ -22,7 +22,7 @@
                 <div style="width: 55%; display: flex; flex-direction: column; justify-content: center;">
                     
                     <!--<div id="WorldCards" class="HideScrollbar" style="height: 95%; width: 100%; padding-left: 10px; display: flex; flex-direction: column; align-items: center; justify-items: flex-start; overflow-y: auto; overflow-x: hidden; gap: 10px;">-->
-                    <div id="WorldCards" class="HideScrollbar" style="height: 95%; width: 100%; padding-left: 10px; display: grid; grid-template-columns: repeat(2, auto); gap: 10px; overflow-x: hidden; overflow-y: auto;">
+                    <div id="WorldCards" class="HideScrollbar" style="height: 95%; width: 100%; padding-left: 10px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; overflow-x: hidden; overflow-y: auto;">
                         {% for serverId, server in servers.items()  %}
                             <button class="InvisibleButton" style="display: flex;">
                                 <div name="{{serverId}}" class="card Outline  expandable shadow-lg mx-auto" style="background: var(--TopbarColour);">
